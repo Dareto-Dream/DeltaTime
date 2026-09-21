@@ -43,7 +43,7 @@ class HeartbeatExportJob < ApplicationJob
         .where("time >= ? AND time <= ?", start_date.beginning_of_day.to_f, end_date.end_of_day.to_f)
     end
 
-    user_identifier = user.slack_uid.presence || "user_#{user.id}"
+    user_identifier = user.username.presence || "user_#{user.id}"
     json_filename = "heartbeats_#{user_identifier}_#{start_date.strftime("%Y%m%d")}_#{end_date.strftime("%Y%m%d")}.json"
     zip_filename = "#{File.basename(json_filename, ".json")}.zip"
 

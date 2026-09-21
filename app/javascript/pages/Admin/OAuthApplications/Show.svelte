@@ -12,7 +12,6 @@
     uid: string;
     verified: boolean;
     confidential: boolean;
-    redirect_to_hca_login: boolean;
     scopes: string[];
     redirect_uris: string[];
     created_at: string;
@@ -108,14 +107,6 @@
               {application.confidential
                 ? "Yes - Confidential"
                 : "No - Public Client"}</span
-            >
-          </DetailField>
-          <DetailField label="Login Redirect" variant="secondary">
-            <span
-              class={`inline-flex items-center gap-1.5 rounded border px-2 py-1 text-sm ${application.redirect_to_hca_login ? "border-green/30 bg-green/20 text-green" : "border-yellow/30 bg-yellow/20 text-yellow"}`}
-              >{application.redirect_to_hca_login
-                ? "Hack Club Auth"
-                : "Deltatime sign in"}</span
             >
           </DetailField>
           <DetailField label="Created" variant="secondary">

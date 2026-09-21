@@ -29,8 +29,6 @@ class StaticPagesController < InertiaController
 
     render inertia: "Auth/SignIn", props: {
       sign_in_email: params[:sign_in_email].present?,
-      show_dev_tool: Rails.env.development?,
-      dev_magic_link: (Rails.env.development? ? session.delete(:dev_magic_link) : nil),
       csrf_token: form_authenticity_token,
       continue_param: params[:continue].presence
     }
@@ -43,11 +41,9 @@ class StaticPagesController < InertiaController
       {
         id: u.id,
         username: u.display_name,
-        slack_username: u.slack_username,
         github_username: u.github_username,
         display_name: u.display_name,
         avatar_url: u.avatar_url,
-        slack_uid: u.slack_uid,
         active_project: proj && { name: proj.project_name, repo_url: proj.repo_url }
       }
     end
@@ -96,8 +92,6 @@ class StaticPagesController < InertiaController
     {
       flavor_text: @flavor_text.to_s,
       sign_in_email: params[:sign_in_email].present?,
-      show_dev_tool: Rails.env.development?,
-      dev_magic_link: (Rails.env.development? ? session.delete(:dev_magic_link) : nil),
       csrf_token: form_authenticity_token,
       home_stats: @home_stats || {},
       flash: inertia_flash_messages

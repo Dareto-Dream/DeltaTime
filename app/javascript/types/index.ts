@@ -60,7 +60,6 @@ export type Footer = {
 export type CurrentlyHackingUser = {
   id: number;
   display_name?: string;
-  slack_uid?: string;
   avatar_url?: string;
   active_project?: { name: string; repo_url?: string | null };
 };

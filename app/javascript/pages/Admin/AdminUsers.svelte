@@ -7,7 +7,6 @@
     id: number;
     display_name: string;
     avatar_url: string;
-    slack_uid: string | null;
     admin_level: string;
     allowed_levels: string[];
   };
@@ -94,7 +93,7 @@
       <TextInput
         bind:value={query}
         oninput={search}
-        placeholder="Search by name or Slack ID..."
+        placeholder="Search by name..."
         class="w-full px-4 py-2 bg-darker border border-surface-200 rounded-lg text-surface-content placeholder-gray-500 focus:outline-none focus:border-primary"
       />
     </div>
@@ -110,8 +109,7 @@
           <table class="w-full text-left">
             <thead
               ><tr class="border-b border-surface-200"
-                ><th class="py-3 px-4">User</th><th class="py-3 px-4"
-                  >Slack ID</th
+                ><th class="py-3 px-4">User</th
                 >{#if groups[level].some((u) => u.allowed_levels.length)}<th
                     class="py-3 px-4">Actions</th
                   >{/if}</tr
@@ -130,9 +128,6 @@
         <div>
           {@render User(user)}
           <div class="mt-1 flex items-center gap-2 pl-10">
-            <span class="text-sm text-muted"
-              >{user.slack_uid || "No Slack ID"}</span
-            >
             <span
               class="rounded-full px-2 py-0.5 text-xs {roleClasses[
                 user.admin_level
@@ -143,8 +138,7 @@
         {@render Actions(user)}
       </div>{:else}<tr
         class="border-b border-surface-200 hover:bg-surface-100/50"
-        ><td class="py-3 px-4">{@render User(user)}</td><td
-          class="py-3 px-4 text-muted">{user.slack_uid || "N/A"}</td
+        ><td class="py-3 px-4">{@render User(user)}</td
         >{#if groups[user.admin_level].some((u) => u.allowed_levels.length)}<td
             class="py-3 px-4"
             >{#if user.allowed_levels.length}{@render Actions(

@@ -30,7 +30,7 @@ class Admin::AdminUsersController < Admin::BaseController
 
   def admin_groups
     %w[ultraadmin superadmin admin viewer].to_h do |level|
-      [ level, User.where(admin_level: level).order(:slack_username).map { |user| serialize_user(user) } ]
+      [ level, User.where(admin_level: level).order(:username).map { |user| serialize_user(user) } ]
     end
   end
 
@@ -42,7 +42,7 @@ class Admin::AdminUsersController < Admin::BaseController
 
   def serialize_user(user, all_actions: false)
     levels = all_actions ? %w[ultraadmin superadmin admin viewer] : %w[ultraadmin superadmin admin viewer default]
-    { id: user.id, display_name: user.display_name, avatar_url: user.avatar_url, slack_uid: user.slack_uid,
+    { id: user.id, display_name: user.display_name, avatar_url: user.avatar_url,
       admin_level: user.admin_level, allowed_levels: levels.select { |level| current_user.can_change_admin_level_of?(user, level) } }
   end
 end

@@ -162,25 +162,6 @@
           >
         </span>
       </CheckboxField>
-
-      <CheckboxField
-        native
-        align="start"
-        class={row}
-        inputClass="mt-1 h-4 w-4 rounded border-surface-300 bg-darker text-primary"
-        checked={application.redirect_to_hca_login}
-        name="doorkeeper_application[redirect_to_hca_login]"
-      >
-        <span>
-          <span class="text-sm font-medium text-surface-content"
-            >Use Hack Club Auth for login</span
-          >
-          <span class="mt-1 block text-xs text-muted"
-            >Send unauthenticated users directly to Hack Club Auth before this
-            app's OAuth consent screen.</span
-          >
-        </span>
-      </CheckboxField>
     </div>
   </section>
 

@@ -23,7 +23,6 @@
   type Column = {
     user: UserSummary & {
       timezone: string;
-      slack_url: string | null;
       github_url: string | null;
       trust_level: string;
       can_impersonate: boolean;
@@ -478,11 +477,7 @@
               <div
                 class="mb-1 flex items-center justify-center gap-4 text-center"
               >
-                {#if column.user.slack_url}<a
-                    href={column.user.slack_url}
-                    target="_blank"
-                    class="text-xs text-blue underline">Slack</a
-                  >{/if}{#if column.user.github_url}<a
+                {#if column.user.github_url}<a
                     href={column.user.github_url}
                     target="_blank"
                     class="text-xs text-green underline">Git</a

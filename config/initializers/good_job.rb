@@ -23,10 +23,6 @@ Rails.application.configure do
     end
 
   config.good_job.cron = {
-    # update_slack_status: {
-    #   cron: "*/5 * * * *",
-    #   class: "UserSlackStatusUpdateJob"
-    # },
     daily_leaderboard_update: {
       cron: "* * * * *",
       class: "LeaderboardUpdateJob",
@@ -38,19 +34,6 @@ Rails.application.configure do
       class: "LeaderboardUpdateJob",
       args: [ :last_7_days ],
       kwargs: { force_update: true }
-    },
-    sailors_log_poll: {
-      cron: "*/2 * * * *",
-      class: "SailorsLogPollForChangesJob"
-    },
-    update_slack_channel_cache: {
-      cron: "0 11 * * *",
-      class: "SlackCommand::UpdateSlackChannelCacheJob"
-    },
-
-    slack_username_update: {
-      cron: "0 0 * * *",
-      class: "SlackUsernameUpdateJob"
     },
     # scan_github_repos: {
     #   cron: "0 10 * * *",
@@ -65,10 +48,6 @@ Rails.application.configure do
     #   cron: "0 */3 * * *", # Every 3 hours at minute 0
     #   class: "ScanRepoEventsForCommitsJob",
     #   description: "Scans repository host events (PushEvents) and enqueues jobs to process new commits."
-    # },
-    # cleanup_expired_email_verification_requests: {
-    #   cron: "* * * * *",
-    #   class: "CleanupExpiredEmailVerificationRequestsJob"
     # },
     cache_active_user_graph_data_job: {
       cron: "*/10 * * * *",

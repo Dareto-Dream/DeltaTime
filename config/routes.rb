@@ -113,19 +113,15 @@ Rails.application.routes.draw do
   get "/signin", to: "static_pages#signin", as: :signin, export: true
 
   # Auth routes
-  get "/auth/hca", to: "sessions#hca_new", as: :hca_auth, export: true
-  get "/auth/hca/callback", to: "sessions#hca_create"
-  get "/auth/slack", to: "sessions#slack_new", as: :slack_auth, export: true
-  get "/auth/slack/callback", to: "sessions#slack_create"
+  get "/auth/google", to: "sessions#google_new", as: :google_auth, export: true
+  get "/auth/google/callback", to: "sessions#google_create"
   get "/auth/github", to: "sessions#github_new", as: :github_auth, export: true
   get "/auth/github/callback", to: "sessions#github_create"
   delete "/auth/github/unlink", to: "sessions#github_unlink", as: :github_unlink, export: true
-  post "/auth/email", to: "sessions#email", as: :email_auth, export: true
+  post "/auth/signup", to: "sessions#signup", as: :signup_auth, export: true
+  post "/auth/login", to: "sessions#login", as: :login_auth, export: true
   post "/auth/email/add", to: "sessions#add_email", as: :add_email_auth, export: true
-  post "/auth/email/resend_verification", to: "sessions#resend_email_verification", as: :resend_email_verification_auth, export: true
   delete "/auth/email/unlink", to: "sessions#unlink_email", as: :unlink_email_auth, export: true
-  get "/auth/token/:token", to: "sessions#token", as: :auth_token
-  get "/auth/close_window", to: "sessions#close_window", as: :close_window
   delete "signout", to: "sessions#destroy", as: "signout", export: true
 
   get "/leaderboard", to: redirect("/leaderboards", status: 301)
@@ -165,9 +161,8 @@ Rails.application.routes.draw do
     get "my/settings/editors", to: "settings/editors#show", as: :my_settings_editors
     patch "my/settings/editors", to: "settings/editors#update", as: :my_settings_editors_update
 
-    # Slack & GitHub
-    get "my/settings/slack_github", to: "settings/slack_github#show", as: :my_settings_slack_github
-    patch "my/settings/slack_github", to: "settings/slack_github#update", as: :my_settings_slack_github_update
+    # GitHub
+    get "my/settings/github", to: "settings/github#show", as: :my_settings_github
 
     # Notifications
     get "my/settings/notifications", to: "settings/notifications#show", as: :my_settings_notifications
@@ -193,7 +188,7 @@ Rails.application.routes.draw do
   end
 
   # Backward-compat redirects from the old settings categories.
-  get "my/settings/integrations", to: redirect("/my/settings/slack_github")
+  get "my/settings/integrations", to: redirect("/my/settings/github")
   get "my/settings/access", to: redirect("/my/settings/privacy")
   get "my/settings/data", to: redirect("/my/settings/imports_exports")
 
@@ -217,15 +212,12 @@ Rails.application.routes.draw do
   get "deletion", to: "deletion_requests#show", as: :deletion, export: true
   post "deletion", to: "deletion_requests#create", as: :create_deletion, export: true
   delete "deletion", to: "deletion_requests#cancel", as: :cancel_deletion, export: true
-  get "deletion/hca/callback", to: "deletion_requests#hca_callback", as: :hca_deletion_callback
 
   get "setup", to: "users#setup", as: :setup, export: true
   get "my/wakatime_setup", to: redirect("/setup")
   get "my/wakatime_setup/step-2", to: redirect("/setup")
   get "my/wakatime_setup/step-3", to: redirect("/setup")
   get "my/wakatime_setup/step-4", to: redirect("/setup")
-
-  post "/sailors_log/slack/commands", to: "slack#create"
 
   get "/deltatime/v1", to: redirect("/", status: 302) # some clients seem to link this as the user's dashboard instead of /api/v1/deltatime
   # API routes
@@ -247,7 +239,6 @@ Rails.application.routes.draw do
       get "users/:username/projects/details", to: "stats#user_projects_details"
 
       get "users/lookup_email/:email", to: "users#lookup_email", constraints: { email: /[^\/]+/ }
-      get "users/lookup_slack_uid/:slack_uid", to: "users#lookup_slack_uid"
 
       get "currently_hacking", to: "currently_hacking#index"
 

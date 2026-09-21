@@ -23,8 +23,6 @@
     flash = [],
   }: {
     sign_in_email: boolean;
-    show_dev_tool: boolean;
-    dev_magic_link?: string | null;
     csrf_token: string;
     home_stats: HomeStats;
     flash?: FlashMessage[];

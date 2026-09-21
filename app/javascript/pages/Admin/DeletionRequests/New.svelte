@@ -18,7 +18,7 @@
       ><div class="space-y-4">
         <div>
           <label for="q" class="block text-sm text-muted mb-1"
-            >user ID, username, email, or Slack UID</label
+            >user ID, username, or email</label
           ><TextInput
             id="q"
             name="q"

@@ -3,7 +3,7 @@
   import Button from "../../components/Button.svelte";
   import UserSummary from "./UserSummary.svelte";
   import type { LayoutNav, NavLink } from "../../types";
-  import { sessions } from "../../api";
+  import { staticPages } from "../../api";
   import Menu from "hcicons-svelte/menu";
 
   let {
@@ -20,7 +20,7 @@
     onLogout: () => void;
   } = $props();
 
-  const loginPath = sessions.slackNew.path();
+  const loginPath = staticPages.signin.path();
   const isBrowser = typeof window !== "undefined";
 
   const handleNavLinkClick = () => {

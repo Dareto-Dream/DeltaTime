@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_21_040000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -139,18 +139,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
     t.index ["email"], name: "index_email_addresses_on_email", unique: true
     t.index ["email"], name: "index_email_addresses_on_email_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["user_id"], name: "index_email_addresses_on_user_id"
-  end
-
-  create_table "email_verification_requests", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.string "email"
-    t.datetime "expires_at"
-    t.string "token"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["email"], name: "index_email_verification_requests_on_email_active", unique: true, where: "(deleted_at IS NULL)"
-    t.index ["user_id"], name: "index_email_verification_requests_on_user_id"
   end
 
   create_table "flipper_features", force: :cascade do |t|
@@ -509,7 +497,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
     t.string "name", null: false
     t.bigint "owner_id"
     t.string "owner_type"
-    t.boolean "redirect_to_hca_login", default: false, null: false
     t.text "redirect_uri", null: false
     t.string "scopes", default: "", null: false
     t.string "secret", null: false
@@ -595,56 +582,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
     t.index ["url"], name: "index_repositories_on_url", unique: true
   end
 
-  create_table "sailors_log_leaderboards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.text "message"
-    t.string "slack_channel_id"
-    t.string "slack_uid"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sailors_log_notification_preferences", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.boolean "enabled", default: true, null: false
-    t.string "slack_channel_id", null: false
-    t.string "slack_uid", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slack_uid", "slack_channel_id"], name: "idx_sailors_log_notification_preferences_unique_user_channel", unique: true
-  end
-
-  create_table "sailors_log_slack_notifications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "project_duration", null: false
-    t.string "project_name", null: false
-    t.boolean "sent", default: false, null: false
-    t.string "slack_channel_id", null: false
-    t.string "slack_uid", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sailors_logs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.jsonb "projects_summary", default: {}, null: false
-    t.string "slack_uid", null: false
-    t.datetime "updated_at", null: false
-    t.index ["slack_uid"], name: "index_sailors_logs_on_slack_uid", unique: true
-  end
-
-  create_table "sign_in_tokens", force: :cascade do |t|
-    t.integer "auth_type"
-    t.string "continue_param"
-    t.datetime "created_at", null: false
-    t.datetime "expires_at"
-    t.jsonb "return_data"
-    t.string "token"
-    t.datetime "updated_at", null: false
-    t.datetime "used_at"
-    t.bigint "user_id", null: false
-    t.index ["token"], name: "index_sign_in_tokens_on_token"
-    t.index ["user_id"], name: "index_sign_in_tokens_on_user_id"
-  end
-
   create_table "solid_cache_entries", force: :cascade do |t|
     t.integer "byte_size", null: false
     t.datetime "created_at", null: false
@@ -684,13 +621,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
     t.string "github_uid"
     t.string "github_username"
     t.integer "deltatime_extension_text_type", default: 0, null: false
-    t.string "hca_access_token"
-    t.string "hca_id"
-    t.string "hca_scopes", default: [], array: true
+    t.text "google_access_token"
+    t.string "google_avatar_url"
+    t.string "google_name"
+    t.string "google_uid"
     t.datetime "leaderboard_shadowban_expires_at"
     t.text "leaderboard_shadowban_reason"
     t.boolean "leaderboard_shadowbanned", default: false, null: false
     t.bigint "leaderboard_shadowbanned_by_id"
+    t.string "password_digest"
     t.text "profile_bio"
     t.string "profile_bluesky_url"
     t.string "profile_discord_url"
@@ -699,28 +638,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
     t.string "profile_twitter_url"
     t.string "profile_website_url"
     t.boolean "show_goals_in_statusbar", default: true, null: false
-    t.text "slack_access_token"
-    t.string "slack_avatar_url"
-    t.string "slack_scopes", default: [], array: true
-    t.datetime "slack_synced_at"
-    t.string "slack_uid"
-    t.string "slack_username"
     t.integer "theme", default: 8, null: false
     t.string "timezone", default: "UTC"
     t.integer "trust_level", default: 0, null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.boolean "uses_slack_status", default: false, null: false
     t.boolean "weekly_summary_email_enabled", default: true, null: false
     t.index ["display_name_override"], name: "index_users_on_display_name_override_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["github_uid", "github_access_token"], name: "index_users_on_github_uid_and_access_token"
     t.index ["github_uid"], name: "index_users_on_github_uid"
     t.index ["github_username"], name: "index_users_on_github_username_trgm", opclass: :gin_trgm_ops, using: :gin
-    t.index ["hca_id"], name: "index_users_on_hca_id"
+    t.index ["google_uid", "google_access_token"], name: "index_users_on_google_uid_and_access_token"
+    t.index ["google_uid"], name: "index_users_on_google_uid"
     t.index ["leaderboard_shadowbanned"], name: "index_users_on_leaderboard_shadowbanned", where: "(leaderboard_shadowbanned = true)"
     t.index ["leaderboard_shadowbanned_by_id"], name: "index_users_on_leaderboard_shadowbanned_by_id"
-    t.index ["slack_uid"], name: "index_users_on_slack_uid", unique: true
-    t.index ["slack_username"], name: "index_users_on_slack_username_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["timezone", "trust_level"], name: "index_users_on_timezone_trust_level"
     t.index ["timezone"], name: "index_users_on_timezone"
     t.index ["username"], name: "index_users_on_username"
@@ -765,7 +696,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
   add_foreign_key "deletion_requests", "users", column: "admin_approved_by_id"
   add_foreign_key "documentation_feedbacks", "users", on_delete: :cascade
   add_foreign_key "email_addresses", "users"
-  add_foreign_key "email_verification_requests", "users"
   add_foreign_key "goals", "users"
   add_foreign_key "heartbeat_import_runs", "users"
   add_foreign_key "heartbeat_import_sources", "users"
@@ -781,7 +711,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
   add_foreign_key "project_repo_mappings", "repositories"
   add_foreign_key "project_repo_mappings", "users"
   add_foreign_key "repo_host_events", "users"
-  add_foreign_key "sign_in_tokens", "users"
   add_foreign_key "trust_level_audit_logs", "users"
   add_foreign_key "trust_level_audit_logs", "users", column: "changed_by_id"
   add_foreign_key "users", "users", column: "leaderboard_shadowbanned_by_id"

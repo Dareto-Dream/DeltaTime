@@ -4,8 +4,9 @@ class User < ApplicationRecord
   include UserThemeConfiguration
   include UserFuzzySearch
   include ::OauthAuthentication
-  include ::SlackIntegration
   include ::GithubIntegration
+
+  has_secure_password validations: false
 
   has_subscriptions
 
@@ -20,10 +21,11 @@ class User < ApplicationRecord
   after_update_commit :clear_leaderboard_page_cache, if: -> { saved_change_to_leaderboard_shadowban_state? || saved_change_to_trust_level? }
   before_validation :normalize_username
   before_validation :normalize_display_name_override
-  encrypts :slack_access_token, :github_access_token, :hca_access_token
+  encrypts :github_access_token, :google_access_token
 
-  validates :slack_uid, uniqueness: true, allow_nil: true
   validates :github_uid, uniqueness: { conditions: -> { where.not(github_access_token: nil) } }, allow_nil: true
+  validates :google_uid, uniqueness: { conditions: -> { where.not(google_access_token: nil) } }, allow_nil: true
+  validates :password, length: { minimum: 8 }, allow_nil: true
   validates :timezone, inclusion: { in: TZInfo::Timezone.all_identifiers }, allow_nil: false
   validates :country_code, inclusion: { in: ISO3166::Country.codes }, allow_nil: true
   validates :username,
@@ -90,19 +92,17 @@ class User < ApplicationRecord
     amoled: 10
   }
 
-  # Look up a user by numeric ID, slack_uid, hca_id, or username
+  # Look up a user by numeric ID or username
   def self.lookup_by_identifier(id)
     return nil if id.blank?
 
     numeric_id = id.to_i if id.match?(/^\d+$/)
-    relation = where(slack_uid: id).or(where(hca_id: id)).or(where(username: id))
+    relation = where(username: id)
     relation = where(id: numeric_id).or(relation) if numeric_id
 
     candidates = relation.to_a
     lookup_order = [
       numeric_id && ->(u) { u.id == numeric_id },
-      ->(u) { u.slack_uid == id },
-      ->(u) { u.hca_id == id },
       ->(u) { u.username == id }
     ].compact
     lookup_order.each { |matcher| match = candidates.find(&matcher); return match if match }
@@ -192,19 +192,12 @@ class User < ApplicationRecord
   has_many :goals, dependent: :destroy
   has_many :documentation_feedbacks, dependent: :destroy
   has_many :email_addresses, dependent: :destroy
-  has_many :email_verification_requests, dependent: :destroy
-  has_many :sign_in_tokens, dependent: :destroy
   has_many :project_repo_mappings
 
   has_many :api_keys
   has_many :admin_api_keys, dependent: :destroy
   has_many :oauth_applications, as: :owner, dependent: :destroy
   belongs_to :leaderboard_shadowbanned_by, class_name: "User", optional: true
-
-  has_one :sailors_log,
-    foreign_key: :slack_uid,
-    primary_key: :slack_uid,
-    class_name: "SailorsLog"
 
   has_many :heartbeat_import_runs, dependent: :destroy
 
@@ -216,10 +209,9 @@ class User < ApplicationRecord
     numeric_id = (term.match?(/\A\d+\z/) ? term.to_i : nil)
 
     parts = [
-      "SELECT id FROM users WHERE slack_uid = :exact",
       "SELECT id FROM users WHERE username ILIKE :contains",
-      "SELECT id FROM users WHERE slack_username ILIKE :contains",
       "SELECT id FROM users WHERE github_username ILIKE :contains",
+      "SELECT id FROM users WHERE google_name ILIKE :contains",
       "SELECT user_id AS id FROM email_addresses WHERE email ILIKE :contains"
     ]
     parts << "SELECT id FROM users WHERE id = #{numeric_id}" if numeric_id
@@ -327,8 +319,8 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    return self.slack_avatar_url if self.slack_avatar_url.present?
     return self.github_avatar_url if self.github_avatar_url.present?
+    return self.google_avatar_url if self.google_avatar_url.present?
 
     email = self.email_addresses&.first&.email
     if email.present?
@@ -342,7 +334,7 @@ class User < ApplicationRecord
   def display_name
     return display_name_override if display_name_override.present?
 
-    name = slack_username || github_username || username
+    name = github_username || google_name || username
     return name if name.present?
     email = email_addresses&.first&.email
     return "error displaying name" unless email.present?
@@ -350,8 +342,6 @@ class User < ApplicationRecord
   end
 
   def most_recent_direct_entry_heartbeat = heartbeats.where(source_type: :direct_entry).order(time: :desc).first
-
-  def create_email_signin_token(continue_param: nil) = sign_in_tokens.create!(auth_type: :email, continue_param: continue_param)
 
   def rotate_api_keys!
     api_keys.transaction { api_keys.destroy_all; api_keys.create!(name: "Deltatime key") }
@@ -362,8 +352,6 @@ class User < ApplicationRecord
     api_key.update!(token: SecureRandom.uuid_v4)
     api_key
   end
-
-  def find_valid_token(token) = sign_in_tokens.valid.find_by(token: token)
 
   def self.not_convicted = where.not(trust_level: User.trust_levels[:red])
   def self.not_suspect = where(trust_level: [ User.trust_levels[:blue], User.trust_levels[:green] ])

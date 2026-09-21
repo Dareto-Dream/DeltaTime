@@ -50,7 +50,7 @@ class Admin::OauthApplicationsController < Admin::BaseController
   end
 
   def application_params
-    params.require(:oauth_application).permit(:name, :redirect_uri, :scopes, :confidential, :redirect_to_hca_login)
+    params.require(:oauth_application).permit(:name, :redirect_uri, :scopes, :confidential)
   end
 
   def summary(application)
@@ -63,7 +63,7 @@ class Admin::OauthApplicationsController < Admin::BaseController
   def show_props
     owner = @application.owner
     { application: summary(@application).merge(uid: @application.uid, scopes: @application.scopes.to_a.map(&:to_s),
-        confidential: @application.confidential?, redirect_to_hca_login: @application.redirect_to_hca_login?,
+        confidential: @application.confidential?,
         created_at: @application.created_at.strftime("%B %d, %Y at %I:%M %p"),
         owner: owner && { id: owner.id, display_name: owner.display_name, avatar_url: owner.avatar_url,
                           can_impersonate: current_user.can_impersonate?(owner) }),
@@ -73,7 +73,7 @@ class Admin::OauthApplicationsController < Admin::BaseController
   def edit_props
     { application: { id: @application.id, name: @application.name.to_s, redirect_uri: @application.redirect_uri.to_s,
         scopes: @application.scopes.to_s, confidential: @application.confidential?,
-        redirect_to_hca_login: @application.redirect_to_hca_login?, verified: @application.verified? },
+        verified: @application.verified? },
       errors: @application.errors.to_hash }
   end
 end

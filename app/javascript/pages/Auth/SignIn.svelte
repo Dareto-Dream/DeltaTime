@@ -9,14 +9,10 @@
 
   let {
     sign_in_email,
-    show_dev_tool,
-    dev_magic_link,
     csrf_token,
     continue_param,
   }: {
     sign_in_email: boolean;
-    show_dev_tool: boolean;
-    dev_magic_link?: string | null;
     csrf_token: string;
     continue_param?: string | null;
   } = $props();
@@ -42,14 +38,7 @@
         </Link>
       </div>
 
-      <AuthForm
-        {sign_in_email}
-        {show_dev_tool}
-        {dev_magic_link}
-        {csrf_token}
-        redirect_to="signin"
-        {continue_param}
-      />
+      <AuthForm {sign_in_email} {csrf_token} redirect_to="signin" {continue_param} />
 
       <div class="text-center mt-4">
         <Link

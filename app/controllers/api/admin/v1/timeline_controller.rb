@@ -8,10 +8,6 @@ module Api
           date = params[:date] ? Date.parse(params[:date]) : Time.current.to_date
 
           raw_user_ids = params[:user_ids].present? ? params[:user_ids].split(",").map(&:to_i).uniq : []
-          if params[:slack_uids].present?
-            slack_uids = params[:slack_uids].split(",").first(MAX_TIMELINE_USERS)
-            raw_user_ids += User.where(slack_uid: slack_uids).pluck(:id)
-          end
           raw_user_ids = raw_user_ids.first(MAX_TIMELINE_USERS)
 
           selected_user_ids = ([ current_user.id ] + raw_user_ids).uniq
@@ -24,7 +20,6 @@ module Api
                 id: u.id,
                 username: u.username,
                 display_name: u.display_name,
-                slack_username: u.slack_username,
                 github_username: u.github_username,
                 timezone: u.timezone,
                 avatar_url: u.avatar_url
@@ -66,7 +61,7 @@ module Api
           all_ids_to_fetch = ([ current_user.id ] + user_ids_from_leaderboard).uniq
 
           users_data = User.where(id: all_ids_to_fetch)
-                           .select(:id, :username, :slack_username, :github_username, :slack_avatar_url, :github_avatar_url, :display_name_override)
+                           .select(:id, :username, :github_username, :google_name, :github_avatar_url, :google_avatar_url, :display_name_override)
                            .preload(:email_addresses)
                            .index_by(&:id)
 

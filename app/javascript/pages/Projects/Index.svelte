@@ -9,7 +9,7 @@
   import {
     myProjectRepoMappings,
     sessions,
-    settingsSlackGithub,
+    settingsGithub,
   } from "../../api";
   import { buildIntervalChange, intervalParams } from "./intervalNav";
   import type { ProjectCard as ProjectCardType } from "./types";
@@ -49,7 +49,7 @@
 
   const indexPath = myProjectRepoMappings.index.path();
   const githubAuthPath = sessions.githubNew.path();
-  const settingsPath = `${settingsSlackGithub.show.path()}#user_github_account`;
+  const settingsPath = `${settingsGithub.show.path()}#user_github_account`;
 
   const intervalQueryString = $derived(
     intervalParams(interval, from, to).toString(),

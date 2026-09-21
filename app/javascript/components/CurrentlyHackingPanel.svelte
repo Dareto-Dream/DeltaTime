@@ -35,19 +35,9 @@
           loading="lazy"
         />
       {/if}
-      {#if user.slack_uid}
-        <a
-          href={`https://hackclub.slack.com/team/${user.slack_uid}`}
-          target="_blank"
-          class="text-blue hover:underline text-sm"
-        >
-          @{user.display_name || `User ${user.id}`}
-        </a>
-      {:else}
-        <span class="text-surface-content text-sm">
-          {user.display_name || `User ${user.id}`}
-        </span>
-      {/if}
+      <span class="text-surface-content text-sm">
+        {user.display_name || `User ${user.id}`}
+      </span>
     </div>
     {#if user.active_project}
       <div class="text-xs text-muted ml-8">

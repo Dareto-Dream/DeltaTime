@@ -11,7 +11,6 @@
     redirect_uri: string;
     scopes: string;
     confidential: boolean;
-    redirect_to_hca_login: boolean;
     verified: boolean;
   };
   let {
@@ -21,14 +20,12 @@
   let name = $state(""),
     redirectUri = $state(""),
     scopes = $state(""),
-    confidential = $state(false),
-    hcaLogin = $state(false);
+    confidential = $state(false);
   $effect(() => {
     name = application.name;
     redirectUri = application.redirect_uri;
     scopes = application.scopes;
     confidential = application.confidential;
-    hcaLogin = application.redirect_to_hca_login;
   });
   const input =
     "w-full px-3 py-2 bg-darkless border border-darkless rounded text-surface-content focus:border-primary focus:ring-1 focus:ring-primary placeholder-secondary";
@@ -123,23 +120,6 @@
             ><small class="block mt-1 text-secondary"
               >Confidential clients can keep secrets. Native apps and SPAs are
               not confidential.</small
-            ></span
-          >
-        </CheckboxField>
-        <CheckboxField
-          native
-          align="start"
-          class="p-4 bg-darkless border border-darkless rounded"
-          inputClass="mt-0.5 h-4 w-4 rounded border-darkless bg-darker text-primary focus:ring-primary"
-          name="oauth_application[redirect_to_hca_login]"
-          bind:checked={hcaLogin}
-        >
-          <span
-            ><b class="text-sm text-surface-content"
-              >Use Hack Club Auth for Login</b
-            ><small class="block mt-1 text-secondary"
-              >Unauthenticated users authorizing this app will be sent directly
-              to Hack Club Auth instead of the generic Deltatime sign-in page.</small
             ></span
           >
         </CheckboxField>

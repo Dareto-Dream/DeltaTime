@@ -6,18 +6,16 @@
 test_user = nil
 if Rails.env.development? || Rails.env.test?
   # Creating test user
-  test_user = User.find_or_create_by(slack_uid: 'TEST123456') do |user|
-    user.username = 'testuser'
-    user.slack_username = 'testuser'
-
+  test_user = User.find_or_create_by(username: 'testuser') do |user|
+    user.password = 'testing-password'
     user.admin_level = :ultraadmin
     # Ensure timezone is set to avoid nil timezone issues
     user.timezone = 'America/New_York'
   end
 
-  # Add email address with slack as the source
+  # Add email address
   email = test_user.email_addresses.find_or_create_by(email: 'test@example.com')
-  email.update(source: :slack) if email.source.nil?
+  email.update(source: :signing_in) if email.source.nil?
 
   # Create API key
   api_key = test_user.api_keys.find_or_create_by(name: 'Development API Key') do |key|
@@ -31,18 +29,12 @@ if Rails.env.development? || Rails.env.test?
     key.token = admin_api_token
   end
 
-  # Create a sign-in token that doesn't expire
-  token = test_user.sign_in_tokens.find_or_create_by(token: 'testing-token') do |t|
-    t.expires_at = 1.year.from_now
-    t.auth_type = :email
-  end
-
   puts "Created test user:"
   puts "  Username: #{test_user.display_name}"
   puts "  Email: #{email.email}"
+  puts "  Password: testing-password"
   puts "  API Key: #{api_key.token}"
   puts "  Admin API Key: #{admin_api_token}"
-  puts "  Sign-in Token: #{token.token}"
 
   # Create sample heartbeats for last 7 days with variety of data
   if test_user.heartbeats.count < 50

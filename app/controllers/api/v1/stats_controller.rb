@@ -21,7 +21,7 @@ class Api::V1::StatsController < ApplicationController
     end
 
     if params[:user_email].present?
-      user_id = EmailAddress.find_by(email: params[:user_email])&.user_id || find_by_email(params[:user_email])
+      user_id = EmailAddress.find_by(email: params[:user_email])&.user_id
       return render_not_found_json("User not found") unless user_id.present?
       query = query.where(user_id: user_id)
     end
@@ -129,7 +129,7 @@ class Api::V1::StatsController < ApplicationController
     id = params[:username] || params[:username_or_id] || params[:user_id]
     return render_not_found_json("User not found") if id.blank?
 
-    query = User.where(slack_uid: id).or(User.where(username: id))
+    query = User.where(username: id)
     query = query.or(User.where(id: id)) if id.match?(/^\d+$/)
     raw_level = query.pick(:trust_level)
     return render_not_found_json("User not found") unless raw_level
@@ -181,20 +181,6 @@ class Api::V1::StatsController < ApplicationController
     return if @user.allow_public_stats_lookup
     return if current_user == @user || @api_caller_user == @user
     render_forbidden("user has disabled public stats")
-  end
-
-  def find_by_email(email)
-    cache_key = "user_id_by_email/#{email}"
-    slack_id = Rails.cache.fetch(cache_key, expires_in: 1.week) do
-      response = HTTP.auth("Bearer #{ENV["SLACK_USER_OAUTH_TOKEN"]}")
-                     .get("https://slack.com/api/users.lookupByEmail", params: { email: email })
-      JSON.parse(response.body)["user"]["id"]
-    rescue => e
-      report_error(e, message: "Error finding user by email")
-      nil
-    end
-    Rails.cache.delete(cache_key) if slack_id.nil?
-    slack_id
   end
 
   def project_stats_query(include_archived: false)

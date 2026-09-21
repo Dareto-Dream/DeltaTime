@@ -12,7 +12,6 @@ class CurrentlyHacking
       {
         id: user.id,
         display_name: user.display_name,
-        slack_uid: user.slack_uid,
         avatar_url: user.avatar_url,
         active_project: project && { name: project.project_name, repo_url: project.repo_url }
       }

@@ -132,8 +132,8 @@ class Api::Deltatime::V1::DeltatimeController < ApplicationController
 
       render json: {
         data: {
-          username: @user.slack_uid,
-          user_id: @user.slack_uid,
+          username: @user.username.presence || @user.id.to_s,
+          user_id: @user.id.to_s,
           start: start_time.iso8601,
           end: end_time.iso8601,
           status: "ok",

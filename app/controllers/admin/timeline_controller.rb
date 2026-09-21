@@ -1,12 +1,11 @@
 class Admin::TimelineController < Admin::BaseController
   include ApplicationHelper
 
-  USER_SELECT_FIELDS = %i[id username slack_username github_username slack_avatar_url github_avatar_url display_name_override].freeze
+  USER_SELECT_FIELDS = %i[id username github_username google_name google_avatar_url github_avatar_url display_name_override].freeze
 
   def show
     @date = parse_date_param
     raw_user_ids = params[:user_ids].present? ? params[:user_ids].split(",").map(&:to_i).uniq : []
-    raw_user_ids += User.where(slack_uid: params[:slack_uids].split(",")).pluck(:id) if params[:slack_uids].present?
 
     @selected_user_ids = ([ current_user.id ] + raw_user_ids).uniq
 
@@ -86,7 +85,7 @@ class Admin::TimelineController < Admin::BaseController
       {
         user: {
           id: user.id, display_name: user.display_name.to_s, avatar_url: user.avatar_url,
-          timezone: timezone, slack_url: user == current_user || user.slack_uid.blank? ? nil : "slack://user?team=T0266FRGM&id=#{user.slack_uid}",
+          timezone: timezone,
           github_url: user.github_profile_url, trust_level: user.trust_level,
           can_impersonate: current_user.can_impersonate?(user)
         },

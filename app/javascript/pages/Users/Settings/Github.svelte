@@ -8,20 +8,10 @@
   import Button from "../../../components/Button.svelte";
   import Modal from "../../../components/Modal.svelte";
   import SectionCard from "./components/SectionCard.svelte";
-  import CheckboxField from "../../../components/CheckboxField.svelte";
   import ModalActions from "./components/ModalActions.svelte";
-  import { sessions, settingsSlackGithub } from "../../../api";
+  import { sessions } from "../../../api";
 
   type Props = {
-    user: { uses_slack_status: boolean };
-    slack: {
-      can_enable_status: boolean;
-      notification_channels: Array<{
-        id: string;
-        label: string;
-        url: string;
-      }>;
-    };
     github: {
       connected: boolean;
       username?: string | null;
@@ -29,84 +19,14 @@
     };
   };
 
-  let { user, slack, github }: Props = $props();
+  let { github }: Props = $props();
 
   let unlinkGithubModalOpen = $state(false);
 </script>
 
 <svelte:head>
-  <title>Slack & GitHub - Deltatime Settings</title>
+  <title>GitHub - Deltatime Settings</title>
 </svelte:head>
-
-<SectionCard
-  id="user_slack_status"
-  title="Slack Status Sync"
-  description="Keep your Slack status updated while you are actively coding."
->
-  <div class="space-y-4">
-    {#if !slack.can_enable_status}
-      <a
-        href={sessions.slackNew.path()}
-        class="inline-flex rounded-md border border-surface-200 bg-surface-100 px-3 py-2 text-sm text-surface-content transition-colors hover:bg-surface-200"
-      >
-        Re-authorize with Slack
-      </a>
-    {/if}
-
-    <Form
-      id="slack-github-slack-form"
-      action={settingsSlackGithub.update.path()}
-      method="patch"
-      class="space-y-3"
-      options={{ preserveScroll: true }}
-    >
-      <CheckboxField
-        name="user[uses_slack_status]"
-        bind:checked={user.uses_slack_status}
-        label="Update my Slack status automatically"
-      />
-    </Form>
-  </div>
-
-  {#snippet footer()}
-    <Button type="submit" form="slack-github-slack-form"
-      >Save Slack settings</Button
-    >
-  {/snippet}
-</SectionCard>
-
-<SectionCard
-  id="user_slack_notifications"
-  title="Slack Channel Notifications"
-  description="Enable notifications in any channel by running /sailorslog on in that channel."
->
-  <p class="text-sm text-muted">
-    Command:
-    <code class="rounded bg-darker px-1 py-0.5 text-xs text-surface-content"
-      >/sailorslog on</code
-    >
-  </p>
-
-  {#if slack.notification_channels.length > 0}
-    <ul class="mt-4 space-y-2">
-      {#each slack.notification_channels as channel}
-        <li
-          class="rounded-md border border-surface-200 bg-darker px-3 py-2 text-sm text-surface-content"
-        >
-          <a href={channel.url} target="_blank" class="underline"
-            >{channel.label}</a
-          >
-        </li>
-      {/each}
-    </ul>
-  {:else}
-    <p
-      class="mt-4 rounded-md border border-surface-200 bg-darker px-3 py-2 text-sm text-muted"
-    >
-      No channel notifications are enabled.
-    </p>
-  {/if}
-</SectionCard>
 
 <SectionCard
   id="user_github_account"

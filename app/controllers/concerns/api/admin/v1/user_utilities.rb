@@ -45,9 +45,8 @@ module Api
               {
                 id: row["id"],
                 username: row["username"],
-                slack_username: row["slack_username"],
                 github_username: row["github_username"],
-                slack_avatar_url: row["slack_avatar_url"],
+                google_name: row["google_name"],
                 github_avatar_url: row["github_avatar_url"],
                 email: row["matched_email"],
                 rank_score: row["rank_score"]
@@ -93,8 +92,6 @@ module Api
               id: user.id,
               username: user.username,
               display_name: user.display_name,
-              slack_uid: user.slack_uid,
-              slack_username: user.slack_username,
               github_username: user.github_username,
               timezone: user.timezone,
               country_code: user.country_code,
@@ -285,7 +282,7 @@ module Api
           users = User.includes(:email_addresses).where(id: user_ids)
           render json: {
             users: users.as_json(
-              only: %i[id username slack_uid slack_username github_username timezone country_code trust_level slack_avatar_url github_avatar_url],
+              only: %i[id username github_username google_name timezone country_code trust_level google_avatar_url github_avatar_url],
               methods: %i[display_name avatar_url]
             )
           }

@@ -17,7 +17,6 @@ module Api
                 id: user.id,
                 username: user.username,
                 display_name: user.display_name,
-                slack_username: user.slack_username,
                 github_username: user.github_username,
                 admin_level: user.admin_level,
                 email_addresses: user.email_addresses.map(&:email),

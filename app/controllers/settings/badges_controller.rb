@@ -35,5 +35,5 @@ class Settings::BadgesController < Settings::BaseController
     end
   end
 
-  def badge_user_id = @user.slack_uid.presence || @user.username.presence || @user.id.to_s
+  def badge_user_id = @user.username.presence || @user.id.to_s
 end

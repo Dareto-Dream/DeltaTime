@@ -6,7 +6,7 @@ module Api
       # GET /api/v1/badge/:user_id/*project
       #
       # Generates a shields.io badge showing coding time for a project.
-      # Supports lookup by slack_uid, username, or internal id.
+      # Supports lookup by username or internal id.
       # Project can be a project name ("deltatime") or owner/repo ("hackclub/deltatime").
       def show
         user = find_user(params[:user_id])
@@ -40,8 +40,7 @@ module Api
 
       def find_user(identifier)
         return nil if identifier.blank?
-        User.find_by(slack_uid: identifier) ||
-          User.find_by(username: identifier) ||
+        User.find_by(username: identifier) ||
           (identifier.match?(/^\d+$/) && User.find_by(id: identifier))
       end
 

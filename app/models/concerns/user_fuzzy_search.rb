@@ -16,11 +16,10 @@ module UserFuzzySearch
       }
 
       candidate_parts = [
-        "SELECT id FROM users WHERE slack_uid = :exact",
         "SELECT id FROM users WHERE username ILIKE :contains",
         "SELECT id FROM users WHERE display_name_override ILIKE :contains",
         "SELECT id FROM users WHERE github_username ILIKE :contains",
-        "SELECT id FROM users WHERE slack_username ILIKE :contains",
+        "SELECT id FROM users WHERE google_name ILIKE :contains",
         "SELECT user_id AS id FROM email_addresses WHERE email ILIKE :contains"
       ]
       candidate_parts << "SELECT id FROM users WHERE id = #{numeric_id}" if numeric_id
@@ -29,7 +28,6 @@ module UserFuzzySearch
 
       rank_sql = sanitize_sql_for_conditions([ <<~SQL.squish, binds ])
         CASE WHEN users.id::text = :exact THEN 1000 ELSE 0 END +
-        CASE WHEN users.slack_uid = :exact THEN 1000 ELSE 0 END +
         CASE WHEN users.username ILIKE :ilike_exact THEN 100
              WHEN users.username ILIKE :prefix THEN 50
              WHEN users.username ILIKE :contains THEN 10
@@ -42,9 +40,9 @@ module UserFuzzySearch
              WHEN users.github_username ILIKE :prefix THEN 50
              WHEN users.github_username ILIKE :contains THEN 10
              ELSE 0 END +
-        CASE WHEN users.slack_username ILIKE :ilike_exact THEN 100
-             WHEN users.slack_username ILIKE :prefix THEN 50
-             WHEN users.slack_username ILIKE :contains THEN 10
+        CASE WHEN users.google_name ILIKE :ilike_exact THEN 100
+             WHEN users.google_name ILIKE :prefix THEN 50
+             WHEN users.google_name ILIKE :contains THEN 10
              ELSE 0 END +
         COALESCE(MAX(
           CASE WHEN email_addresses.email ILIKE :ilike_exact THEN 100

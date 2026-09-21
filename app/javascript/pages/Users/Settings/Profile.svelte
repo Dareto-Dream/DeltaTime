@@ -5,8 +5,7 @@
 
 <script lang="ts">
   import { Form } from "@inertiajs/svelte";
-  import { Tooltip } from "bits-ui";
-  import { Icon, ArrowPath, Trash } from "svelte-hero-icons";
+  import { Icon, Trash } from "svelte-hero-icons";
   import Button from "../../../components/Button.svelte";
   import FormField from "../../../components/FormField.svelte";
   import Select from "../../../components/Select.svelte";
@@ -33,10 +32,6 @@
       email: string;
       source: string;
       can_unlink: boolean;
-      pending: boolean;
-      expired?: boolean;
-      can_resend: boolean;
-      resend_cooldown_seconds: number;
     }>;
     errors: {
       display_name_override: string[];
@@ -53,13 +48,6 @@
     emails,
     errors,
   }: Props = $props();
-
-  function formatCooldown(seconds: number): string {
-    if (seconds <= 0) return "";
-
-    const minutes = Math.ceil(seconds / 60);
-    return `Wait ${minutes} minutes before requesting another verification email`;
-  }
 </script>
 
 <svelte:head>
@@ -107,7 +95,7 @@
 <SectionCard
   id="user_display_name"
   title="Display Name"
-  description="This name appears across Deltatime instead of your Slack, GitHub, or username."
+  description="This name appears across Deltatime instead of your GitHub, Google, or username."
 >
   <Form
     id="profile-display-name-form"
@@ -185,7 +173,7 @@
 <SectionCard
   id="user_email_addresses"
   title="Email Addresses"
-  description="Add or remove email addresses used for sign-in and verification."
+  description="Add or remove email addresses used for sign-in."
 >
   <div class="space-y-2">
     {#if emails.length > 0}
@@ -196,62 +184,9 @@
           <div class="grow text-sm text-surface-content">
             <p class="flex items-center gap-2">
               <span>{email.email}</span>
-              {#if email.pending}
-                <span
-                  class="rounded-md border border-surface-200 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-muted"
-                >
-                  Unverified
-                </span>
-                {#if email.expired}
-                  <span
-                    class="rounded-md border border-surface-200 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-muted"
-                  >
-                    Expired
-                  </span>
-                {/if}
-              {/if}
             </p>
             <p class="text-xs text-muted">{email.source}</p>
           </div>
-          {#if email.pending}
-            <Tooltip.Provider delayDuration={150}>
-              <Tooltip.Root>
-                <Tooltip.Trigger>
-                  {#snippet child({ props })}
-                    <span {...props} class="inline-flex">
-                      <Form
-                        action={sessions.resendEmailVerification.path()}
-                        method="post"
-                        options={{ preserveScroll: true }}
-                      >
-                        <input type="hidden" name="email" value={email.email} />
-                        <Button
-                          type="submit"
-                          unstyled
-                          disabled={!email.can_resend}
-                          aria-label="Resend verification email"
-                          class="inline-flex items-center justify-center rounded-md p-1.5 text-muted transition-colors hover:text-surface-content disabled:cursor-not-allowed disabled:opacity-40"
-                        >
-                          <Icon src={ArrowPath} size="20" />
-                        </Button>
-                      </Form>
-                    </span>
-                  {/snippet}
-                </Tooltip.Trigger>
-                <Tooltip.Portal>
-                  <Tooltip.Content
-                    sideOffset={6}
-                    class="bits-tooltip-content z-[11000] rounded-md border border-surface-200 bg-darkless px-2.5 py-1.5 text-xs text-surface-content shadow-lg shadow-black/30"
-                  >
-                    {email.can_resend
-                      ? "Resend verification email"
-                      : formatCooldown(email.resend_cooldown_seconds) ||
-                        "Resend available soon"}
-                  </Tooltip.Content>
-                </Tooltip.Portal>
-              </Tooltip.Root>
-            </Tooltip.Provider>
-          {/if}
           {#if email.can_unlink}
             <Form
               action={sessions.unlinkEmail.path()}
@@ -262,8 +197,8 @@
               <Button
                 type="submit"
                 unstyled
-                title={email.pending ? "Remove email" : "Unlink email"}
-                aria-label={email.pending ? "Remove email" : "Unlink email"}
+                title="Unlink email"
+                aria-label="Unlink email"
                 class="inline-flex items-center justify-center rounded-md p-1.5 text-muted transition-colors hover:text-red"
               >
                 <Icon src={Trash} size="20" />
