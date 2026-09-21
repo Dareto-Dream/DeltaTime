@@ -30,7 +30,7 @@
       <div class="text-center">
         <Link href="/" class="inline-flex items-center gap-3 mb-8">
           <img
-            src="/images/new-icon-rounded.png"
+            src="/images/deltatime-icon.svg"
             class="w-12 h-12 rounded-lg"
             alt="Deltatime"
           />

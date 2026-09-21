@@ -25,7 +25,7 @@
   >
     <Link href={staticPages.index.path()} class="flex items-center gap-3">
       <img
-        src="/images/new-icon-rounded.png"
+        src="/images/deltatime-icon.svg"
         class="w-10 h-10 rounded-lg"
         alt="Deltatime"
       />

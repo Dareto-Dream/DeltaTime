@@ -57,7 +57,7 @@
       <div class="md:col-span-1">
         <a href="/" class="flex items-center gap-2 mb-4">
           <img
-            src="/images/new-icon-rounded.png"
+            src="/images/deltatime-icon.svg"
             class="w-8 h-8 rounded-lg"
             alt="Deltatime"
           />
