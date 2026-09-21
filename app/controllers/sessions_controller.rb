@@ -10,32 +10,49 @@ class SessionsController < ApplicationController
   end
 
   def google_create
-    return if handle_oauth_error("Google", redirect_path: root_path, alert_label: "Google")
+    if params[:error].present?
+      report_message("Google OAuth error: #{params[:error]}") unless params[:error] == "access_denied"
+      alert = params[:error] == "access_denied" ? "Sign in cancelled" : "Failed to authenticate with Google. Error ID: #{Sentry.last_event_id}"
+      return redirect_to(current_user ? my_settings_path : root_path, alert: alert)
+    end
 
     unless valid_oauth_state?(provider: "Google", session_key: :google_oauth_state_nonce, received_nonce: params[:state])
-      return redirect_to(root_path, alert: "Failed to authenticate with Google")
+      return redirect_to(current_user ? my_settings_path : root_path, alert: "Failed to authenticate with Google")
     end
 
     redirect_uri = url_for(action: :google_create, only_path: false)
-    @user = User.from_google_token(params[:code], redirect_uri, client_ip)
+    @user = User.from_google_token(params[:code], redirect_uri, current_user, ip_address: client_ip)
 
     if @user&.persisted?
-      preserved_return_data = session[:return_data]
-      reset_session
-      session[:user_id] = @user.id
-      session[:return_data] = preserved_return_data if preserved_return_data
-      notice = "Successfully signed in with Google! Welcome!"
-
-      if @user.previously_new_record?
-        redirect_to setup_path, notice: notice
-      elsif session[:return_data]&.dig("url").present?
-        redirect_to session[:return_data].delete("url"), notice: notice
+      if current_user
+        redirect_to my_settings_path, notice: "Successfully linked Google account!"
       else
-        redirect_to root_path, notice: notice
+        preserved_return_data = session[:return_data]
+        reset_session
+        session[:user_id] = @user.id
+        session[:return_data] = preserved_return_data if preserved_return_data
+        notice = "Successfully signed in with Google! Welcome!"
+
+        if @user.previously_new_record?
+          redirect_to setup_path, notice: notice
+        elsif session[:return_data]&.dig("url").present?
+          redirect_to session[:return_data].delete("url"), notice: notice
+        else
+          redirect_to root_path, notice: notice
+        end
       end
     else
-      redirect_to root_path, alert: "Failed to authenticate with Google!"
+      report_message("Failed to sign in/link Google account")
+      redirect_to(current_user ? my_settings_path : root_path, alert: "Failed to authenticate with Google")
     end
+  end
+
+  def google_unlink
+    return unless require_signed_in!("Please sign in first")
+
+    current_user.update!(google_access_token: nil, google_uid: nil, google_name: nil, google_avatar_url: nil)
+    Rails.logger.info "Google account unlinked for User ##{current_user.id}"
+    redirect_to my_settings_path, notice: "Google account unlinked successfully"
   end
 
   def github_new

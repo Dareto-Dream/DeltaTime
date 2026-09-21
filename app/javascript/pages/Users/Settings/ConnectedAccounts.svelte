@@ -12,6 +12,10 @@
   import { sessions } from "../../../api";
 
   type Props = {
+    google: {
+      connected: boolean;
+      name?: string | null;
+    };
     github: {
       connected: boolean;
       username?: string | null;
@@ -19,14 +23,50 @@
     };
   };
 
-  let { github }: Props = $props();
+  let { google, github }: Props = $props();
 
+  let unlinkGoogleModalOpen = $state(false);
   let unlinkGithubModalOpen = $state(false);
 </script>
 
 <svelte:head>
-  <title>GitHub - Deltatime Settings</title>
+  <title>Connected Accounts - Deltatime Settings</title>
 </svelte:head>
+
+<SectionCard
+  id="user_google_account"
+  title="Connected Google Account"
+  description="Link Google to sign in without a password."
+  hasBody={Boolean(google.connected && google.name)}
+>
+  {#if google.connected && google.name}
+    <div
+      class="rounded-md border border-surface-200 bg-darker px-3 py-3 text-sm text-surface-content"
+    >
+      Connected as {google.name}
+    </div>
+  {/if}
+
+  {#snippet footer()}
+    {#if google.connected}
+      <Button href={sessions.googleNew.path()} native class="rounded-md"
+        >Reconnect Google</Button
+      >
+      <Button
+        type="button"
+        variant="surface"
+        class="rounded-md"
+        onclick={() => (unlinkGoogleModalOpen = true)}
+      >
+        Unlink Google
+      </Button>
+    {:else}
+      <Button href={sessions.googleNew.path()} native class="rounded-md"
+        >Connect Google</Button
+      >
+    {/if}
+  {/snippet}
+</SectionCard>
 
 <SectionCard
   id="user_github_account"
@@ -65,6 +105,35 @@
     {/if}
   {/snippet}
 </SectionCard>
+
+<Modal
+  bind:open={unlinkGoogleModalOpen}
+  title="Unlink Google account?"
+  description="You'll need another way to sign in (GitHub or email + password) once this is unlinked."
+  maxWidth="max-w-md"
+  hasActions
+>
+  {#snippet actions()}
+    <ModalActions onCancel={() => (unlinkGoogleModalOpen = false)}>
+      {#snippet confirm()}
+        <Form
+          action={sessions.googleUnlink.path()}
+          method="delete"
+          class="m-0"
+          options={{ preserveScroll: true }}
+        >
+          <Button
+            type="submit"
+            variant="primary"
+            class="h-10 w-full text-on-primary"
+          >
+            Unlink Google
+          </Button>
+        </Form>
+      {/snippet}
+    </ModalActions>
+  {/snippet}
+</Modal>
 
 <Modal
   bind:open={unlinkGithubModalOpen}

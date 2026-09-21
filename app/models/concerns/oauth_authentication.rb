@@ -24,7 +24,10 @@ module OauthAuthentication
       }.to_query}")
     end
 
-    def from_google_token(code, redirect_uri, ip_address = nil)
+    # Signs in (or links, when current_user is given) a Google account. Without
+    # a current_user this behaves like a first-class sign-in provider: it finds
+    # an existing account by google_uid or verified email, or creates a new one.
+    def from_google_token(code, redirect_uri, current_user = nil, ip_address: nil)
       response = HTTP.post("https://oauth2.googleapis.com/token", form: {
         client_id: ENV["GOOGLE_CLIENT_ID"], client_secret: ENV["GOOGLE_CLIENT_SECRET"],
         code: code, redirect_uri: redirect_uri, grant_type: "authorization_code"
@@ -37,29 +40,35 @@ module OauthAuthentication
       google_uid = user_info["sub"]
       return nil if google_uid.blank?
 
-      @user = User.find_by(google_uid: google_uid)
-      @user ||= EmailAddress.find_by(email: user_info["email"])&.user if user_info["email"].present?
+      target_user = current_user
+      target_user ||= User.find_by(google_uid: google_uid)
+      target_user ||= (EmailAddress.find_by(email: user_info["email"])&.user if user_info["email"].present?)
 
-      if @user
+      if target_user
+        User.where(google_uid: google_uid).where.not(id: target_user.id).where.not(google_access_token: nil).find_each do |user|
+          Rails.logger.info "Clearing Google token for User ##{user.id} (Google UID: #{google_uid}) - linking to new account"
+          user.update!(google_access_token: nil, google_uid: nil, google_name: nil, google_avatar_url: nil)
+        end
+
         attrs = {
           google_uid: google_uid, google_access_token: access_token,
           google_name: user_info["name"], google_avatar_url: user_info["picture"]
         }
-        attrs[:country_code] = country_code_from_ip(ip_address) if @user.country_code.blank?
-        @user.update!(attrs)
+        attrs[:country_code] = country_code_from_ip(ip_address) if target_user.country_code.blank?
+        target_user.update!(attrs)
       else
         ActiveRecord::Base.transaction do
-          @user = User.create!(
+          target_user = User.create!(
             google_uid: google_uid, google_access_token: access_token,
             google_name: user_info["name"], google_avatar_url: user_info["picture"],
             country_code: country_code_from_ip(ip_address)
           )
-          EmailAddress.create!(email: user_info["email"], user: @user) if user_info["email"].present?
+          EmailAddress.create!(email: user_info["email"], user: target_user) if user_info["email"].present?
         end
       end
-      @user
+      target_user
     rescue => e
-      report_error(e, message: "Error creating user from Google data: #{e.message}")
+      report_error(e, message: "Error signing in with Google: #{e.message}")
       nil
     end
 

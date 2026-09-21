@@ -19,7 +19,7 @@ class Settings::ProfileController < Settings::BaseController
         username: @user.username
       },
       options: options,
-      profile_url: (@user.username.present? ? "https://hackati.me/#{@user.username}" : nil),
+      profile_url: (@user.username.present? ? profile_url(username: @user.username) : nil),
       emails: email_props
     }
   end

@@ -3,7 +3,7 @@ import {
   settingsSetup,
   settingsAppearance,
   settingsEditors,
-  settingsGithub,
+  settingsConnectedAccounts,
   settingsNotifications,
   settingsPrivacy,
   settingsGoals,
@@ -56,9 +56,9 @@ export const SETTINGS_SECTIONS = [
     icon: CodeBracket,
   },
   {
-    id: "github",
-    label: "GitHub",
-    path: settingsGithub.show.path(),
+    id: "connected_accounts",
+    label: "Connected Accounts",
+    path: settingsConnectedAccounts.show.path(),
     icon: CodeBracket,
   },
   {

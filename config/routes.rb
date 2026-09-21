@@ -115,6 +115,7 @@ Rails.application.routes.draw do
   # Auth routes
   get "/auth/google", to: "sessions#google_new", as: :google_auth, export: true
   get "/auth/google/callback", to: "sessions#google_create"
+  delete "/auth/google/unlink", to: "sessions#google_unlink", as: :google_unlink, export: true
   get "/auth/github", to: "sessions#github_new", as: :github_auth, export: true
   get "/auth/github/callback", to: "sessions#github_create"
   delete "/auth/github/unlink", to: "sessions#github_unlink", as: :github_unlink, export: true
@@ -161,8 +162,8 @@ Rails.application.routes.draw do
     get "my/settings/editors", to: "settings/editors#show", as: :my_settings_editors
     patch "my/settings/editors", to: "settings/editors#update", as: :my_settings_editors_update
 
-    # GitHub
-    get "my/settings/github", to: "settings/github#show", as: :my_settings_github
+    # Connected accounts (Google, GitHub)
+    get "my/settings/connected_accounts", to: "settings/connected_accounts#show", as: :my_settings_connected_accounts
 
     # Notifications
     get "my/settings/notifications", to: "settings/notifications#show", as: :my_settings_notifications
@@ -188,7 +189,8 @@ Rails.application.routes.draw do
   end
 
   # Backward-compat redirects from the old settings categories.
-  get "my/settings/integrations", to: redirect("/my/settings/github")
+  get "my/settings/integrations", to: redirect("/my/settings/connected_accounts")
+  get "my/settings/github", to: redirect("/my/settings/connected_accounts")
   get "my/settings/access", to: redirect("/my/settings/privacy")
   get "my/settings/data", to: redirect("/my/settings/imports_exports")
 

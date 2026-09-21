@@ -62,7 +62,6 @@ class InertiaController < ApplicationController
     if current_user
       links += [
         inertia_link("Projects", my_projects_path, active: request.path.start_with?("/my/projects")),
-        inertia_link("Docs", "/docs", active: request.path.start_with?("/docs"), inertia: false),
         inertia_link("Extensions", extensions_path, active: helpers.current_page?(extensions_path)),
         inertia_link("Settings", my_settings_path, active: request.path.start_with?("/my/settings")),
         inertia_link("My OAuth Apps", oauth_applications_path, active: helpers.current_page?(oauth_applications_path) || request.path.start_with?("/oauth/applications")),
@@ -70,7 +69,6 @@ class InertiaController < ApplicationController
       ]
     else
       links += [
-        inertia_link("Docs", "/docs", active: request.path.start_with?("/docs"), inertia: false),
         inertia_link("Extensions", extensions_path, active: helpers.current_page?(extensions_path))
       ]
     end
