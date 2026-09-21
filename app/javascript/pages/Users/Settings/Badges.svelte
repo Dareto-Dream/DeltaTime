@@ -21,8 +21,6 @@
       markscribe_template: string;
       markscribe_reference_url: string;
       markscribe_preview_image_url: string;
-      heatmap_badge_url: string;
-      heatmap_config_url: string;
       hackabox_repo_url: string;
       hackabox_preview_image_url: string;
     };
@@ -178,33 +176,6 @@
       alt="Example markscribe output"
       class="settings-image-outline mt-4 w-full max-w-3xl rounded-md"
     />
-  </SectionCard>
-
-  <SectionCard
-    id="user_heatmap"
-    title="Activity Heatmap"
-    description="A customizable heatmap for your coding activity."
-    wide
-  >
-    <p class="text-sm text-muted">
-      Configuration:
-      <a
-        class="text-primary underline"
-        href={badges.heatmap_config_url}
-        target="_blank">open heatmap builder</a
-      >
-    </p>
-    <div class="mt-4 rounded-md border border-surface-200 bg-darker p-4 pb-3">
-      <a href={badges.heatmap_config_url} target="_blank" class="block">
-        <img
-          src={badges.heatmap_badge_url}
-          alt="Heatmap badge preview"
-          class="settings-image-outline max-w-full"
-        />
-      </a>
-      <pre
-        class="mt-2 overflow-x-auto text-xs text-surface-content">{badges.heatmap_badge_url}</pre>
-    </div>
   </SectionCard>
 
   <SectionCard

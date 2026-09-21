@@ -1,15 +1,16 @@
 class GithubReadmeStats
   THEMES = Rails.root.join("config/github_readme_themes.txt").readlines(chomp: true).reject(&:empty?).freeze
 
-  def initialize(user_id = nil, theme = nil)
+  def initialize(user_id = nil, theme = nil, api_domain: nil)
     @user_id = user_id || "{YOUR_USER_ID}"
     @theme = theme || THEMES.first
+    @api_domain = api_domain
   end
 
   def generate_badge_url
     url = URI.parse("https://github-readme-stats.hackclub.dev/api/wakatime")
     url.query = URI.encode_www_form(
-      username: @user_id, api_domain: "deltatime.hackclub.com",
+      username: @user_id, api_domain: @api_domain,
       theme: @theme, custom_title: "Deltatime Stats", layout: "compact",
       cache_seconds: 0, langs_count: 8
     )
