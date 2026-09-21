@@ -25,12 +25,12 @@
       removed unless determined to have been issued incorrectly. In that case,
       it will automatically be removed. We take fraud very seriously and have a
       zero-tolerance policy for abuse. If you believe this was a mistake, please
-      DM the
+      reach out to us on
       <a
-        href="https://hackclub.slack.com/team/U091HC53CE8"
+        href="https://discord.gg/GjMB5G4jyE"
         target="_blank"
-        class="underline">Fraud Squad</a
-      > on Slack. We do not respond in any other channel, DM or thread.
+        class="underline">Discord</a
+      >. We do not respond in any other channel, DM or thread.
     </p>
     <p class="mb-0">
       <b>What caused this?</b> We do not disclose the patterns that were detected.

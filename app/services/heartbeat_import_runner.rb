@@ -288,7 +288,7 @@ class HeartbeatImportRunner < ApplicationService
     when HeartbeatImportDumpClient::TransientError
       if error.status.to_i >= 500
         msg = "#{import_source_name(run)} ran into an error while processing the import."
-        run.hackatime_v1_dump? ? "#{msg} Please reach out to #hackatime-help on Slack." : msg
+        run.hackatime_v1_dump? ? "#{msg} Please reach out to us on Discord: https://discord.gg/GjMB5G4jyE" : msg
       else
         "#{import_source_name(run)} could not be reached while processing the import. Please try again."
       end

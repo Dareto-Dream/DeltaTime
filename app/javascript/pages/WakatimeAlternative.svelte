@@ -98,9 +98,9 @@
         "WakaTime Pro has team analytics. At the moment, we're not planning on implementing this, because we'd rather focus on making our offering for individual users better instead.",
     },
     {
-      title: "Built for Hack Club",
+      title: "Small community",
       description:
-        "Anyone can sign up, but the leaderboards and culture skew toward the Hack Club community. (Psst... if you're aged 13-18, you should come join us!)",
+        "Anyone can sign up, but the leaderboards and culture skew toward our Discord community. Come say hi!",
     },
     {
       title: "Younger project",

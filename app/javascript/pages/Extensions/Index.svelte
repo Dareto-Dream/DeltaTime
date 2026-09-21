@@ -22,13 +22,6 @@
         "A Tamagotchi system. Code, fill your cup, and get your pet rewards.",
       install: "https://github.com/joysudo/catatime/releases/",
     },
-    {
-      name: "HackaStreak",
-      source: "https://github.com/hippogriff101/HackaStreak",
-      description: "Check a user's Hackatime streak in Slack.",
-      install: "https://hackclub.enterprise.slack.com/archives/C0AJLGZ73NE",
-      buttonLabel: "Try it out!",
-    },
   ];
 </script>
 

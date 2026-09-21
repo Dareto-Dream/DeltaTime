@@ -54,10 +54,10 @@
     <p class="mt-8 text-sm text-muted">
       If this problem persists, please contact us on
       <a
-        href="https://hackclub.slack.com"
+        href="https://discord.gg/GjMB5G4jyE"
         class="text-primary hover:underline"
         target="_blank"
-        rel="noreferrer">Slack</a
+        rel="noreferrer">Discord</a
       >.
     </p>
     {#if sentry_event_id}

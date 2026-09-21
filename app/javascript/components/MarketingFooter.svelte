@@ -21,7 +21,7 @@
     {
       title: "Community",
       links: [
-        { label: "Slack", href: "https://hackclub.com/slack", external: true },
+        { label: "Discord", href: "https://discord.gg/GjMB5G4jyE", external: true },
         {
           label: "GitHub",
           href: "https://github.com/Dareto-Dream/DeltaTime",
