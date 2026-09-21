@@ -5,7 +5,7 @@
 
 <script lang="ts">
   import { Link } from "@inertiajs/svelte";
-  import { terms } from "../api";
+  import { staticPages } from "../api";
   import MarketingFooter from "../components/MarketingFooter.svelte";
   import MarketingHeader from "../components/MarketingHeader.svelte";
 
@@ -222,7 +222,7 @@
         </section>
 
         <section class="pt-4">
-          <a href={terms.path()} class="text-primary underline text-sm"
+          <a href={staticPages.terms.path()} class="text-primary underline text-sm"
             >Read the Terms of Service &rarr;</a
           >
         </section>

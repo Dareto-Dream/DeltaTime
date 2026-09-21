@@ -5,7 +5,7 @@
 
 <script lang="ts">
   import { Link } from "@inertiajs/svelte";
-  import { privacy, terms } from "../../api";
+  import { staticPages } from "../../api";
   import AuthForm from "../Home/signedOut/AuthForm.svelte";
 
   let {
@@ -55,10 +55,13 @@
   <p
     class="mx-auto w-full max-w-md pt-8 text-center text-secondary text-sm text-pretty"
   >
-    By signing in, you agree to the <a class="text-primary" href={terms.path()}
-      >Terms of Service</a
+    By signing in, you agree to the <a
+      class="text-primary"
+      href={staticPages.terms.path()}>Terms of Service</a
     >
     and
-    <a class="text-primary" href={privacy.path()}>Privacy Policy</a>.
+    <a class="text-primary" href={staticPages.privacy.path()}
+      >Privacy Policy</a
+    >.
   </p>
 </div>

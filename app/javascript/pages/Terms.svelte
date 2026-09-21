@@ -4,7 +4,7 @@
 </script>
 
 <script lang="ts">
-  import { privacy } from "../api";
+  import { staticPages } from "../api";
   import MarketingFooter from "../components/MarketingFooter.svelte";
   import MarketingHeader from "../components/MarketingHeader.svelte";
 
@@ -65,7 +65,7 @@
             connected accounts) secure, and for anything that happens under
             your account. Please use one account per person and provide
             accurate information - see the
-            <a href={privacy.path()} class="text-primary underline"
+            <a href={staticPages.privacy.path()} class="text-primary underline"
               >Privacy Policy</a
             > for what we do with it.
           </p>
@@ -144,7 +144,7 @@
             <a href="/my/settings/privacy" class="text-primary underline"
               >Settings &rarr; Privacy</a
             >; see the
-            <a href={privacy.path()} class="text-primary underline"
+            <a href={staticPages.privacy.path()} class="text-primary underline"
               >Privacy Policy</a
             > for how that process works.
           </p>
@@ -196,7 +196,7 @@
         </section>
 
         <section class="pt-4">
-          <a href={privacy.path()} class="text-primary underline text-sm"
+          <a href={staticPages.privacy.path()} class="text-primary underline text-sm"
             >Read the Privacy Policy &rarr;</a
           >
         </section>

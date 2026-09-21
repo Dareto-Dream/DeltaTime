@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Link } from "@inertiajs/svelte";
-  import { users, privacy, terms } from "../api";
+  import { users, staticPages } from "../api";
 
   type FooterLink = {
     label: string;
@@ -33,8 +33,8 @@
     {
       title: "Legal",
       links: [
-        { label: "Privacy Policy", href: privacy.path() },
-        { label: "Terms of Service", href: terms.path() },
+        { label: "Privacy Policy", href: staticPages.privacy.path() },
+        { label: "Terms of Service", href: staticPages.terms.path() },
         {
           label: "Code of Conduct",
           href: "https://hackclub.com/conduct",
