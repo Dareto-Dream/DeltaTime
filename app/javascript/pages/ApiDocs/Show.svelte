@@ -14,7 +14,7 @@
     hideDownloadButton: false,
     customCss:
       'main { margin-bottom: 0 !important; padding: 0 !important; } a.no-underline.hover\\:underline[href="https://www.scalar.com"][target="_blank"] { display: none !important; }',
-    metaData: { title, description: "The API for Hackatime" },
+    metaData: { title, description: "The API for Deltatime" },
   });
 
   type ScalarInstance = { destroy: () => void };

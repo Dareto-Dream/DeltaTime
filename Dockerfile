@@ -107,7 +107,7 @@ RUN --mount=type=cache,target=/root/.bundle/cache \
     rm -rf "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
 # Copy application source without persisting build-only dependencies in its
-# layers. Rails and Blume consume those dependencies through read-only mounts.
+# layers. Rails consumes those dependencies through read-only mounts.
 FROM ruby-base AS application-source
 
 # image_processing 2.0 loads Ruby Vips during Rails boot, so the stages that
@@ -118,18 +118,14 @@ COPY --from=libvips /libvips/libvips-cpp.so /usr/local/lib/libvips-cpp.so
 RUN ln -s libvips-cpp.so /usr/local/lib/libvips.so.42
 
 COPY --from=javascript-dependencies /rails/vendor/fonts /rails/vendor/fonts
-COPY --exclude=blume.config.ts --exclude=docs . .
+COPY . .
 
-# Build Blume from only its inputs so Rails application changes neither
-# invalidate nor delay documentation generation.
-FROM ruby-base AS docs-assets
+# Stage the checked-in public/ assets on their own so Rails application
+# changes don't invalidate this layer. The docs site (Blume) build was
+# removed along with docs/; this stage now only copies static assets.
+FROM ruby-base AS static-assets
 
-COPY package.json blume.config.ts theme.css ./
-COPY config/themes.yml config/themes.yml
 COPY public public
-COPY docs docs
-RUN --mount=type=bind,from=javascript-dependencies,source=/rails/node_modules,target=/rails/node_modules,rw \
-    bun run build:docs
 
 # Generate route helpers before the two asset branches start.
 FROM application-source AS route-helpers
@@ -188,7 +184,7 @@ RUN --mount=type=bind,from=javascript-dependencies,source=/rails/node_modules,ta
 FROM rails-assets AS build
 
 COPY --from=frontend-assets /rails/public /rails/public
-COPY --from=docs-assets /rails/public /rails/public
+COPY --from=static-assets /rails/public /rails/public
 
 # Final stage for app image
 FROM prepared-runtime

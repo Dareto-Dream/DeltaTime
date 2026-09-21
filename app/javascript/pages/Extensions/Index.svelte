@@ -32,7 +32,7 @@
   ];
 </script>
 
-<svelte:head><title>Extensions - Hackatime</title></svelte:head>
+<svelte:head><title>Extensions - Deltatime</title></svelte:head>
 
 <div>
   <div class="mb-6 sm:mb-8">

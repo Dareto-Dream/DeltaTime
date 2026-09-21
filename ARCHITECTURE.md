@@ -1,4 +1,4 @@
-# Hackatime architecture guide
+# Deltatime architecture guide
 
 This is a map of current ownership and invariants, not a proposed design. Follow
 the linked source when behavior and this summary disagree.
@@ -71,11 +71,11 @@ profile synchronization.
 ### API identities
 
 * [`ApiKey`](app/models/api_key.rb) is a user credential (UUIDv4 for WakaTime
-  compatibility). The Hackatime-compatible controller accepts Bearer, Basic,
+  compatibility). The Deltatime-compatible controller accepts Bearer, Basic,
   or legacy `api_key` query input, resolves the key's user, then calls the
   ingestion service. It skips CSRF because it is token-authenticated; pending
   deletion blocks writes. See
-  [`HackatimeController`](app/controllers/api/hackatime/v1/hackatime_controller.rb).
+  [`DeltatimeController`](app/controllers/api/deltatime/v1/deltatime_controller.rb).
 * Doorkeeper is a separate delegated-user boundary. Its configured scopes are
   `profile` (default), `read`, and `admin`; validate token acceptability and
   required scopes, then load the resource owner. Ordinary OAuth/API access is

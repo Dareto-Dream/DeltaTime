@@ -70,7 +70,7 @@
     { href: "#integrations", label: "Integrations" },
     { href: "#faq", label: "FAQ" },
     {
-      href: "https://github.com/hackclub/hackatime",
+      href: "https://github.com/Dareto-Dream/DeltaTime",
       label: "GitHub",
       external: true,
     },
@@ -83,7 +83,7 @@
 </script>
 
 <svelte:head>
-  <title>Hackatime - Track your coding time</title>
+  <title>Deltatime - Track your coding time</title>
 </svelte:head>
 
 <div class="landing-page min-h-screen w-full bg-darker text-surface-content">
@@ -115,7 +115,7 @@
       <p
         class="text-lg md:text-xl text-secondary max-w-[70ch] mx-auto leading-relaxed mb-8"
       >
-        Hackatime is a free, open-source replacement for WakaTime. Your coding
+        Deltatime is a free, open-source replacement for WakaTime. Your coding
         habits, project breakdowns and language stats belong to you - not a
         proprietary database!
       </p>
@@ -166,7 +166,7 @@
         <div class="bg-surface">
           <img
             src="/images/docs-index.webp"
-            alt="Hackatime Dashboard"
+            alt="Deltatime Dashboard"
             class="w-full h-auto block rounded"
           />
         </div>

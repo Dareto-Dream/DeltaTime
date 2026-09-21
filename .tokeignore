@@ -1,6 +1,5 @@
 vendor/
 swagger/
-docs/
 spec/fixtures/heartbeats.json
 package-lock.json
 tsconfig.json

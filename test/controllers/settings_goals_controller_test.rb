@@ -23,7 +23,7 @@ class SettingsGoalsControllerTest < ActionDispatch::IntegrationTest
         period: "day",
         target_seconds: 3600,
         languages: [ "Ruby" ],
-        projects: [ "hackatime" ]
+        projects: [ "deltatime" ]
       }
     }
 
@@ -33,7 +33,7 @@ class SettingsGoalsControllerTest < ActionDispatch::IntegrationTest
     saved_goal = user.reload.goals.first
     assert_equal "day", saved_goal.period
     assert_equal [ "Ruby" ], saved_goal.languages
-    assert_equal [ "hackatime" ], saved_goal.projects
+    assert_equal [ "deltatime" ], saved_goal.projects
   end
 
   test "rejects sixth goal when limit reached" do

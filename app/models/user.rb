@@ -282,7 +282,7 @@ class User < ApplicationRecord
     streak_days > 30 ? "30+" : (streak_days < 1 ? nil : streak_days.to_s)
   end
 
-  enum :hackatime_extension_text_type, {
+  enum :deltatime_extension_text_type, {
     simple_text: 0,
     clock_emoji: 1,
     compliment_text: 2
@@ -300,7 +300,7 @@ class User < ApplicationRecord
   end
 
   def format_extension_text(duration)
-    case hackatime_extension_text_type
+    case deltatime_extension_text_type
     when "simple_text"
       return "Start coding!" if duration.zero?
       ::ApplicationController.helpers.short_time_simple(duration)
@@ -354,7 +354,7 @@ class User < ApplicationRecord
   def create_email_signin_token(continue_param: nil) = sign_in_tokens.create!(auth_type: :email, continue_param: continue_param)
 
   def rotate_api_keys!
-    api_keys.transaction { api_keys.destroy_all; api_keys.create!(name: "Hackatime key") }
+    api_keys.transaction { api_keys.destroy_all; api_keys.create!(name: "Deltatime key") }
   end
 
   def rotate_single_api_key!(api_key)

@@ -51,9 +51,9 @@ class ApplicationController < ActionController::Base
   end
 
   def persist_theme_cookie
-    return if cookies[:hackatime_theme] == current_user.theme
+    return if cookies[:deltatime_theme] == current_user.theme
 
-    cookies.permanent[:hackatime_theme] = {
+    cookies.permanent[:deltatime_theme] = {
       value: current_user.theme,
       httponly: false,
       same_site: :lax,

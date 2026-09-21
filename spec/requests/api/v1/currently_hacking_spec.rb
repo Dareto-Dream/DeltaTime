@@ -22,15 +22,15 @@ RSpec.describe 'Api::V1::CurrentlyHacking', type: :request do
                 type: :object,
                 properties: {
                   display_name: { type: :string, nullable: true, example: 'Orpheus' },
-                  avatar_url: { type: :string, nullable: true, example: 'https://hackatime.hackclub.com/images/athena.png' },
+                  avatar_url: { type: :string, nullable: true, example: 'https://deltatime.hackclub.com/images/athena.png' },
                   country_code: { type: :string, nullable: true, example: 'US' },
                   working_on: {
                     type: :object,
                     nullable: true,
                     description: 'The project the user is currently working on, or null.',
                     properties: {
-                      project_name: { type: :string, example: 'hackatime' },
-                      repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' }
+                      project_name: { type: :string, example: 'deltatime' },
+                      repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' }
                     }
                   }
                 },

@@ -198,7 +198,7 @@ RSpec.describe 'Api::V1::Stats', type: :request do
           properties: {
             projects: {
               type: :array,
-              items: { type: :string, example: 'hackatime' }
+              items: { type: :string, example: 'deltatime' }
             }
           }
         run_test!
@@ -244,10 +244,10 @@ RSpec.describe 'Api::V1::Stats', type: :request do
 
         schema type: :object,
           properties: {
-            name: { type: :string, example: 'hackatime' },
+            name: { type: :string, example: 'deltatime' },
             total_seconds: { type: :number, example: 14820.5 },
             languages: { type: :array, items: { type: :string, example: 'Ruby' }, example: %w[Ruby Svelte TypeScript] },
-            repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' },
+            repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' },
             total_heartbeats: { type: :integer, example: 482 },
             first_heartbeat: { type: :string, format: :date_time, nullable: true, example: '2024-03-20T15:30:00Z' },
             last_heartbeat: { type: :string, format: :date_time, nullable: true, example: '2024-06-06T18:45:00Z' },
@@ -329,10 +329,10 @@ RSpec.describe 'Api::V1::Stats', type: :request do
               items: {
                 type: :object,
                 properties: {
-                  name: { type: :string, example: 'hackatime' },
+                  name: { type: :string, example: 'deltatime' },
                   total_seconds: { type: :number, example: 14820.5 },
                   languages: { type: :array, items: { type: :string, example: 'Ruby' }, example: %w[Ruby Svelte TypeScript] },
-                  repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' },
+                  repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' },
                   total_heartbeats: { type: :integer, example: 482 },
                   first_heartbeat: { type: :string, format: :date_time, nullable: true, example: '2024-03-20T15:30:00Z' },
                   last_heartbeat: { type: :string, format: :date_time, nullable: true, example: '2024-06-06T18:45:00Z' },

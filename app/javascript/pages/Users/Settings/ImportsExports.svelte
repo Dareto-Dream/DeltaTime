@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-  <title>Imports & Exports - Hackatime Settings</title>
+  <title>Imports & Exports - Deltatime Settings</title>
 </svelte:head>
 
 <ImportsCard

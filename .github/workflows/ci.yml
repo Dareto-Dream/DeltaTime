@@ -125,7 +125,7 @@ jobs:
       - name: Setup Blacksmith Builder
         uses: useblacksmith/setup-docker-builder@v2
         with:
-          cache-key: hackatime/v3/${{ matrix.dockerfile }}
+          cache-key: deltatime/v3/${{ matrix.dockerfile }}
           nofallback: true
 
       - name: Build ${{ matrix.dockerfile }}
@@ -150,7 +150,7 @@ jobs:
       - name: Setup Blacksmith Builder
         uses: useblacksmith/setup-docker-builder@v2
         with:
-          cache-key: hackatime/v3/Dockerfile
+          cache-key: deltatime/v3/Dockerfile
           nofallback: true
 
       - name: Log in to GitHub Container Registry

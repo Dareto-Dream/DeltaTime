@@ -7,7 +7,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "hca_new stores continue path for oauth authorize" do
     continue_query = {
       client_id: "Ck47_6hihaBqZO7z3CLmJlCB-0NzHtZHGeDBwG4CqRs",
-      redirect_uri: "https://game.hackclub.com/hackatime/callback",
+      redirect_uri: "https://game.hackclub.com/deltatime/callback",
       response_type: "code",
       scope: "profile read",
       state: "a254695483383bd70ee41424b75d638a869e5d6769e11b50"
@@ -84,7 +84,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "email auth uses the public URL for the development sign-in link" do
     original_public_url = ENV["PUBLIC_URL"]
-    ENV["PUBLIC_URL"] = "https://hackatime.example.test/"
+    ENV["PUBLIC_URL"] = "https://deltatime.example.test/"
     email = "public-url-test-#{SecureRandom.hex(4)}@example.com"
     user = create(:user, :with_email, email: email)
     host! "3000-orb-id.e2b.app"
@@ -92,7 +92,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post email_auth_path, params: { email: email }
 
     token = SignInToken.last
-    assert_equal "https://hackatime.example.test/auth/token/#{token.token}", session[:dev_magic_link]
+    assert_equal "https://deltatime.example.test/auth/token/#{token.token}", session[:dev_magic_link]
   ensure
     ENV["PUBLIC_URL"] = original_public_url
   end
@@ -102,12 +102,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     ENV["PUBLIC_URL"] = ""
     email = "blank-public-url-test-#{SecureRandom.hex(4)}@example.com"
     user = create(:user, :with_email, email: email)
-    host! "hackatime.local"
+    host! "deltatime.local"
 
     post email_auth_path, params: { email: email }
 
     token = SignInToken.last
-    assert_equal "http://hackatime.local/auth/token/#{token.token}", session[:dev_magic_link]
+    assert_equal "http://deltatime.local/auth/token/#{token.token}", session[:dev_magic_link]
   ensure
     ENV["PUBLIC_URL"] = original_public_url
   end

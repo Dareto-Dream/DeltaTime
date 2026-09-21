@@ -10,7 +10,7 @@ class Settings::SetupController < Settings::BaseController
         has_api_key: api_key_token.present?,
         empty_message: "No API key is available yet. Rotate your API key from Privacy & Security to generate one.",
         api_key: api_key_token,
-        api_url: "https://#{request.host_with_port}/api/hackatime/v1"
+        api_url: "https://#{request.host_with_port}/api/deltatime/v1"
       }
     }
   end
@@ -21,7 +21,7 @@ class Settings::SetupController < Settings::BaseController
       # put this in your ~/.wakatime.cfg file
 
       [settings]
-      api_url = https://#{request.host_with_port}/api/hackatime/v1
+      api_url = https://#{request.host_with_port}/api/deltatime/v1
       api_key = #{api_key}
       heartbeat_rate_limit_seconds = 30
 

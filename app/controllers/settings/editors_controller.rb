@@ -12,11 +12,11 @@ class Settings::EditorsController < Settings::BaseController
 
   def page_props
     { user: {
-        hackatime_extension_text_type: @user.hackatime_extension_text_type,
+        deltatime_extension_text_type: @user.deltatime_extension_text_type,
         show_goals_in_statusbar: @user.show_goals_in_statusbar
       },
       options: base_options(keys: %i[extension_text_types]) }
   end
 
-  def editor_params = params.require(:user).permit(:hackatime_extension_text_type, :show_goals_in_statusbar)
+  def editor_params = params.require(:user).permit(:deltatime_extension_text_type, :show_goals_in_statusbar)
 end

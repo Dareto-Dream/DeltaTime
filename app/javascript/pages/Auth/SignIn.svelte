@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-  <title>Sign in - Hackatime</title>
+  <title>Sign in - Deltatime</title>
 </svelte:head>
 
 <div
@@ -36,9 +36,9 @@
           <img
             src="/images/new-icon-rounded.png"
             class="w-12 h-12 rounded-lg"
-            alt="Hackatime"
+            alt="Deltatime"
           />
-          <span class="font-bold text-3xl tracking-tight">Hackatime</span>
+          <span class="font-bold text-3xl tracking-tight">Deltatime</span>
         </Link>
       </div>
 

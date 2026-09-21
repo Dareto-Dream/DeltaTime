@@ -39,13 +39,13 @@
 </script>
 
 <svelte:head>
-  <title>Appearance - Hackatime Settings</title>
+  <title>Appearance - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
   id="user_theme"
   title="Theme"
-  description="Pick how Hackatime looks for your account."
+  description="Pick how Deltatime looks for your account."
   wide
 >
   <Form

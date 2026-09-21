@@ -35,8 +35,8 @@ RSpec.describe 'Api::V1::Badges', type: :request do
 
         `user_id` is matched, in order, against the user's Slack UID, then
         username, then (only when the value is all digits) the internal numeric
-        ID. `project` may be a raw project name (e.g. `hackatime`) or an
-        `owner/repo` pair (e.g. `hackclub/hackatime`) which is resolved to a
+        ID. `project` may be a raw project name (e.g. `deltatime`) or an
+        `owner/repo` pair (e.g. `hackclub/deltatime`) which is resolved to a
         project name via the user's repo mappings.
 
         Any additional query parameters not consumed below (e.g. `style`, `logo`,
@@ -46,9 +46,9 @@ RSpec.describe 'Api::V1::Badges', type: :request do
       parameter name: :user_id, in: :path, type: :string, required: true,
                 description: 'User identifier: Slack UID, username, or numeric internal ID.'
       parameter name: :project, in: :path, type: :string, required: true,
-                description: 'Project name (e.g. "hackatime") or "owner/repo" (e.g. "hackclub/hackatime").'
+                description: 'Project name (e.g. "deltatime") or "owner/repo" (e.g. "hackclub/deltatime").'
       parameter name: :label, in: :query, type: :string, required: false,
-                description: 'Left-hand text of the badge. Default: "hackatime".'
+                description: 'Left-hand text of the badge. Default: "deltatime".'
       parameter name: :color, in: :query, type: :string, required: false,
                 description: 'Badge color passed to shields.io (any shields.io-accepted color). Default: "blue".'
       parameter name: :aliases, in: :query, type: :string, required: false,
@@ -65,12 +65,12 @@ RSpec.describe 'Api::V1::Badges', type: :request do
           create(:user, slack_uid: "UBADGE#{SecureRandom.hex(4)}", timezone: 'UTC', allow_public_stats_lookup: true)
         end
         let(:user_id) { badge_user.slack_uid }
-        let(:project) { 'hackatime' }
+        let(:project) { 'deltatime' }
         let(:label) { nil }
         let(:color) { nil }
         let(:aliases) { nil }
 
-        before { log_time(badge_user, 'hackatime') }
+        before { log_time(badge_user, 'deltatime') }
 
         run_test! do |response|
           expect(response.status).to eq(307)
@@ -80,7 +80,7 @@ RSpec.describe 'Api::V1::Badges', type: :request do
 
       response(404, 'user not found') do
         let(:user_id) { 'definitely-no-such-user' }
-        let(:project) { 'hackatime' }
+        let(:project) { 'deltatime' }
         let(:label) { nil }
         let(:color) { nil }
         let(:aliases) { nil }
@@ -96,7 +96,7 @@ RSpec.describe 'Api::V1::Badges', type: :request do
           create(:user, slack_uid: "UPRIV#{SecureRandom.hex(4)}", timezone: 'UTC', allow_public_stats_lookup: false)
         end
         let(:user_id) { badge_user.slack_uid }
-        let(:project) { 'hackatime' }
+        let(:project) { 'deltatime' }
         let(:label) { nil }
         let(:color) { nil }
         let(:aliases) { nil }
@@ -130,12 +130,12 @@ RSpec.describe 'Api::V1::Badges', type: :request do
           create(:user, slack_uid: "UZERO#{SecureRandom.hex(4)}", timezone: 'UTC', allow_public_stats_lookup: true)
         end
         let(:user_id) { badge_user.slack_uid }
-        let(:project) { 'hackatime' }
+        let(:project) { 'deltatime' }
         let(:label) { nil }
         let(:color) { nil }
         let(:aliases) { nil }
 
-        before { create_heartbeat(badge_user, 'hackatime', Time.current.to_i) }
+        before { create_heartbeat(badge_user, 'deltatime', Time.current.to_i) }
 
         run_test! do |response|
           expect(response.status).to eq(400)

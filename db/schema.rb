@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_20_115013) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_20_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -683,7 +683,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_20_115013) do
     t.string "github_avatar_url"
     t.string "github_uid"
     t.string "github_username"
-    t.integer "hackatime_extension_text_type", default: 0, null: false
+    t.integer "deltatime_extension_text_type", default: 0, null: false
     t.string "hca_access_token"
     t.string "hca_id"
     t.string "hca_scopes", default: [], array: true

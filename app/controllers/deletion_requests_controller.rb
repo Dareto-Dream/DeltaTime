@@ -40,7 +40,7 @@ class DeletionRequestsController < InertiaController
     hca_id = User.hca_id_from_token(params[:code], redirect_uri)
     unless hca_id.present? && hca_id == pending_request["hca_id"]
       report_message("HCA deletion step-up identity did not match User ##{current_user.id}")
-      return redirect_to(my_settings_path, alert: "Please verify with the Hack Club Account linked to Hackatime.")
+      return redirect_to(my_settings_path, alert: "Please verify with the Hack Club Account linked to Deltatime.")
     end
 
     unless current_user.can_request_deletion?

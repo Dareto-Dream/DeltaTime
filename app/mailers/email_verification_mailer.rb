@@ -11,7 +11,7 @@ class EmailVerificationMailer < ApplicationMailer
 
     mail(
       to: verification_request.email,
-      subject: "Verify your email address for Hackatime"
+      subject: "Verify your email address for Deltatime"
     )
   end
 end

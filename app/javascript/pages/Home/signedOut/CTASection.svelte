@@ -17,7 +17,7 @@
     </h2>
     <p class="text-on-primary/90 text-lg mb-10">
       Join {usersTracked} users who have tracked {hoursTracked}+ hours of coding
-      with Hackatime.
+      with Deltatime.
     </p>
     <Link
       href="/signin"

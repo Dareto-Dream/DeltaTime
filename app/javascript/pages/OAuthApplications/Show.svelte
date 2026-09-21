@@ -137,7 +137,7 @@
             >
               {application.redirect_to_hca_login
                 ? "Hack Club Auth"
-                : "Hackatime sign in"}
+                : "Deltatime sign in"}
             </Badge>
           </DetailField>
 

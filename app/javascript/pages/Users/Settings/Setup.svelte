@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-  <title>Setup - Hackatime Settings</title>
+  <title>Setup - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
@@ -30,7 +30,7 @@
   description="Use the setup guide if you are configuring a new editor or device."
 >
   <p class="text-sm text-muted">
-    Hackatime uses the WakaTime plugin ecosystem, so the setup guide covers
+    Deltatime uses the WakaTime plugin ecosystem, so the setup guide covers
     editor installation, API keys, and API URL configuration.
   </p>
 

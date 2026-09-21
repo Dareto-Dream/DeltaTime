@@ -41,7 +41,7 @@ RSpec.describe 'Api::Summary', type: :request do
               items: {
                 type: :object,
                 properties: {
-                  key: { type: :string, example: 'hackatime' },
+                  key: { type: :string, example: 'deltatime' },
                   total: { type: :number, example: 21600.0 }
                 }
               }

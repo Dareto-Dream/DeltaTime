@@ -12,8 +12,8 @@
 
   type Feature = {
     name: string;
-    hackatime: string;
-    hackatimeHighlight: boolean;
+    deltatime: string;
+    deltatimeHighlight: boolean;
     wakatimeFree: string;
     wakatimePro: string;
   };
@@ -21,71 +21,71 @@
   const features: Feature[] = [
     {
       name: "Price",
-      hackatime: "Free forever",
-      hackatimeHighlight: true,
+      deltatime: "Free forever",
+      deltatimeHighlight: true,
       wakatimeFree: "Free",
       wakatimePro: "$9/month",
     },
     {
       name: "Open Source",
-      hackatime: "✓",
-      hackatimeHighlight: true,
+      deltatime: "✓",
+      deltatimeHighlight: true,
       wakatimeFree: "✗",
       wakatimePro: "✗",
     },
     {
       name: "Editor Support",
-      hackatime: "70+ editors",
-      hackatimeHighlight: false,
+      deltatime: "70+ editors",
+      deltatimeHighlight: false,
       wakatimeFree: "70+ editors",
       wakatimePro: "70+ editors",
     },
     {
       name: "Data Retention",
-      hackatime: "Unlimited",
-      hackatimeHighlight: true,
+      deltatime: "Unlimited",
+      deltatimeHighlight: true,
       wakatimeFree: "14 days",
       wakatimePro: "Unlimited",
     },
     {
       name: "Project Stats",
-      hackatime: "Full access",
-      hackatimeHighlight: true,
+      deltatime: "Full access",
+      deltatimeHighlight: true,
       wakatimeFree: "Limited",
       wakatimePro: "Full access",
     },
     {
       name: "Language Breakdown",
-      hackatime: "✓",
-      hackatimeHighlight: true,
+      deltatime: "✓",
+      deltatimeHighlight: true,
       wakatimeFree: "✓",
       wakatimePro: "✓",
     },
     {
       name: "Leaderboards",
-      hackatime: "✓ (Community)",
-      hackatimeHighlight: true,
+      deltatime: "✓ (Community)",
+      deltatimeHighlight: true,
       wakatimeFree: "✓ (Community)",
       wakatimePro: "✓",
     },
     {
       name: "Self-Hosting",
-      hackatime: "✓",
-      hackatimeHighlight: true,
+      deltatime: "✓",
+      deltatimeHighlight: true,
       wakatimeFree: "✗",
       wakatimePro: "✗",
     },
     {
       name: "Team Features",
-      hackatime: "✗",
-      hackatimeHighlight: false,
+      deltatime: "✗",
+      deltatimeHighlight: false,
       wakatimeFree: "✗",
       wakatimePro: "✓",
     },
     {
       name: "API Access",
-      hackatime: "✓ Full",
-      hackatimeHighlight: true,
+      deltatime: "✓ Full",
+      deltatimeHighlight: true,
       wakatimeFree: "Limited",
       wakatimePro: "✓ Full",
     },
@@ -105,12 +105,12 @@
     {
       title: "Younger project",
       description:
-        "WakaTime has been around since 2013, whereas Hackatime launched in 2024. The plugin ecosystem is the same, but we're still adding things.",
+        "WakaTime has been around since 2013, whereas Deltatime launched in 2024. The plugin ecosystem is the same, but we're still adding things.",
     },
     {
       title: "Less AI tracking features",
       description:
-        "WakaTime is much more suited to your needs if you need detailed stats on things like token usage. Whilst we do track AI coding time, and show things like AI vs human coding time, we aren't super interested in adding more AI stuff to Hackatime.",
+        "WakaTime is much more suited to your needs if you need detailed stats on things like token usage. Whilst we do track AI coding time, and show things like AI vs human coding time, we aren't super interested in adding more AI stuff to Deltatime.",
     },
   ];
 
@@ -126,7 +126,7 @@
     { href: "/#philosophy", label: "Philosophy", external: false },
     { href: "/#features", label: "Features", external: false },
     {
-      href: "https://github.com/hackclub/hackatime",
+      href: "https://github.com/Dareto-Dream/DeltaTime",
       label: "GitHub",
       external: true,
     },
@@ -134,7 +134,7 @@
 </script>
 
 <svelte:head>
-  <title>Wakatime vs Hackatime</title>
+  <title>Wakatime vs Deltatime</title>
 </svelte:head>
 
 <div class="min-h-screen w-full bg-darker text-surface-content">
@@ -145,11 +145,11 @@
       <h1
         class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-6"
       >
-        WakaTime vs Hackatime
+        WakaTime vs Deltatime
       </h1>
       <p class="text-lg md:text-xl text-secondary leading-relaxed max-w-[75ch]">
         Want to track your coding time without paying $9 a month?
-        <strong class="text-surface-content">Hackatime</strong> is a free, open
+        <strong class="text-surface-content">Deltatime</strong> is a free, open
         source tracker built by
         <a
           href="https://hackclub.com"
@@ -179,7 +179,7 @@
         per day if you're into that kind of thing!
       </p>
       <p class="text-secondary leading-relaxed max-w-[75ch]">
-        On the other hand, Hackatime is <strong class="text-surface-content"
+        On the other hand, Deltatime is <strong class="text-surface-content"
           >completely free!</strong
         >
         We built it for Hack Club's events so we could have a unified system to track
@@ -192,7 +192,7 @@
   <section class="pb-16">
     <div class="max-w-[900px] mx-auto px-6">
       <h2 class="text-2xl md:text-3xl font-semibold mb-6">
-        So, how does Hackatime stack up?
+        So, how does Deltatime stack up?
       </h2>
       <div class="overflow-x-auto rounded-lg border border-surface-200/60">
         <table class="w-full border-collapse">
@@ -204,7 +204,7 @@
               >
               <th
                 class="text-left py-3.5 px-5 text-primary font-semibold text-sm"
-                >Hackatime</th
+                >Deltatime</th
               >
               <th
                 class="text-left py-3.5 px-5 text-secondary font-semibold text-sm"
@@ -227,9 +227,9 @@
                   >{feature.name}</td
                 >
                 <td
-                  class="py-3 px-5 text-sm {feature.hackatimeHighlight
+                  class="py-3 px-5 text-sm {feature.deltatimeHighlight
                     ? 'text-primary font-medium'
-                    : 'text-secondary'}">{feature.hackatime}</td
+                    : 'text-secondary'}">{feature.deltatime}</td
                 >
                 <td class="py-3 px-5 text-sm text-secondary"
                   >{feature.wakatimeFree}</td
@@ -271,7 +271,7 @@
   <section class="pb-16">
     <div class="max-w-[900px] mx-auto px-6">
       <h2 class="text-2xl md:text-3xl font-semibold mb-5">
-        Reasons you might prefer Hackatime
+        Reasons you might prefer Deltatime
       </h2>
       <p class="text-secondary leading-relaxed mb-6">
         Especially if you're a student, an open source contributor, or just not
@@ -303,7 +303,7 @@
       <pre
         class="bg-surface border border-surface-200/40 p-5 rounded-lg overflow-x-auto text-sm text-surface-content mb-6 leading-relaxed"><code
           >[settings]
-api_url = https://hackatime.hackclub.com/api/hackatime/v1
+api_url = https://deltatime.hackclub.com/api/deltatime/v1
 api_key = YOUR_API_KEY_HERE</code
         ></pre>
       <p class="text-secondary leading-relaxed">

@@ -30,7 +30,7 @@ class Settings::BaseController < InertiaController
     # see .timezone_options below; a user's current zone, if outside the list,
     # is pinned in ProfileController#page_props so it never disappears.
     timezones: -> { Settings::BaseController.timezone_options },
-    extension_text_types: -> { User.hackatime_extension_text_types.keys.map { |k| { label: k.humanize, value: k } } },
+    extension_text_types: -> { User.deltatime_extension_text_types.keys.map { |k| { label: k.humanize, value: k } } },
     themes: -> { User.theme_options }
   }.freeze
 

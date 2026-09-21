@@ -176,7 +176,7 @@
 </script>
 
 <svelte:head>
-  <title>Goals - Hackatime Settings</title>
+  <title>Goals - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard

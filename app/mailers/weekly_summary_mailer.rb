@@ -23,7 +23,7 @@ class WeeklySummaryMailer < ApplicationMailer
     @top_projects = breakdown(coding_heartbeats.group(:project).duration_seconds, default_name: "Other")
     @top_languages = breakdown(Heartbeat.attributed_durations_by(coding_heartbeats, :language))
 
-    mail(to: recipient_email, subject: "Your Hackatime weekly summary (#{@subject_period_label})")
+    mail(to: recipient_email, subject: "Your Deltatime weekly summary (#{@subject_period_label})")
   end
 
   private

@@ -115,7 +115,7 @@
               class={`inline-flex items-center gap-1.5 rounded border px-2 py-1 text-sm ${application.redirect_to_hca_login ? "border-green/30 bg-green/20 text-green" : "border-yellow/30 bg-yellow/20 text-yellow"}`}
               >{application.redirect_to_hca_login
                 ? "Hack Club Auth"
-                : "Hackatime sign in"}</span
+                : "Deltatime sign in"}</span
             >
           </DetailField>
           <DetailField label="Created" variant="secondary">

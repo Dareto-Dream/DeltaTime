@@ -8,8 +8,8 @@ class LoopsMailerTest < ActionMailer::TestCase
     mail = LoopsMailer.sign_in_email(recipient, token)
 
     assert_equal [ recipient ], mail.to
-    assert_equal "Your Hackatime sign-in link", mail.subject
-    assert_includes mail.html_part.body.decoded, "Sign in to Hackatime"
+    assert_equal "Your Deltatime sign-in link", mail.subject
+    assert_includes mail.html_part.body.decoded, "Sign in to Deltatime"
     assert_includes mail.text_part.body.decoded, "/auth/token/#{token}"
   end
 end

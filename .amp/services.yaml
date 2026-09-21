@@ -1,7 +1,7 @@
 services:
-  hackatime:
+  deltatime:
     command: sudo docker compose up -d db && sudo env PUBLIC_URL="$PUBLIC_URL" docker compose --profile portal up --no-deps portal
     port: 3001
     portal:
-      title: Hackatime
+      title: Deltatime
       description: Use /__dev/log-me-in/test@example.com to sign in as the seeded development user.

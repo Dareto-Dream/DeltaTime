@@ -34,7 +34,7 @@
         Your applications
       </h1>
       <p class="text-sm sm:text-base text-muted">
-        Manage your OAuth applications that integrate with Hackatime.
+        Manage your OAuth applications that integrate with Deltatime.
       </p>
     </div>
 
@@ -126,7 +126,7 @@
         No applications yet
       </h2>
       <p class="mt-2 text-sm text-muted">
-        Create your first OAuth application to start integrating with Hackatime.
+        Create your first OAuth application to start integrating with Deltatime.
       </p>
       <div class="mt-5">
         <Button href={newApplicationPath} variant="primary"

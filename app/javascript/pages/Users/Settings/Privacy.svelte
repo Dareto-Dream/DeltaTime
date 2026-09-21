@@ -37,8 +37,8 @@
     "Switching to an alternative",
     "Concerns about my data",
     "Don't see the need to track my time",
-    "Couldn't figure out how to install Hackatime",
-    "Hackatime is missing stats I want to see",
+    "Couldn't figure out how to install Deltatime",
+    "Deltatime is missing stats I want to see",
     "Something else",
   ];
 
@@ -76,7 +76,7 @@
 </script>
 
 <svelte:head>
-  <title>Privacy & Security - Hackatime Settings</title>
+  <title>Privacy & Security - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
@@ -108,7 +108,7 @@
 <SectionCard
   id="authorized_applications"
   title="Authorized Applications"
-  description="Applications that have access to your Hackatime account."
+  description="Applications that have access to your Deltatime account."
   wide
 >
   {#if authorized_applications.length}

@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Hackatime</title>
+  <title>{title} - Deltatime</title>
   <meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

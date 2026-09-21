@@ -3,7 +3,7 @@
 </h1>
 <p class="text-base leading-relaxed text-gray-700 mt-4 mb-0">
   Hi <%= h(@user.display_name) %>, please confirm that you want to add
-  <strong><%= @verification_request.email %></strong> to your Hackatime account.
+  <strong><%= @verification_request.email %></strong> to your Deltatime account.
 </p>
 
 <%= render "shared/mailer/button", url: @verification_url, label: "Verify email address" %>

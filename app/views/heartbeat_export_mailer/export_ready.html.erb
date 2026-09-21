@@ -2,7 +2,7 @@
   Your heartbeat export is ready
 </h1>
 <p class="text-base leading-relaxed text-gray-700 mt-4 mb-0">
-  Hi <%= h(@user.display_name) %>, your requested Hackatime heartbeat export is ready to download.
+  Hi <%= h(@user.display_name) %>, your requested Deltatime heartbeat export is ready to download.
 </p>
 
 <%= render "shared/mailer/button", url: @download_url, label: "Download #{@filename}" %>

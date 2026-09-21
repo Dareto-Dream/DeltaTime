@@ -3,7 +3,7 @@ module LanguageUtils
 
   # Some extensions are silly and report the wrong language for a given entity path.
   # But, we know better!
-  # This means that we can just override the language when we think it's incorrect, and Hackatime
+  # This means that we can just override the language when we think it's incorrect, and Deltatime
   # will be accurate Most Of The Time(tm). Without this, it's the opposite!
   AUTHORITATIVE_EXTENSIONS = %w[.luau].freeze
 

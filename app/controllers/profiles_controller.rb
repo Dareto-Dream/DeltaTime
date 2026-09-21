@@ -53,7 +53,7 @@ class ProfilesController < InertiaController
     since_date = first_heartbeat ? Time.at(first_heartbeat).to_date.strftime("%-m/%-d/%Y") : nil
 
     render inertia: "Projects/PublicShow", props: {
-      page_title: "#{project_name} — @#{@user.username} | Hackatime",
+      page_title: "#{project_name} — @#{@user.username} | Deltatime",
       project_name: project_name, username: @user.username,
       since_date: since_date, repo_url: mapping.repo_url,
       total_time_label: h.short_time_detailed(stats[:total_time]),
@@ -82,7 +82,7 @@ class ProfilesController < InertiaController
   end
 
   def profile_page_title
-    "#{@user.username.present? ? "@#{@user.username}" : @user.display_name} | Hackatime"
+    "#{@user.username.present? ? "@#{@user.username}" : @user.display_name} | Deltatime"
   end
 
   def set_profile_social_preview
@@ -94,7 +94,7 @@ class ProfilesController < InertiaController
 
   def profile_social_description
     return @user.profile_bio.to_s.squish.truncate(180) if @user.profile_bio.present?
-    "View #{@user.display_name}'s Hackatime coding profile."
+    "View #{@user.display_name}'s Deltatime coding profile."
   end
 
   def ensure_profile_og_image!

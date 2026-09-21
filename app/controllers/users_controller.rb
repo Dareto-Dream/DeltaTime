@@ -74,8 +74,8 @@ class UsersController < InertiaController
   end
 
   def set_setup_meta
-    @page_title = @og_title = "Set Up Your Editor - Hackatime"
-    @meta_description = @og_description = "Connect your code editor to Hackatime in minutes. Install the WakaTime plugin and start tracking your coding time for free."
+    @page_title = @og_title = "Set Up Your Editor - Deltatime"
+    @meta_description = @og_description = "Connect your code editor to Deltatime in minutes. Install the WakaTime plugin and start tracking your coding time for free."
   end
 
   def require_admin = require_admin!

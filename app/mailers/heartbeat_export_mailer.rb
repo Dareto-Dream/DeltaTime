@@ -11,7 +11,7 @@ class HeartbeatExportMailer < ApplicationMailer
 
     mail(
       to: recipient_email,
-      subject: "Your Hackatime heartbeat export is ready"
+      subject: "Your Deltatime heartbeat export is ready"
     )
   end
 end

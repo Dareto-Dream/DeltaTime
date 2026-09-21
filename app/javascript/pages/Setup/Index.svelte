@@ -66,7 +66,7 @@
 </script>
 
 <svelte:head>
-  <title>Set Up Hackatime</title>
+  <title>Set Up Deltatime</title>
 </svelte:head>
 
 <div
@@ -91,8 +91,8 @@
       {#if step === "welcome"}
         <TwoChoiceLayout
           emoji="/images/emojis/ms-grinning.svg"
-          title="Welcome to Hackatime!"
-          subtitle="Hackatime is a free tool from Hack Club that tracks the time you spend working on projects."
+          title="Welcome to Deltatime!"
+          subtitle="Deltatime is a free tool from Hack Club that tracks the time you spend working on projects."
           question="To get started, do you have a code editor (like VSCode) installed?"
         >
           <TwoChoiceCard
@@ -153,7 +153,7 @@
         <TwoChoiceLayout
           emoji="/images/emojis/ms-cool.svg"
           title="Awesome!"
-          subtitle="Let's get you set up with Hackatime directly."
+          subtitle="Let's get you set up with Deltatime directly."
           question="Are you comfortable with pasting a setup script in your terminal, or would you like to manually install each extension?"
         >
           <TwoChoiceCard

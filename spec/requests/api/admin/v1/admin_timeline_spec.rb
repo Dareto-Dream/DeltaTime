@@ -49,8 +49,8 @@ RSpec.describe 'Admin::Timeline', type: :request, openapi_spec: 'admin/swagger.y
                           items: {
                             type: :object,
                             properties: {
-                              name: { type: :string, example: 'hackatime' },
-                              repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' }
+                              name: { type: :string, example: 'deltatime' },
+                              repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' }
                             }
                           }
                         },
@@ -72,7 +72,7 @@ RSpec.describe 'Admin::Timeline', type: :request, openapi_spec: 'admin/swagger.y
                   timestamp: { type: :number, format: :float, example: 1710948000.0 },
                   additions: { type: :integer, nullable: true, example: 120 },
                   deletions: { type: :integer, nullable: true, example: 18 },
-                  github_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime/commit/a1b2c3d' }
+                  github_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime/commit/a1b2c3d' }
                 }
               }
             }
@@ -118,8 +118,8 @@ RSpec.describe 'Admin::Timeline', type: :request, openapi_spec: 'admin/swagger.y
                           items: {
                             type: :object,
                             properties: {
-                              name: { type: :string, example: 'hackatime' },
-                              repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' }
+                              name: { type: :string, example: 'deltatime' },
+                              repo_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' }
                             }
                           }
                         },
@@ -141,7 +141,7 @@ RSpec.describe 'Admin::Timeline', type: :request, openapi_spec: 'admin/swagger.y
                   timestamp: { type: :number, format: :float, example: 1710948000.0 },
                   additions: { type: :integer, nullable: true, example: 120 },
                   deletions: { type: :integer, nullable: true, example: 18 },
-                  github_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime/commit/a1b2c3d' }
+                  github_url: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime/commit/a1b2c3d' }
                 }
               }
             }

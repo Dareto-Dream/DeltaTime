@@ -12,7 +12,7 @@ class SettingsAppearanceControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     assert_redirected_to my_settings_appearance_path
     assert_equal "nord", user.reload.theme
-    assert_equal "nord", cookies[:hackatime_theme]
+    assert_equal "nord", cookies[:deltatime_theme]
 
     follow_redirect!(headers: { "X-Inertia" => "true" })
 

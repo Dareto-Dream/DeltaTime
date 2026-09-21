@@ -6,7 +6,7 @@ class LoopsMailer < ApplicationMailer
 
     mail(
       to: @email,
-      subject: "Your Hackatime sign-in link"
+      subject: "Your Deltatime sign-in link"
     )
   end
 end

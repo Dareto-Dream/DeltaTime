@@ -25,7 +25,7 @@ class HeartbeatExportMailerTest < ActionMailer::TestCase
     )
 
     assert_equal [ @recipient_email ], mail.to
-    assert_equal "Your Hackatime heartbeat export is ready", mail.subject
+    assert_equal "Your Deltatime heartbeat export is ready", mail.subject
     assert_equal 0, mail.attachments.size
 
     assert_includes mail.html_part.body.decoded, "Your heartbeat export is ready"

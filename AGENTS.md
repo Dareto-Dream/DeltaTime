@@ -1,4 +1,4 @@
-# AGENTS.md for Hackatime
+# AGENTS.md for Deltatime
 
 _You MUST read the [development guide](DEVELOPMENT.md) before starting. If you cannot read it, please ask for help._
 
@@ -102,7 +102,7 @@ Skip running checks which aren't relevant to your changes. However, at the very 
 
 ### Amp portal server
 
-The Amp portal runs Rails in the dedicated `portal` Compose profile while the `web` container remains available for commands. Keep the portal process attached to `docker compose up`; do not change it back to `docker compose exec`, because stopping the outer exec process can orphan Puma inside the container. Use `amp orb service restart hackatime` after changing the portal service configuration.
+The Amp portal runs Rails in the dedicated `portal` Compose profile while the `web` container remains available for commands. Keep the portal process attached to `docker compose up`; do not change it back to `docker compose exec`, because stopping the outer exec process can orphan Puma inside the container. Use `amp orb service restart deltatime` after changing the portal service configuration.
 
 Orb setup prebuilds the Vite client bundle so the first portal request does not block on a build. After changing frontend source, run `docker compose exec web bin/vite build` before asking the user to review the portal; otherwise their first request can spend several seconds compiling assets.
 

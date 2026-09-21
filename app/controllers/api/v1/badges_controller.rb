@@ -7,7 +7,7 @@ module Api
       #
       # Generates a shields.io badge showing coding time for a project.
       # Supports lookup by slack_uid, username, or internal id.
-      # Project can be a project name ("hackatime") or owner/repo ("hackclub/hackatime").
+      # Project can be a project name ("deltatime") or owner/repo ("hackclub/deltatime").
       def show
         user = find_user(params[:user_id])
         return render_not_found_json("User not found") unless user
@@ -25,7 +25,7 @@ module Api
           seconds += user.heartbeats.where(project: alias_names).duration_seconds
         end
 
-        label = params[:label] || "hackatime"
+        label = params[:label] || "deltatime"
         color = params[:color] || "blue"
         shields_url = "https://img.shields.io/badge/#{ERB::Util.url_encode(label)}-#{ERB::Util.url_encode(format_duration(seconds))}-#{ERB::Util.url_encode(color)}"
 

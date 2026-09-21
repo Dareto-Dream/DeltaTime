@@ -27,9 +27,9 @@
       <img
         src="/images/new-icon-rounded.png"
         class="w-10 h-10 rounded-lg"
-        alt="Hackatime"
+        alt="Deltatime"
       />
-      <span class="font-bold text-2xl tracking-tight">Hackatime</span>
+      <span class="font-bold text-2xl tracking-tight">Deltatime</span>
     </Link>
     <nav
       class="hidden md:flex gap-8 items-center text-sm font-medium text-secondary"

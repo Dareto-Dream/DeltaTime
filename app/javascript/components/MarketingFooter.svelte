@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Link } from "@inertiajs/svelte";
+  import { users } from "../api";
 
   type FooterLink = {
     label: string;
@@ -13,9 +14,8 @@
     {
       title: "Platform",
       links: [
-        { label: "Documentation", href: "/docs" },
         { label: "Leaderboards", href: "/leaderboards" },
-        { label: "Editor Setup", href: "/docs/editors/vs-code" },
+        { label: "Editor Setup", href: users.setup.path() },
       ],
     },
     {
@@ -24,7 +24,7 @@
         { label: "Slack", href: "https://hackclub.com/slack", external: true },
         {
           label: "GitHub",
-          href: "https://github.com/hackclub/hackatime",
+          href: "https://github.com/Dareto-Dream/DeltaTime",
           external: true,
         },
         { label: "Hack Club", href: "https://hackclub.com", external: true },
@@ -59,9 +59,9 @@
           <img
             src="/images/new-icon-rounded.png"
             class="w-8 h-8 rounded-lg"
-            alt="Hackatime"
+            alt="Deltatime"
           />
-          <span class="font-bold text-xl tracking-tight">Hackatime</span>
+          <span class="font-bold text-xl tracking-tight">Deltatime</span>
         </a>
         <p class="text-sm text-secondary max-w-[35ch] leading-relaxed">
           A project by Hack Club. Made with 💖 in 🇬🇧🇺🇸

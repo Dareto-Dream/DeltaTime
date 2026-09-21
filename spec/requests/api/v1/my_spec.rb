@@ -187,7 +187,7 @@ RSpec.describe 'Api::V1::My', type: :request do
       parameter name: :project_repo_mapping, in: :body, schema: {
         type: :object,
         properties: {
-          repo_url: { type: :string, example: 'https://github.com/hackclub/hackatime' }
+          repo_url: { type: :string, example: 'https://github.com/hackclub/deltatime' }
         },
         required: [ 'repo_url' ]
       }
@@ -195,8 +195,8 @@ RSpec.describe 'Api::V1::My', type: :request do
       response(302, 'redirect', document: false) do
         let(:Authorization) { "Bearer dev-api-key-12345" }
         let(:api_key) { 'dev-api-key-12345' }
-        let(:project_name) { 'hackatime' }
-        let(:project_repo_mapping) { { repo_url: 'https://github.com/hackclub/hackatime' } }
+        let(:project_name) { 'deltatime' }
+        let(:project_repo_mapping) { { repo_url: 'https://github.com/hackclub/deltatime' } }
 
         before do
           login_browser_user
@@ -220,11 +220,11 @@ RSpec.describe 'Api::V1::My', type: :request do
       response(302, 'redirect', document: false) do
         let(:Authorization) { "Bearer dev-api-key-12345" }
         let(:api_key) { 'dev-api-key-12345' }
-        let(:project_name) { 'hackatime' }
+        let(:project_name) { 'deltatime' }
 
         before do
            login_browser_user
-           create(:project_repo_mapping, user: user, project_name: 'hackatime')
+           create(:project_repo_mapping, user: user, project_name: 'deltatime')
         end
         run_test!
       end
@@ -243,11 +243,11 @@ RSpec.describe 'Api::V1::My', type: :request do
       response(302, 'redirect', document: false) do
         let(:Authorization) { "Bearer dev-api-key-12345" }
         let(:api_key) { 'dev-api-key-12345' }
-        let(:project_name) { 'hackatime' }
+        let(:project_name) { 'deltatime' }
 
         before do
            login_browser_user
-           p = create(:project_repo_mapping, user: user, project_name: 'hackatime')
+           p = create(:project_repo_mapping, user: user, project_name: 'deltatime')
            p.archive!
         end
         run_test!

@@ -19,7 +19,7 @@
         size="lg"
         class="w-full md:w-auto shrink-0"
       >
-        Let&apos;s setup Hackatime! Click me :D
+        Let&apos;s setup Deltatime! Click me :D
       </Button>
     </div>
   </div>

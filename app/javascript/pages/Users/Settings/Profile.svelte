@@ -63,7 +63,7 @@
 </script>
 
 <svelte:head>
-  <title>Profile - Hackatime Settings</title>
+  <title>Profile - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
@@ -107,7 +107,7 @@
 <SectionCard
   id="user_display_name"
   title="Display Name"
-  description="This name appears across Hackatime instead of your Slack, GitHub, or username."
+  description="This name appears across Deltatime instead of your Slack, GitHub, or username."
 >
   <Form
     id="profile-display-name-form"

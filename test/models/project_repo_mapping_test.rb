@@ -3,7 +3,7 @@ require "test_helper"
 class ProjectRepoMappingTest < ActiveSupport::TestCase
   test "archive and unarchive toggle archived state" do
     user = create(:user)
-    mapping = create(:project_repo_mapping, user: user, project_name: "hackatime")
+    mapping = create(:project_repo_mapping, user: user, project_name: "deltatime")
 
     assert_not mapping.archived?
 
@@ -38,11 +38,11 @@ class ProjectRepoMappingTest < ActiveSupport::TestCase
 
   test "nonexistent GitHub repository URLs are invalid" do
     user = create(:user, github_access_token: "github-token")
-    stub_request(:get, "https://api.github.com/repos/hackcl/hackatime")
+    stub_request(:get, "https://api.github.com/repos/hackcl/deltatime")
       .to_return(status: 404, body: '{"message":"Not Found"}')
     mapping = user.project_repo_mappings.build(
       project_name: "missing",
-      repo_url: "https://github.com/hackcl/hackatime"
+      repo_url: "https://github.com/hackcl/deltatime"
     )
 
     assert_not mapping.valid?

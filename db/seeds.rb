@@ -115,16 +115,16 @@ end
 app_owner = test_user || User.find_by(id: 1)
 
 OauthApplication.find_or_create_by(
-  name: "Hackatime Desktop",
+  name: "Deltatime Desktop",
   owner: app_owner,
-  redirect_uri: "hackatime://auth/callback",
+  redirect_uri: "deltatime://auth/callback",
   uid: "BPr5VekIV-xuQ2ZhmxbGaahJ3XVd7gM83pql-HYGYxQ",
   scopes: [ "profile" ],
   confidential: false,
 )
 
 if test_user && defined?(Doorkeeper)
-  app = OauthApplication.find_by(name: "Hackatime Desktop")
+  app = OauthApplication.find_by(name: "Deltatime Desktop")
 
   existing_token = Doorkeeper::AccessToken.find_by(token: 'dev-api-key-12345')
 

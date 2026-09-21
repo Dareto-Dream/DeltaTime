@@ -9,13 +9,13 @@ class SetupTest < ApplicationSystemTestCase
   test "old wakatime_setup routes redirect to /setup" do
     visit "/my/wakatime_setup"
     assert_current_path "/setup"
-    assert_text "Welcome to Hackatime!"
+    assert_text "Welcome to Deltatime!"
   end
 
   test "terminal flow shows the setup command with per-OS tabs" do
     visit setup_path
 
-    assert_text "Welcome to Hackatime!"
+    assert_text "Welcome to Deltatime!"
     click_on "Yes, I have an editor installed"
 
     assert_text "Are you comfortable with pasting a setup script in your terminal, or would you like to manually install each extension?"
@@ -54,7 +54,7 @@ class SetupTest < ApplicationSystemTestCase
     assert_text "github.com/codespaces"
 
     click_on "Continue"
-    assert_text "Install \"Hackatime Time Tracker\""
+    assert_text "Install \"Deltatime Time Tracker\""
 
     click_on "I'm done!"
     assert_text "Fair Play Policy"

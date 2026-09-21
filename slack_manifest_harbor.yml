@@ -1,16 +1,16 @@
 # from https://app.slack.com/app-settings/T0266FRGM/A08EJ0W7N82/app-manifest
 display_information:
-  name: Hackatime
-  description: Track your time on Hackatime!
+  name: Deltatime
+  description: Track your time on Deltatime!
   background_color: "#de9c0d"
 features:
   bot_user:
-    display_name: hackatime
+    display_name: deltatime
     always_online: false
 oauth_config:
   redirect_urls:
     - http://localhost:3000/auth/slack/callback
-    - https://hackatime.hackclub.com/auth/slack/callback
+    - https://deltatime.hackclub.com/auth/slack/callback
   scopes:
     user:
       - users.profile:read

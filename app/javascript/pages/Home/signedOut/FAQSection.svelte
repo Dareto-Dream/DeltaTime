@@ -4,15 +4,15 @@
   const faqs = [
     {
       q: "Is this really free?",
-      a: "Yep. Hackatime is a free service by Hack Club. We made it for ourselves and our events, and it's good marketing :)",
+      a: "Yep. Deltatime is a free service by Hack Club. We made it for ourselves and our events, and it's good marketing :)",
     },
     {
       q: "How do I migrate from WakaTime?",
-      a: "Point your existing WakaTime plugin at Hackatime's API URL and enter your Hackatime API key! You can even import your WakaTime data into Hackatime.",
+      a: "Point your existing WakaTime plugin at Deltatime's API URL and enter your Deltatime API key! You can even import your WakaTime data into Deltatime.",
     },
     {
       q: "Is my code private?",
-      a: "Hackatime only receives metadata (e.g. file names, project names, timestamps, language). We never see your actual source code.",
+      a: "Deltatime only receives metadata (e.g. file names, project names, timestamps, language). We never see your actual source code.",
     },
     {
       q: "Can I self-host this?",

@@ -38,7 +38,7 @@ class HeartbeatExportJobTest < ActiveJob::TestCase
     assert_equal 1, ActionMailer::Base.deliveries.size
     mail = ActionMailer::Base.deliveries.last
     assert_equal [ @user.email_addresses.first.email ], mail.to
-    assert_equal "Your Hackatime heartbeat export is ready", mail.subject
+    assert_equal "Your Deltatime heartbeat export is ready", mail.subject
 
     blob = ActiveStorage::Blob.order(created_at: :asc).last
     assert_equal "application/zip", blob.content_type

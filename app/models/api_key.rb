@@ -11,6 +11,6 @@ class ApiKey < ApplicationRecord
   # WakaTime compatibility: vscode-wakatime expects a UUID v4 token.
   def generate_token!
     self.token ||= SecureRandom.uuid_v4
-    self.name ||= "Hackatime key"
+    self.name ||= "Deltatime key"
   end
 end

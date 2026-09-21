@@ -1,6 +1,6 @@
 # Development
 
-Hello and welcome to the Hackatime codebase! This is a brief guide to help you get started with contributing to the project.
+Hello and welcome to the Deltatime codebase! This is a brief guide to help you get started with contributing to the project.
 
 ## Quickstart
 
@@ -10,7 +10,7 @@ Clone down the repository:
 
 ```sh
 # Set it up...
-$ git clone https://github.com/hackclub/hackatime && cd hackatime
+$ git clone https://github.com/Dareto-Dream/DeltaTime && cd DeltaTime
 
 # Set your config
 $ cp .env.example .env

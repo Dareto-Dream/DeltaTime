@@ -36,7 +36,7 @@ RSpec.describe 'Api::Internal', type: :request, openapi_spec: 'admin/swagger.yam
           properties: {
             success: { type: :boolean, example: true },
             status: { type: :string, example: 'complete' },
-            token_type: { type: :string, example: 'Desktop', description: 'The name of the revoked key (e.g. the regular API key\'s name such as "Desktop" or the default "Hackatime key"; for admin keys, the admin key\'s name). This is the key name, not a type descriptor.' },
+            token_type: { type: :string, example: 'Desktop', description: 'The name of the revoked key (e.g. the regular API key\'s name such as "Desktop" or the default "Deltatime key"; for admin keys, the admin key\'s name). This is the key name, not a type descriptor.' },
             owner_email: { type: :string, nullable: true, example: 'orpheus@hackclub.com' },
             key_name: { type: :string, nullable: true, example: 'Revoker admin key', description: 'Present only when revoking an admin ("hka_") key; the admin key\'s name.' }
           }

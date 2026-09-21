@@ -57,17 +57,17 @@ class StaticPagesController < InertiaController
   def currently_hacking_count = render(json: { count: Cache::CurrentlyHackingCountJob.perform_now[:count] })
 
   def wakatime_alternative
-    @meta_description = @og_description = @twitter_description = "Looking for a WakaTime alternative? Hackatime is a free, open source coding time tracker with all features unlocked. Compare features, pricing, and see why developers are switching."
-    @page_title = "WakaTime Alternative - Free & Open Source Coding Time Tracker | Hackatime"
-    @meta_keywords = "wakatime alternative, free time tracker, coding time tracker, open source wakatime, hackatime, developer analytics, programming stats"
-    @og_title = @twitter_title = "WakaTime Alternative - Free & Open Source | Hackatime"
+    @meta_description = @og_description = @twitter_description = "Looking for a WakaTime alternative? Deltatime is a free, open source coding time tracker with all features unlocked. Compare features, pricing, and see why developers are switching."
+    @page_title = "WakaTime Alternative - Free & Open Source Coding Time Tracker | Deltatime"
+    @meta_keywords = "wakatime alternative, free time tracker, coding time tracker, open source wakatime, deltatime, developer analytics, programming stats"
+    @og_title = @twitter_title = "WakaTime Alternative - Free & Open Source | Deltatime"
     render inertia: "WakatimeAlternative"
   end
 
   private
 
   def set_homepage_seo_content
-    @page_title = @og_title = @twitter_title = "Hackatime - Track your coding time"
+    @page_title = @og_title = @twitter_title = "Deltatime - Track your coding time"
     @meta_description = @og_description = @twitter_description = "Free and open-source coding time tracker. Works with VS Code, JetBrains, vim, emacs, and 70+ editors. Built by Hack Club for teenage developers."
     @meta_keywords = "coding time tracker, programming stats, open source time tracker, hack club coding tracker, free time tracking, code statistics, high school programming, coding analytics"
   end

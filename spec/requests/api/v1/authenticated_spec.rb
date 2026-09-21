@@ -153,7 +153,7 @@ RSpec.describe 'Api::V1::Authenticated', type: :request do
               items: {
                 type: :object,
                 properties: {
-                  name: { type: :string, example: 'hackatime' },
+                  name: { type: :string, example: 'deltatime' },
                   total_seconds: { type: :number, example: 3600.0 },
                   most_recent_heartbeat: { type: :string, format: :date_time, nullable: true, example: '2024-03-20T15:30:00Z' },
                   languages: { type: :array, items: { type: :string, example: 'Ruby' } },
@@ -239,7 +239,7 @@ RSpec.describe 'Api::V1::Authenticated', type: :request do
               created_at: { type: :string, format: :date_time, example: '2024-03-20T15:30:00Z' },
               time: { type: :number, example: 1710948600.0 },
               category: { type: :string, example: 'coding' },
-              project: { type: :string, example: 'hackatime' },
+              project: { type: :string, example: 'deltatime' },
               language: { type: :string, example: 'Ruby' },
               editor: { type: :string, example: 'VS Code' },
               operating_system: { type: :string, example: 'Mac' },

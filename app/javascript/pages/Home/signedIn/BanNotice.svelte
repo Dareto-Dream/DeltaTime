@@ -14,9 +14,9 @@
   <div class="text-surface-content text-left text-lg space-y-2">
     <p class="mb-2">
       <b>What does this mean?</b> Your account was found to be engaging in fraud or
-      abuse of Hackatime. This includes using methods to gain an unfair advantage
+      abuse of Deltatime. This includes using methods to gain an unfair advantage
       on the leaderboards or attempting to manipulate your coding time in any way.
-      This ban restricts your ability to participate in public leaderboards, but Hackatime
+      This ban restricts your ability to participate in public leaderboards, but Deltatime
       will still track and display your time. Your ability to participate in current
       and future Hack Club events may also be affected.
     </p>

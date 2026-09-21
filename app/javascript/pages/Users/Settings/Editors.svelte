@@ -14,7 +14,7 @@
 
   type Props = {
     user: {
-      hackatime_extension_text_type: string;
+      deltatime_extension_text_type: string;
       show_goals_in_statusbar: boolean;
     };
     options: {
@@ -25,16 +25,16 @@
   let { user, options }: Props = $props();
 
   let goalsDisabled = $derived(
-    user.hackatime_extension_text_type !== "simple_text",
+    user.deltatime_extension_text_type !== "simple_text",
   );
 </script>
 
 <svelte:head>
-  <title>Editors - Hackatime Settings</title>
+  <title>Editors - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
-  id="user_hackatime_extension"
+  id="user_deltatime_extension"
   title="Extension Display"
   description="Choose how coding time appears in the extension status text."
 >
@@ -48,8 +48,8 @@
     <FormField inputId="extension_type" label="Display style">
       <Select
         id="extension_type"
-        name="user[hackatime_extension_text_type]"
-        bind:value={user.hackatime_extension_text_type}
+        name="user[deltatime_extension_text_type]"
+        bind:value={user.deltatime_extension_text_type}
         items={options.extension_text_types}
       />
     </FormField>

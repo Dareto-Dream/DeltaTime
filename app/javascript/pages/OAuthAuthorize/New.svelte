@@ -106,7 +106,7 @@
             {client_name}
           </p>
           <p class="mt-0.5 text-pretty text-xs text-muted">
-            wants to access your Hackatime account
+            wants to access your Deltatime account
           </p>
         </div>
       </div>

@@ -31,7 +31,7 @@ class HeartbeatImportRunnerTest < ActiveSupport::TestCase
             entity: "/tmp/test.rb",
             type: "file",
             time: 1_700_000_000.0,
-            project: "hackatime",
+            project: "deltatime",
             language: "Ruby",
             is_write: true
           }
@@ -93,7 +93,7 @@ class HeartbeatImportRunnerTest < ActiveSupport::TestCase
             entity: "/tmp/test.rb",
             type: "file",
             time: 1_700_000_000.0,
-            project: "hackatime",
+            project: "deltatime",
             language: "Ruby",
             is_write: true
           }

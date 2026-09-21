@@ -139,7 +139,7 @@
               >Use Hack Club Auth for Login</b
             ><small class="block mt-1 text-secondary"
               >Unauthenticated users authorizing this app will be sent directly
-              to Hack Club Auth instead of the generic Hackatime sign-in page.</small
+              to Hack Club Auth instead of the generic Deltatime sign-in page.</small
             ></span
           >
         </CheckboxField>

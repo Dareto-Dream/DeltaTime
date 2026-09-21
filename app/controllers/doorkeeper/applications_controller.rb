@@ -96,7 +96,7 @@ module Doorkeeper
 
     FORM_LABELS = {
       new: { component: "OAuthApplications/New", title_key: "doorkeeper.applications.new.title",
-             subheading: "Create a new OAuth application to integrate with Hackatime.",
+             subheading: "Create a new OAuth application to integrate with Deltatime.",
              form_mode: "new", form_method: "post" },
       edit: { component: "OAuthApplications/Edit", title_key: "doorkeeper.applications.edit.title",
               subheading_template: "Update the settings for %{name}.",

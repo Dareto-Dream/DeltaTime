@@ -91,7 +91,7 @@ class DocumentationFeedbacksControllerTest < ActionDispatch::IntegrationTest
     {
       helpful: true,
       path: "/docs/editors/android-studio",
-      title: "Android Studio - Hackatime Docs",
+      title: "Android Studio - Deltatime Docs",
       visitor_token: SecureRandom.uuid
     }.merge(overrides)
   end

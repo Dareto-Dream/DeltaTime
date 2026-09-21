@@ -5,7 +5,7 @@
     {
       n: "01",
       title: "Register",
-      body: "Create a free account on Hackatime. You'll get an API key — that's how your editor identifies you.",
+      body: "Create a free account on Deltatime. You'll get an API key — that's how your editor identifies you.",
     },
     {
       n: "02",
@@ -40,7 +40,7 @@
         Enter your API key and set the <code
           class="text-primary bg-surface-100 px-1.5 py-0.5 rounded text-sm"
           >api_url</code
-        > to Hackatime. Done.
+        > to Deltatime. Done.
       </p>
     </div>
   </div>

@@ -75,7 +75,7 @@
   <ScreenHeader
     emoji="/images/emojis/ms-lightning.svg"
     title="Let's do it!"
-    html="<b>Pick your operating system</b>, then follow the steps to run the setup command. It installs Hackatime and your editor plugins for you."
+    html="<b>Pick your operating system</b>, then follow the steps to run the setup command. It installs Deltatime and your editor plugins for you."
   />
 
   <div class="mx-auto max-w-2xl space-y-4">
@@ -106,7 +106,7 @@
 
     <VideoTutorial
       src={`https://www.youtube.com/embed/grriwsX5mIo?modestbranding=1&rel=0&t=${videoTime}`}
-      iframeTitle="Hackatime setup video tutorial"
+      iframeTitle="Deltatime setup video tutorial"
     />
   </div>
 

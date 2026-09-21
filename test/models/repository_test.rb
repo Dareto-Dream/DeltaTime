@@ -2,11 +2,11 @@ require "test_helper"
 
 class RepositoryTest < ActiveSupport::TestCase
   test "parse_url extracts host owner and name" do
-    parsed = Repository.parse_url("https://github.com/hackclub/hackatime")
+    parsed = Repository.parse_url("https://github.com/hackclub/deltatime")
 
     assert_equal "github.com", parsed[:host]
     assert_equal "hackclub", parsed[:owner]
-    assert_equal "hackatime", parsed[:name]
+    assert_equal "deltatime", parsed[:name]
   end
 
   test "formatted_languages truncates to top three with ellipsis" do

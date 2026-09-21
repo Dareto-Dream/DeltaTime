@@ -22,7 +22,7 @@ class Rack::Attack
   end
 
   def self.heartbeat_request?(req)
-    req.path =~ %r{\A/api/hackatime/v1/users/[^/]+/heartbeats(?:\.bulk)?\z}
+    req.path =~ %r{\A/api/deltatime/v1/users/[^/]+/heartbeats(?:\.bulk)?\z}
   end
 
   def self.oauth_user_id(req)

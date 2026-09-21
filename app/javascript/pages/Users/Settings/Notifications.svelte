@@ -18,13 +18,13 @@
 </script>
 
 <svelte:head>
-  <title>Notifications - Hackatime Settings</title>
+  <title>Notifications - Deltatime Settings</title>
 </svelte:head>
 
 <SectionCard
   id="user_email_notifications"
   title="Email Notifications"
-  description="Control which product emails Hackatime sends to your linked email addresses."
+  description="Control which product emails Deltatime sends to your linked email addresses."
 >
   <Form
     id="notifications-settings-form"

@@ -1,7 +1,7 @@
 ---
 - value: standard
   label: Classic
-  description: Current Hackatime look.
+  description: Current Deltatime look.
   color_scheme: dark
   theme_color: "#c8394f"
   preview:
@@ -22,7 +22,7 @@
 
 - value: midnight
   label: Midnight
-  description: Neutral charcoal with classic Hackatime accents.
+  description: Neutral charcoal with classic Deltatime accents.
   color_scheme: dark
   theme_color: "#ec3750"
   preview:

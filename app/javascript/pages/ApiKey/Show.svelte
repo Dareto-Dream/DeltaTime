@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Your API Key - Hackatime</title>
+  <title>Your API Key - Deltatime</title>
 </svelte:head>
 
 <div class="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-12">

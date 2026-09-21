@@ -81,7 +81,7 @@ class ProfileOgImageGenerator
     end
 
     def username
-      @username ||= user.username.present? ? "@#{user.username}" : "Hackatime profile"
+      @username ||= user.username.present? ? "@#{user.username}" : "Deltatime profile"
     end
 
     def initials

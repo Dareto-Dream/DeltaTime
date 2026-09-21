@@ -21,14 +21,14 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
 
     assert_difference("user.heartbeats.count", 1) do
       assert_enqueued_with(job: DashboardRollupRefreshJob, args: [ user.id ]) do
-        assert_enqueued_with(job: AttemptProjectRepoMappingJob, args: [ user.id, "hackatime" ]) do
+        assert_enqueued_with(job: AttemptProjectRepoMappingJob, args: [ user.id, "deltatime" ]) do
           result = HeartbeatIngest.call(
             user: user,
             mode: :direct,
             heartbeats: [ {
               entity: "src/main.rb",
               plugin: "vscode/1.0.0",
-              project: "hackatime",
+              project: "deltatime",
               time: Time.current.to_f,
               type: "file"
             } ],
@@ -170,7 +170,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
     payload = {
       entity: "src/main.rb",
       plugin: "vscode/1.0.0",
-      project: "hackatime",
+      project: "deltatime",
       time: Time.current.to_f,
       type: "file"
     }
@@ -377,7 +377,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
     user = create(:user)
     payload = {
       entity: "src/main.rb",
-      project: "hackatime",
+      project: "deltatime",
       time: Time.current.to_f,
       type: "file"
     }
@@ -408,7 +408,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
         {
           entity: "src/first.py",
           plugin: "vscode/1.0.0",
-          project: "hackatime",
+          project: "deltatime",
           time: now - 1,
           type: "file",
           language: "Python"
@@ -416,7 +416,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
         {
           entity: "src/second.rb",
           plugin: "vscode/1.0.0",
-          project: "hackatime",
+          project: "deltatime",
           time: now,
           type: "file",
           language: "<<LAST_LANGUAGE>>"
@@ -538,7 +538,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
 
     heartbeat = user.heartbeats.sole
     assert_equal "coding", heartbeat.category
-    assert_equal "hackatime", heartbeat.project
+    assert_equal "deltatime", heartbeat.project
   end
 
   test "import heartbeat ingest recognizes a pre-normalization fields hash" do
@@ -546,7 +546,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
     raw = {
       category: "",
       entity: "/tmp/test.rb",
-      project: "  hackatime\n",
+      project: "  deltatime\n",
       time: 1_700_000_000.0,
       type: "file"
     }
@@ -882,7 +882,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
               entity: "/tmp/test.rb",
               type: "file",
               time: 1_700_000_000.0,
-              project: "hackatime",
+              project: "deltatime",
               language: "Ruby",
               is_write: true
             },
@@ -890,7 +890,7 @@ class HeartbeatIngestTest < ActiveSupport::TestCase
               entity: "/tmp/test.rb",
               type: "file",
               time: 1_700_000_000.0,
-              project: "hackatime",
+              project: "deltatime",
               language: "Ruby",
               is_write: true
             }

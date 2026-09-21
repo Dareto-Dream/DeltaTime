@@ -13,7 +13,7 @@ else
   is_dirty = `git status --porcelain 2>/dev/null`.present?
 end
 
-commit_link = git_hash != "unknown" ? "https://github.com/hackclub/hackatime/commit/#{git_hash}" : nil
+commit_link = git_hash != "unknown" ? "https://github.com/Dareto-Dream/DeltaTime/commit/#{git_hash}" : nil
 short_hash = git_hash[0..7]
 version = is_dirty ? "#{short_hash}-dirty" : short_hash
 

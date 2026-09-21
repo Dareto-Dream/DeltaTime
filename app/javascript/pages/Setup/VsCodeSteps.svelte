@@ -21,13 +21,13 @@
       height: 712,
     },
     {
-      title: 'Search for "Hackatime"',
+      title: 'Search for "Deltatime"',
       image: step2,
       width: 592,
       height: 234,
     },
     {
-      title: 'Install "Hackatime Time Tracker"',
+      title: 'Install "Deltatime Time Tracker"',
       image: step3,
       width: 1186,
       height: 352,
@@ -48,7 +48,7 @@
   <ScreenHeader
     emoji="/images/emojis/ms-computer.svg"
     title="Awesome!"
-    subtitle="Now let's install the Hackatime extension in your editor."
+    subtitle="Now let's install the Deltatime extension in your editor."
   />
 
   <div class="grid grid-cols-1 gap-6 md:grid-cols-3">

@@ -145,7 +145,7 @@
 >
   <h2 class="mb-4 text-lg font-semibold text-surface-content/90">{title}</h2>
   <div
-    class="hackatime-pie-chart relative h-[260px] min-w-0 sm:h-[290px] lg:h-[330px]"
+    class="deltatime-pie-chart relative h-[260px] min-w-0 sm:h-[290px] lg:h-[330px]"
   >
     {#if data.length > 0}
       <svg

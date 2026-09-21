@@ -47,7 +47,7 @@
 </script>
 
 <svelte:head>
-  <title>Dashboard - Hackatime</title>
+  <title>Dashboard - Deltatime</title>
 </svelte:head>
 
 <div>

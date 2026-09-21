@@ -4,7 +4,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
   path '/api/v1/users/lookup_email/{email}' do
     get('Lookup user by email') do
       tags 'Users'
-      description 'Find a user ID by their email address. Useful for integrations that need to map emails to Hackatime users. Requires an active Admin API Key supplied via the Authorization Bearer header.'
+      description 'Find a user ID by their email address. Useful for integrations that need to map emails to Deltatime users. Requires an active Admin API Key supplied via the Authorization Bearer header.'
       security [ Bearer: [] ]
       produces 'application/json'
 

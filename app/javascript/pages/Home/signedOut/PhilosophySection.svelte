@@ -4,7 +4,7 @@
   const cards = [
     {
       title: "No artificial limits",
-      body: "Other trackers delete your history after two weeks unless you pay. Hackatime stores it indefinitely, making it a perfect alternative to WakaTime.",
+      body: "Other trackers delete your history after two weeks unless you pay. Deltatime stores it indefinitely, making it a perfect alternative to WakaTime.",
     },
     {
       title: "Community built",

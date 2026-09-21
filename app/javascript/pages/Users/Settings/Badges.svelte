@@ -63,7 +63,7 @@
 {/snippet}
 
 <svelte:head>
-  <title>Badges - Hackatime Settings</title>
+  <title>Badges - Deltatime Settings</title>
 </svelte:head>
 
 {#if !allow_public_stats_lookup}

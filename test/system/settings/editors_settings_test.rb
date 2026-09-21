@@ -16,6 +16,6 @@ class EditorsSettingsTest < ApplicationSystemTestCase
     click_on "Save extension settings"
 
     assert_text "Settings updated successfully"
-    assert_equal "clock_emoji", @user.reload.hackatime_extension_text_type
+    assert_equal "clock_emoji", @user.reload.deltatime_extension_text_type
   end
 end

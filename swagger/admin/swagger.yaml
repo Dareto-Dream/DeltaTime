@@ -1,10 +1,10 @@
 ---
 openapi: 3.0.1
 info:
-  title: Hackatime Admin API
+  title: Deltatime Admin API
   version: v1
   description: |
-    Admin and internal endpoints for Hackatime.
+    Admin and internal endpoints for Deltatime.
 
     Admin endpoints require an Admin API Key or an OAuth access token with the `admin` scope.
     Internal endpoints require an internal environment token. These endpoints are not part of the public API.
@@ -1369,11 +1369,11 @@ paths:
                                   properties:
                                     name:
                                       type: string
-                                      example: hackatime
+                                      example: deltatime
                                     repo_url:
                                       type: string
                                       nullable: true
-                                      example: https://github.com/hackclub/hackatime
+                                      example: https://github.com/hackclub/deltatime
                               editors:
                                 type: array
                                 items:
@@ -1411,7 +1411,7 @@ paths:
                         github_url:
                           type: string
                           nullable: true
-                          example: https://github.com/hackclub/hackatime/commit/a1b2c3d
+                          example: https://github.com/hackclub/deltatime/commit/a1b2c3d
         '422':
           description: invalid date format
           content:
@@ -1809,7 +1809,7 @@ paths:
                         project:
                           type: string
                           nullable: true
-                          example: hackatime
+                          example: deltatime
                         branch:
                           type: string
                           nullable: true
@@ -2153,7 +2153,7 @@ paths:
                     type: array
                     items:
                       type: string
-                      example: hackatime
+                      example: deltatime
                   count:
                     type: integer
                     example: 12
@@ -2350,7 +2350,7 @@ paths:
                         project:
                           type: string
                           nullable: true
-                          example: hackatime
+                          example: deltatime
                         branch:
                           type: string
                           nullable: true
@@ -2490,7 +2490,7 @@ paths:
                         name:
                           type: string
                           nullable: true
-                          example: hackatime
+                          example: deltatime
                         total_heartbeats:
                           type: integer
                           example: 4821
@@ -2513,7 +2513,7 @@ paths:
                         repo:
                           type: string
                           nullable: true
-                          example: https://github.com/hackclub/hackatime
+                          example: https://github.com/hackclub/deltatime
                         repo_mapping_id:
                           type: integer
                           nullable: true
@@ -3385,7 +3385,7 @@ paths:
                     type: string
                     example: Desktop
                     description: The name of the revoked key (e.g. the regular API
-                      key's name such as "Desktop" or the default "Hackatime key";
+                      key's name such as "Desktop" or the default "Deltatime key";
                       for admin keys, the admin key's name). This is the key name,
                       not a type descriptor.
                   owner_email:
@@ -3587,7 +3587,7 @@ servers:
   description: Production API
   variables:
     defaultHost:
-      default: hackatime.hackclub.com
+      default: deltatime.hackclub.com
 - url: http://{localHost}
   description: Local Development API
   variables:

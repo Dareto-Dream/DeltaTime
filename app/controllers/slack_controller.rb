@@ -13,7 +13,7 @@ class SlackController < ApplicationController
       unless user
         render json: {
           response_type: "ephemeral",
-          text: "Darn it! I could not find a hackatime account linked with your slack account! please sign up and link your slack account at https://hackatime.hackclub.com/my/settings"
+          text: "Darn it! I could not find a deltatime account linked with your slack account! please sign up and link your slack account at https://deltatime.hackclub.com/my/settings"
         }
         return
       end

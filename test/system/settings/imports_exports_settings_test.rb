@@ -36,7 +36,7 @@ class ImportsExportsSettingsTest < ApplicationSystemTestCase
 
     assert_text "Imports"
     assert_text "WakaTime"
-    assert_text "Hackatime v1"
+    assert_text "Deltatime v1"
     assert_field "remote_import_api_key"
     assert_text "Start remote import"
   end

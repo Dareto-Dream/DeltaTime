@@ -19,7 +19,7 @@ RSpec.configure do |config|
       description: 'Production API',
       variables: {
         defaultHost: {
-          default: 'hackatime.hackclub.com'
+          default: 'deltatime.hackclub.com'
         }
       }
     },
@@ -41,7 +41,7 @@ RSpec.configure do |config|
       properties: {
         id: { type: :integer, example: 1 },
         username: { type: :string, example: 'orpheus' },
-        avatar_url: { type: :string, example: 'https://hackatime.hackclub.com/images/athena.png' },
+        avatar_url: { type: :string, example: 'https://deltatime.hackclub.com/images/athena.png' },
         display_name: { type: :string, example: 'Orpheus' },
         is_admin: { type: :boolean, example: false }
       }
@@ -51,7 +51,7 @@ RSpec.configure do |config|
       description: 'A single unit of coding activity representing a specific moment in time.',
       properties: {
         id: { type: :integer, example: 1024 },
-        entity: { type: :string, nullable: true, example: '/Users/orpheus/hackatime/app/services/chaos_monkey_service.rb', description: 'File path or app name being accessed' },
+        entity: { type: :string, nullable: true, example: '/Users/orpheus/deltatime/app/services/chaos_monkey_service.rb', description: 'File path or app name being accessed' },
         type: { type: :string, nullable: true, example: 'file', enum: [ 'file', 'app' ] },
         category: {
           type: :string,
@@ -65,7 +65,7 @@ RSpec.configure do |config|
           ]
         },
         time: { type: :number, format: :float, example: 1709251200.0, description: 'Unix timestamp of the activity' },
-        project: { type: :string, nullable: true, example: 'hackatime' },
+        project: { type: :string, nullable: true, example: 'deltatime' },
         branch: { type: :string, nullable: true, example: 'main' },
         language: { type: :string, nullable: true, example: 'Ruby' },
         is_write: { type: :boolean, nullable: true, example: true },
@@ -115,7 +115,7 @@ RSpec.configure do |config|
           items: {
             type: :object,
             properties: {
-              name: { type: :string, example: 'hackatime' },
+              name: { type: :string, example: 'deltatime' },
               total_seconds: { type: :number, example: 3600.0 },
               percent: { type: :number, example: 100.0 }
             }
@@ -147,12 +147,12 @@ RSpec.configure do |config|
     ProjectRepoMapping: {
       type: :object,
       properties: {
-        project_name: { type: :string, example: 'hackatime' },
+        project_name: { type: :string, example: 'deltatime' },
         repository: {
           type: :object,
           properties: {
-            url: { type: :string, example: 'https://github.com/hackclub/hackatime' },
-            homepage: { type: :string, example: 'https://hackatime.hackclub.com' }
+            url: { type: :string, example: 'https://github.com/hackclub/deltatime' },
+            homepage: { type: :string, example: 'https://deltatime.hackclub.com' }
           }
         },
         is_archived: { type: :boolean, example: false }
@@ -178,7 +178,7 @@ RSpec.configure do |config|
           items: {
             type: :object,
             properties: {
-              key: { type: :string, example: 'hackatime' },
+              key: { type: :string, example: 'deltatime' },
               total: { type: :number, example: 3600.0 }
             }
           }
@@ -298,10 +298,10 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Hackatime API',
+        title: 'Deltatime API',
         version: 'v1',
         description: <<~DESC
-          Hackatime's API gives access to coding activity data.
+          Deltatime's API gives access to coding activity data.
 
           We support the WakaTime spec, allowing you to use existing plugins and tools.
         DESC
@@ -342,10 +342,10 @@ RSpec.configure do |config|
     'admin/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'Hackatime Admin API',
+        title: 'Deltatime Admin API',
         version: 'v1',
         description: <<~DESC
-          Admin and internal endpoints for Hackatime.
+          Admin and internal endpoints for Deltatime.
 
           Admin endpoints require an Admin API Key or an OAuth access token with the `admin` scope.
           Internal endpoints require an internal environment token. These endpoints are not part of the public API.

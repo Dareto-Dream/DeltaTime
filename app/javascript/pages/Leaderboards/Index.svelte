@@ -76,7 +76,7 @@
 </script>
 
 <svelte:head>
-  <title>Leaderboards | Hackatime</title>
+  <title>Leaderboards | Deltatime</title>
 </svelte:head>
 
 <div>

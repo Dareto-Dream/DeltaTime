@@ -160,7 +160,7 @@ RSpec.describe 'Api::Admin::V1::UserUtils', type: :request, openapi_spec: 'admin
                   id: { type: :integer, example: 987654 },
                   time: { type: :number, example: 1710946200.0 },
                   created_at: { type: :string, format: :date_time, example: '2024-03-20T15:30:00Z' },
-                  project: { type: :string, nullable: true, example: 'hackatime' },
+                  project: { type: :string, nullable: true, example: 'deltatime' },
                   branch: { type: :string, nullable: true, example: 'main' },
                   category: { type: :string, nullable: true, example: 'coding' },
                   dependencies: { type: :array, nullable: true, items: { type: :string }, example: [ 'rails', 'sidekiq' ] },
@@ -496,7 +496,7 @@ RSpec.describe 'Api::Admin::V1::UserUtils', type: :request, openapi_spec: 'admin
           properties: {
             user_id: { type: :integer, example: 42 },
             field: { type: :string, example: 'projects' },
-            values: { type: :array, items: { type: :string, example: 'hackatime' } },
+            values: { type: :array, items: { type: :string, example: 'deltatime' } },
             count: { type: :integer, example: 12 }
           }
 
@@ -667,7 +667,7 @@ RSpec.describe 'Api::Admin::V1::UserUtils', type: :request, openapi_spec: 'admin
                   id: { type: :integer, example: 987654 },
                   time: { type: :string, example: '1710946200.0' },
                   created_at: { type: :string, format: :date_time, example: '2024-03-20T15:30:00Z' },
-                  project: { type: :string, nullable: true, example: 'hackatime' },
+                  project: { type: :string, nullable: true, example: 'deltatime' },
                   branch: { type: :string, nullable: true, example: 'main' },
                   category: { type: :string, nullable: true, example: 'coding' },
                   dependencies: { type: :string, nullable: true, example: 'rails,sidekiq' },
@@ -735,13 +735,13 @@ RSpec.describe 'Api::Admin::V1::UserUtils', type: :request, openapi_spec: 'admin
               items: {
                 type: :object,
                 properties: {
-                  name: { type: :string, nullable: true, example: 'hackatime' },
+                  name: { type: :string, nullable: true, example: 'deltatime' },
                   total_heartbeats: { type: :integer, example: 4821 },
                   total_duration: { type: :number, example: 86400.0 },
                   first_heartbeat: { type: :number, nullable: true, example: 1704067200.0 },
                   last_heartbeat: { type: :number, nullable: true, example: 1710946200.0 },
                   languages: { type: :array, items: { type: :string, example: 'Ruby' } },
-                  repo: { type: :string, nullable: true, example: 'https://github.com/hackclub/hackatime' },
+                  repo: { type: :string, nullable: true, example: 'https://github.com/hackclub/deltatime' },
                   repo_mapping_id: { type: :integer, nullable: true, example: 314 },
                   archived: { type: :boolean, example: false }
                 }
