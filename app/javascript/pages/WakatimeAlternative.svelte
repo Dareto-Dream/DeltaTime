@@ -303,7 +303,7 @@
       <pre
         class="bg-surface border border-surface-200/40 p-5 rounded-lg overflow-x-auto text-sm text-surface-content mb-6 leading-relaxed"><code
           >[settings]
-api_url = https://deltatime.hackclub.com/api/deltatime/v1
+api_url = https://deltatime.deltavdevs.com/api/deltatime/v1
 api_key = YOUR_API_KEY_HERE</code
         ></pre>
       <p class="text-secondary leading-relaxed">
