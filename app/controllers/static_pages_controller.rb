@@ -1,7 +1,7 @@
 class StaticPagesController < InertiaController
   include DashboardData
 
-  layout "inertia", only: %i[index wakatime_alternative]
+  layout "inertia", only: %i[index wakatime_alternative privacy terms]
 
   def index
     if current_user
@@ -51,6 +51,18 @@ class StaticPagesController < InertiaController
   end
 
   def currently_hacking_count = render(json: { count: Cache::CurrentlyHackingCountJob.perform_now[:count] })
+
+  def privacy
+    @page_title = "Privacy Policy | Deltatime"
+    @meta_description = @og_description = @twitter_description = "How Deltatime collects, uses, and protects your data."
+    render inertia: "Privacy", props: { last_updated: "September 21, 2026" }
+  end
+
+  def terms
+    @page_title = "Terms of Service | Deltatime"
+    @meta_description = @og_description = @twitter_description = "The terms that govern your use of Deltatime."
+    render inertia: "Terms", props: { last_updated: "September 21, 2026" }
+  end
 
   def wakatime_alternative
     @meta_description = @og_description = @twitter_description = "Looking for a WakaTime alternative? Deltatime is a free, open source coding time tracker with all features unlocked. Compare features, pricing, and see why developers are switching."

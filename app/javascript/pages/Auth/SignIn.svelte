@@ -5,6 +5,7 @@
 
 <script lang="ts">
   import { Link } from "@inertiajs/svelte";
+  import { privacy, terms } from "../../api";
   import AuthForm from "../Home/signedOut/AuthForm.svelte";
 
   let {
@@ -54,16 +55,10 @@
   <p
     class="mx-auto w-full max-w-md pt-8 text-center text-secondary text-sm text-pretty"
   >
-    By signing in, you agree to the <a
-      class="text-primary"
-      href="https://hackclub.com/privacy-and-terms#hack-club-standard-terms-and-conditions"
+    By signing in, you agree to the <a class="text-primary" href={terms.path()}
       >Terms of Service</a
     >
     and
-    <a
-      class="text-primary"
-      href="https://hackclub.com/privacy-and-terms#hack-club-privacy-notice"
-      >Privacy Policy</a
-    >.
+    <a class="text-primary" href={privacy.path()}>Privacy Policy</a>.
   </p>
 </div>

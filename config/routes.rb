@@ -347,6 +347,10 @@ Rails.application.routes.draw do
   get "/sitemap.xml", to: "sitemap#sitemap", defaults: { format: "xml" }
   get "/wakatime-alternative", to: "static_pages#wakatime_alternative"
 
+  # Legal
+  get "/privacy", to: "static_pages#privacy", as: :privacy, export: true
+  get "/terms", to: "static_pages#terms", as: :terms, export: true
+
   # fuck ups
   match "/400", to: "errors#bad_request", via: :all
   match "/404", to: "errors#not_found", via: :all
