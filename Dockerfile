@@ -61,7 +61,7 @@ FROM frontend-base AS javascript-dependencies
 
 COPY package.json bun.lock bunfig.toml ./
 COPY patches patches
-RUN --mount=type=cache,target=/root/.bun/install/cache \
+RUN --mount=type=cache,target=/root/.bun/install/cache,id=bun-install-cache \
     bun i --frozen-lockfile --linker=isolated && \
     mkdir -p node_modules/.vite-client node_modules/.vite-ssr node_modules/.vite-temp
 
@@ -98,8 +98,8 @@ RUN ln -s libvips-cpp.so /usr/local/lib/libvips.so.42 && \
 FROM build-base AS ruby-dependencies
 
 COPY Gemfile Gemfile.lock ./
-RUN --mount=type=cache,target=/root/.bundle/cache \
-    --mount=type=cache,target=/usr/local/bundle/ruby/4.0.0/cache \
+RUN --mount=type=cache,target=/root/.bundle/cache,id=bundle-cache \
+    --mount=type=cache,target=/usr/local/bundle/ruby/4.0.0/cache,id=bundle-gems-cache \
     BUNDLER_VERSION="$(awk 'END { print $1 }' Gemfile.lock)" && \
     (gem list --installed bundler --version "$BUNDLER_VERSION" || \
       gem install bundler --version "$BUNDLER_VERSION" --no-document) && \
@@ -130,9 +130,9 @@ COPY public public
 # Generate route helpers before the two asset branches start.
 FROM application-source AS route-helpers
 
-RUN --network=none \
-    --mount=type=bind,from=ruby-dependencies,source=/usr/local/bundle,target=/usr/local/bundle \
-    export SECRET_KEY_BASE_DUMMY=1 JS_FROM_ROUTES_FORCE=true && \
+COPY --from=ruby-dependencies /usr/local/bundle /usr/local/bundle
+
+RUN export SECRET_KEY_BASE_DUMMY=1 JS_FROM_ROUTES_FORCE=true && \
     AWS_EC2_METADATA_DISABLED=true \
       S3_BUCKET=dummy S3_ACCESS_KEY_ID=dummy S3_SECRET_ACCESS_KEY=dummy S3_ENDPOINT=http://127.0.0.1 \
       ./bin/rake js_from_routes:generate
@@ -141,9 +141,7 @@ RUN --network=none \
 # so production does not compile the same Ruby files again at boot.
 FROM route-helpers AS rails-assets
 
-RUN --network=none \
-    --mount=type=bind,from=ruby-dependencies,source=/usr/local/bundle,target=/usr/local/bundle \
-    --mount=type=cache,target=/root/.cache/bootsnap \
+RUN --mount=type=cache,target=/root/.cache/bootsnap,id=bootsnap-cache \
     export SECRET_KEY_BASE_DUMMY=1 BOOTSNAP_CACHE_DIR=/root/.cache/bootsnap \
       VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION=true && \
     AWS_EC2_METADATA_DISABLED=true \
@@ -167,12 +165,12 @@ COPY svelte.config.js ./
 COPY tsconfig.json tsconfig.node.json ./
 COPY vite.config.ts ./
 COPY --from=route-helpers /rails/app/javascript/api app/javascript/api
+COPY --from=javascript-dependencies /rails/node_modules /rails/node_modules
 
-RUN --mount=type=bind,from=javascript-dependencies,source=/rails/node_modules,target=/rails/node_modules \
-    --mount=type=cache,target=/rails/node_modules/.vite-client \
-    --mount=type=cache,target=/rails/node_modules/.vite-ssr \
-    --mount=type=tmpfs,target=/rails/node_modules/.vite-temp \
-    --mount=type=cache,target=/root/.bun/install/cache \
+RUN --mount=type=cache,target=/rails/node_modules/.vite-client,id=vite-client-cache \
+    --mount=type=cache,target=/rails/node_modules/.vite-ssr,id=vite-ssr-cache \
+    --mount=type=cache,target=/root/.bun/install/cache,id=bun-install-cache \
+    mkdir -p /rails/node_modules/.vite-temp && \
     (VITE_CACHE_DIR=node_modules/.vite-client bun x --bun vite build & \
       client_pid=$!; \
       VITE_CACHE_DIR=node_modules/.vite-ssr bun x --bun vite build --ssr & \
