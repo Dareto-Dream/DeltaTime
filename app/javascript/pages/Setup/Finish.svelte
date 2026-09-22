@@ -79,20 +79,10 @@
       </p>
       <p class="text-sm">
         We have a zero-tolerance policy for fraud. Attempting to cheat the
-        system can result in a <strong>permanent ban</strong> from Deltatime and
-        all Hack Club events. Read the full policy on the
-        <a
-          href="https://fraud.hackclub.com/fairplay"
-          target="_blank"
-          rel="noreferrer"
-          class="font-semibold underline"
-        >
-          Fraud page</a
-        >.
+        system can result in a <strong>permanent ban</strong> from Deltatime.
       </p>
       <p class="mt-3 text-sm">
-        Hack Club is a non-profit running on donations, so please keep your
-        activity honest and respect the community.
+        Please keep your activity honest and respect the community.
       </p>
 
       <div class="mt-2 flex justify-center border-t border-yellow/10 pt-6">
