@@ -251,7 +251,7 @@
         class="mt-3 flex items-center justify-center gap-1.5 text-xs text-muted"
       >
         <Icon src={ShieldCheck} size="18" />
-        Verified by Hack Club HQ
+        Verified application
       </div>
     {/if}
   </div>

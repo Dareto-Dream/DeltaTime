@@ -95,7 +95,7 @@
         <TwoChoiceLayout
           emoji="/images/emojis/ms-grinning.svg"
           title="Welcome to Deltatime!"
-          subtitle="Deltatime is a free tool from Hack Club that tracks the time you spend working on projects."
+          subtitle="Deltatime is a free, open-source tool that tracks the time you spend working on projects."
           question="To get started, what are you tracking your time in?"
         >
           <TwoChoiceCard
@@ -151,7 +151,7 @@
         <LinkScreen
           emoji="/images/emojis/ms-computer.svg"
           title="VSCode setup"
-          subtitle="Let's install Microsoft VSCode on your computer. It's our suggested code editor for making things for Hack Club!"
+          subtitle="Let's install Microsoft VSCode on your computer. It's our suggested code editor to get started."
           lead="To download VSCode, go to this URL and select your system type:"
           url="https://code.visualstudio.com/download"
           urlLabel="code.visualstudio.com/download"

@@ -13,11 +13,9 @@
   let {
     entry,
     rank,
-    can_view_telescreen,
   }: {
     entry: LeaderboardEntry;
     rank: number;
-    can_view_telescreen: boolean;
   } = $props();
 
   const theme = $derived(streakTheme(entry.streak_count));
@@ -69,16 +67,6 @@
             <span class="truncate">{entry.user.display_name}</span>
           {/if}
         </span>
-        {#if can_view_telescreen}
-          <a
-            href={`https://telescreen.hackclub.com/workbench/deltatime/overview?u=${entry.user_id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${entry.user.display_name} on Telescreen`}
-            class="admin-tool relative z-20 shrink-0 p-0.5 hover:opacity-80"
-            title="View on Telescreen">🔭</a
-          >
-        {/if}
         {#if entry.user.country_code}
           <CountryFlag
             countryCode={entry.user.country_code}

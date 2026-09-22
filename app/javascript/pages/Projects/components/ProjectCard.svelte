@@ -178,7 +178,7 @@
       onclick={onShowBrokenInfo}
     >
       <p class="text-sm leading-relaxed text-yellow/80 text-pretty">
-        Time can't be used in Hack Club programs
+        Time can't be counted for this project
         <span class="underline underline-offset-2 hover:text-yellow">
           (why?)
         </span>

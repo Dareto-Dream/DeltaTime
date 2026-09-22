@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="<%= Rails.env == 'production' ? 'production' : 'development' %>" data-theme="<%= current_theme %>" data-color-scheme="<%= current_theme_color_scheme %>">
   <head>
-    <title><%= @page_title || content_for(:title) || 'Deltatime - Track your coding time' %></title>
+    <title><%= @page_title || content_for(:title) || 'Deltatime - Track your time' %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="color-scheme" content="<%= current_theme_color_scheme %>">
 
-    <meta name="description" content="<%= @meta_description || content_for(:meta_description) || 'Free and open-source coding time tracker built by Hack Club. Track your time across 75+ editors.' %>">
-    <meta name="keywords" content="<%= @meta_keywords || content_for(:meta_keywords) || 'coding time tracker, programming stats, wakatime alternative, free time tracking, code statistics, developer analytics, programming time, coding productivity' %>">
-    <meta name="author" content="Hack Club">
+    <meta name="description" content="<%= @meta_description || content_for(:meta_description) || 'Free and open-source time tracker. Track your time across 75+ editors, Minecraft, and more.' %>">
+    <meta name="keywords" content="<%= @meta_keywords || content_for(:meta_keywords) || 'time tracker, productivity stats, wakatime alternative, free time tracking, activity statistics, developer analytics, work time, productivity tracking' %>">
+    <meta name="author" content="Deltatime">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url %>">
     <meta name="theme-color" content="<%= current_theme_color %>">
     <meta name="msapplication-TileColor" content="<%= current_theme_color %>">
-    <meta property="og:title" content="<%= @og_title || content_for(:og_title) || @page_title || content_for(:title) || 'Deltatime - Free Coding Time Tracker' %>">
-    <meta property="og:description" content="<%= @og_description || content_for(:og_description) || @meta_description || content_for(:meta_description) || 'Free and open-source coding time tracker built by Hack Club. Track your time across 75+ editors.' %>">
+    <meta property="og:title" content="<%= @og_title || content_for(:og_title) || @page_title || content_for(:title) || 'Deltatime - Free Time Tracker' %>">
+    <meta property="og:description" content="<%= @og_description || content_for(:og_description) || @meta_description || content_for(:meta_description) || 'Free and open-source time tracker. Track your time across 75+ editors, Minecraft, and more.' %>">
     <meta property="og:url" content="<%= content_for(:og_url) || request.original_url %>">
     <meta property="og:type" content="<%= content_for(:og_type) || 'website' %>">
     <meta property="og:image" content="<%= @og_image || content_for(:og_image) || safe_asset_path('og.jpg', fallback: 'favicon.png') %>">
@@ -24,10 +24,8 @@
     <meta property="og:site_name" content="Deltatime">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@hackclub">
-    <meta name="twitter:creator" content="@hackclub">
-    <meta name="twitter:title" content="<%= @twitter_title || content_for(:twitter_title) || @page_title || content_for(:title) || 'Deltatime - Free Coding Time Tracker' %>">
-    <meta name="twitter:description" content="<%= @twitter_description || content_for(:twitter_description) || @meta_description || content_for(:meta_description) || 'Free and open-source coding time tracker built by Hack Club. Track your time across 75+ editors.' %>">
+    <meta name="twitter:title" content="<%= @twitter_title || content_for(:twitter_title) || @page_title || content_for(:title) || 'Deltatime - Free Time Tracker' %>">
+    <meta name="twitter:description" content="<%= @twitter_description || content_for(:twitter_description) || @meta_description || content_for(:meta_description) || 'Free and open-source time tracker. Track your time across 75+ editors, Minecraft, and more.' %>">
     <meta name="twitter:image" content="<%= @twitter_image || content_for(:twitter_image) || safe_asset_path('favicon.png', fallback: 'og.jpg') %>">
 
     <%= csrf_meta_tags %>
@@ -59,10 +57,9 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Deltatime",
-        "alternateName": "Hack Club Deltatime",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
-        "description": "Track your coding time easily with Deltatime. A free tool to see how much time you spend programming in different languages and editors.",
+        "description": "Track your time easily with Deltatime. A free tool to see how much time you spend working across different languages, editors, and more.",
         "url": "https://deltatime.deltavdevs.com",
         "downloadUrl": "https://deltatime.deltavdevs.com",
         "sameAs": ["https://github.com/Dareto-Dream/DeltaTime"],
@@ -74,27 +71,16 @@
         },
         "author": {
           "@type": "Organization",
-          "name": "Hack Club",
-          "url": "https://hackclub.com"
+          "name": "Deltatime",
+          "url": "https://deltatime.deltavdevs.com"
         },
         "softwareVersion": "2.0",
         "datePublished": "2025-01-01",
         "license": "https://opensource.org/licenses/MIT",
         "programmingLanguage": "Ruby",
         "codeRepository": "https://github.com/Dareto-Dream/DeltaTime",
-        "supportingData": "Free coding time tracker",
-        "featureList": ["Track coding time across 75+ editors", "See which languages you use most", "View daily coding statistics", "Compare with other high schoolers", "Free and open source"]
-      }
-    </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Hack Club",
-        "url": "https://hackclub.com",
-        "logo": "https://hackclub.com/logo.png",
-        "sameAs": ["https://twitter.com/hackclub", "https://github.com/hackclub"]
+        "supportingData": "Free time tracker",
+        "featureList": ["Track your time across 75+ editors and more", "See which languages you use most", "View daily activity statistics", "Compare with others on leaderboards", "Free and open source"]
       }
     </script>
 
@@ -103,7 +89,6 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Deltatime",
-        "alternateName": "Hack Club Deltatime",
         "url": "https://deltatime.deltavdevs.com"
       }
     </script>
@@ -119,7 +104,7 @@
               "name": "What is Deltatime?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Deltatime is a free coding time tracker that helps you see how much time you spend programming. It tracks your coding time across different languages and editors."
+                "text": "Deltatime is a free time tracker that helps you see how much time you spend working on your projects. It tracks your time across different languages, editors, and more."
               }
             },
             {
@@ -143,7 +128,7 @@
               "name": "Is Deltatime the same as WakaTime?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Deltatime is a separate, independent open-source project. While both track coding time, Deltatime is completely free and its community lives on Discord rather than WakaTime's paid platform."
+                "text": "No. Deltatime is a separate, independent open-source project. While both track your time, Deltatime is completely free and its community lives on Discord rather than WakaTime's paid platform."
               }
             }
           ]

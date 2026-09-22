@@ -65,9 +65,9 @@ class StaticPagesController < InertiaController
   end
 
   def wakatime_alternative
-    @meta_description = @og_description = @twitter_description = "Looking for a WakaTime alternative? Deltatime is a free, open source coding time tracker with all features unlocked. Compare features, pricing, and see why developers are switching."
-    @page_title = "WakaTime Alternative - Free & Open Source Coding Time Tracker | Deltatime"
-    @meta_keywords = "wakatime alternative, free time tracker, coding time tracker, open source wakatime, deltatime, developer analytics, programming stats"
+    @meta_description = @og_description = @twitter_description = "Looking for a WakaTime alternative? Deltatime is a free, open source time tracker with all features unlocked. Compare features, pricing, and see why developers are switching."
+    @page_title = "WakaTime Alternative - Free & Open Source Time Tracker | Deltatime"
+    @meta_keywords = "wakatime alternative, free time tracker, open source wakatime, deltatime, developer analytics, productivity stats"
     @og_title = @twitter_title = "WakaTime Alternative - Free & Open Source | Deltatime"
     render inertia: "WakatimeAlternative"
   end
@@ -75,9 +75,9 @@ class StaticPagesController < InertiaController
   private
 
   def set_homepage_seo_content
-    @page_title = @og_title = @twitter_title = "Deltatime - Track your coding time"
-    @meta_description = @og_description = @twitter_description = "Free and open-source coding time tracker. Works with VS Code, JetBrains, vim, emacs, and 70+ editors. Built by Hack Club for teenage developers."
-    @meta_keywords = "coding time tracker, programming stats, open source time tracker, hack club coding tracker, free time tracking, code statistics, high school programming, coding analytics"
+    @page_title = @og_title = @twitter_title = "Deltatime - Track your time"
+    @meta_description = @og_description = @twitter_description = "Free and open-source time tracker. Works with VS Code, JetBrains, vim, emacs, Minecraft, and 70+ editors."
+    @meta_keywords = "time tracker, productivity stats, open source time tracker, free time tracking, activity statistics, developer analytics"
   end
 
   def signed_in_props

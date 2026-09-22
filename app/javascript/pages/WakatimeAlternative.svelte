@@ -148,15 +148,10 @@
         WakaTime vs Deltatime
       </h1>
       <p class="text-lg md:text-xl text-secondary leading-relaxed max-w-[75ch]">
-        Want to track your coding time without paying $9 a month?
+        Want to track your time without paying $9 a month?
         <strong class="text-surface-content">Deltatime</strong> is a free, open
-        source tracker built by
-        <a
-          href="https://hackclub.com"
-          class="text-primary hover:underline"
-          target="_blank">Hack Club</a
-        >. It uses the same editor plugins as WakaTime, so switching is mostly a
-        config change.
+        source tracker. It uses the same editor plugins as WakaTime, so
+        switching is mostly a config change.
       </p>
     </div>
   </section>
@@ -170,7 +165,7 @@
         WakaTime invented this category, but it's also pricey for what it does.
         You get basic stats, but project breakdowns and anything older than two
         weeks sit behind a $9/month plan, and a longer dashboard history costs
-        $14. That's a lot of money for some coding stats!
+        $14. That's a lot of money for some stats!
       </p>
       <p class="text-secondary leading-relaxed mb-4 max-w-[75ch]">
         WakaTime is also focused on tracking <i>AI</i> coding time, rather than human
@@ -182,9 +177,8 @@
         On the other hand, Deltatime is <strong class="text-surface-content"
           >completely free!</strong
         >
-        We built it for Hack Club's events so we could have a unified system to track
-        students' coding time, but it's cheap enough to run that we can give free
-        access to <i>everyone</i>, and it serves as good marketing!
+        It's cheap enough to run that we can give free access to
+        <i>everyone</i>.
       </p>
     </div>
   </section>

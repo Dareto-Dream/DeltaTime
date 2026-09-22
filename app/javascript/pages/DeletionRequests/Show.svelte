@@ -85,7 +85,7 @@
       >
         <li>
           During the 30-day waiting period, you cannot upload data, download
-          data, or use your account for Hack Club programs.
+          data, or otherwise use your account.
         </li>
         <li>
           You can cancel this request at any time before the deletion date.

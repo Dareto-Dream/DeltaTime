@@ -27,7 +27,6 @@
           href: "https://github.com/Dareto-Dream/DeltaTime",
           external: true,
         },
-        { label: "Hack Club", href: "https://hackclub.com", external: true },
       ],
     },
     {
@@ -35,11 +34,6 @@
       links: [
         { label: "Privacy Policy", href: staticPages.privacy.path() },
         { label: "Terms of Service", href: staticPages.terms.path() },
-        {
-          label: "Code of Conduct",
-          href: "https://hackclub.com/conduct",
-          external: true,
-        },
       ],
     },
   ];
@@ -61,7 +55,7 @@
           <span class="font-bold text-xl tracking-tight">Deltatime</span>
         </a>
         <p class="text-sm text-secondary max-w-[35ch] leading-relaxed">
-          A project by Hack Club. Made with 💖 in 🇬🇧🇺🇸
+          Free and open-source time tracker.
         </p>
       </div>
       {#each sections as section}

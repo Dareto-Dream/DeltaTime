@@ -17,8 +17,7 @@
       abuse of Deltatime. This includes using methods to gain an unfair advantage
       on the leaderboards or attempting to manipulate your tracked time in any way.
       This ban restricts your ability to participate in public leaderboards, but Deltatime
-      will still track and display your time. Your ability to participate in current
-      and future Hack Club events may also be affected.
+      will still track and display your time.
     </p>
     <p class="mb-2">
       <b>What can I do?</b> Account bans are non-negotiable, and will not be

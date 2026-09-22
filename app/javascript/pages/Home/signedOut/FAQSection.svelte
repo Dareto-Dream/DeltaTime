@@ -4,7 +4,7 @@
   const faqs = [
     {
       q: "Is this really free?",
-      a: "Yep. Deltatime is a free service by Hack Club. We made it for ourselves and our events, and it's good marketing :)",
+      a: "Yep. Deltatime is a free, open-source service with no paid plans or hidden costs.",
     },
     {
       q: "How do I migrate from WakaTime?",

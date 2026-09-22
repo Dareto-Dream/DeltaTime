@@ -57,10 +57,10 @@
       <% end %>
     </g>
   <% else %>
-    <text x="<%= heatmap_x %>" y="490" font-size="26" font-weight="500" fill="<%= palette[:muted] %>"><%= unavailable_message || "Coding time stats are private" %></text>
+    <text x="<%= heatmap_x %>" y="490" font-size="26" font-weight="500" fill="<%= palette[:muted] %>"><%= unavailable_message || "Time stats are private" %></text>
   <% end %>
 
   <!-- Footer -->
-  <text x="<%= heatmap_x %>" y="588" font-size="15" font-weight="500" fill="<%= palette[:dim] %>">Free, open-source coding time tracker</text>
+  <text x="<%= heatmap_x %>" y="588" font-size="15" font-weight="500" fill="<%= palette[:dim] %>">Free, open-source time tracker</text>
   <text x="<%= width - heatmap_x %>" y="588" text-anchor="end" font-size="15" font-weight="500" fill="<%= palette[:dim] %>"><%= username %></text>
 </svg>

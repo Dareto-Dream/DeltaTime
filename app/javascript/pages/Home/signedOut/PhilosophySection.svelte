@@ -8,7 +8,7 @@
     },
     {
       title: "Community built",
-      body: "Built by the makers at Hack Club. Anyone can contribute to the codebase and help shape the product!",
+      body: "Open source and community driven. Anyone can contribute to the codebase and help shape the product!",
     },
   ];
 </script>

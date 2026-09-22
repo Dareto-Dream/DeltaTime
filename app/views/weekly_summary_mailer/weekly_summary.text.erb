@@ -1,20 +1,20 @@
-Deltatime — Your Coding Recap
+Deltatime — Your Weekly Recap
 ==============================
 <%= @period_label %>
 
 Hi <%= h(@user.display_name) %>,
 
-Here's your weekly coding snapshot from Deltatime.
+Here's your weekly snapshot from Deltatime.
 
 OVERVIEW
 --------
-Total coding time:  <%= short_time_simple(@total_seconds) %>
+Total time:         <%= short_time_simple(@total_seconds) %>
 Daily average:      <%= short_time_simple(@daily_average_seconds) %>
 Active days:        <%= @active_days %>/7
 Heartbeats:         <%= @total_heartbeats %>
 <% if @total_seconds.zero? %>
 
-No coding activity was recorded this week. Start a new session and your next summary will include your project and language breakdown.
+No activity was recorded this week. Start a new session and your next summary will include your project and language breakdown.
 <% else %>
 
 TOP PROJECTS

@@ -21,8 +21,6 @@
       markscribe_template: string;
       markscribe_reference_url: string;
       markscribe_preview_image_url: string;
-      hackabox_repo_url: string;
-      hackabox_preview_image_url: string;
     };
     allow_public_stats_lookup: boolean;
   };
@@ -174,29 +172,6 @@
     <img
       src={badges.markscribe_preview_image_url}
       alt="Example markscribe output"
-      class="settings-image-outline mt-4 w-full max-w-3xl rounded-md"
-    />
-  </SectionCard>
-
-  <SectionCard
-    id="user_hackabox"
-    title="Hackabox Gist"
-    description="Fork the Hackabox template repository to create a pinned profile gist with your coding stats, updated daily."
-    wide
-  >
-    <p class="mt-3 text-sm text-muted">
-      Reference:
-      <a
-        href={badges.hackabox_repo_url}
-        target="_blank"
-        class="text-primary underline"
-      >
-        hackabox setup instructions
-      </a>
-    </p>
-    <img
-      src={badges.hackabox_preview_image_url}
-      alt="Example hackabox output"
       class="settings-image-outline mt-4 w-full max-w-3xl rounded-md"
     />
   </SectionCard>

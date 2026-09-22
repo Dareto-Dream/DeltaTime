@@ -18,7 +18,6 @@
     leaderboard,
     is_logged_in,
     github_uid_blank,
-    can_view_telescreen,
     entries,
   }: {
     period_type: string;
@@ -27,7 +26,6 @@
     leaderboard: LeaderboardMeta | null;
     is_logged_in: boolean;
     github_uid_blank: boolean;
-    can_view_telescreen: boolean;
     entries?: LeaderboardEntriesPayload;
   } = $props();
 
@@ -160,7 +158,6 @@
             {searchQuery}
             {leaderboard}
             {github_uid_blank}
-            {can_view_telescreen}
             {period_type}
           />
         {/snippet}

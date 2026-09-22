@@ -47,20 +47,6 @@ class LeaderboardsControllerTest < ActionDispatch::IntegrationTest
     assert_inertia_props period_type: "daily"
   end
 
-  test "index exposes Telescreen links to admin-level viewers only" do
-    create_boards_for_today(period_type: :daily)
-
-    %i[admin superadmin ultraadmin].each do |admin_level|
-      sign_in_as(create_user(username: "lb_#{admin_level}", admin_level: admin_level))
-      get leaderboards_path
-      assert_inertia_props can_view_telescreen: true
-    end
-
-    sign_in_as(create_user(username: "leaderboard_viewer", admin_level: :viewer))
-    get leaderboards_path
-    assert_inertia_props can_view_telescreen: false
-  end
-
   test "validated_period_type does not intern arbitrary symbols" do
     user = create_user(username: "bad_period_user")
     create_boards_for_today(period_type: :daily)

@@ -11,8 +11,8 @@ class OnboardingMailer < ApplicationMailer
 
   def check_in(user, recipient_email:)
     @user = user
-    from_email = ENV.fetch("ONBOARDING_CHECK_IN_FROM_EMAIL", "Mahad Kalam <mahad@hackclub.com>")
-    reply_to = "deltatime@hackclub.com"
+    from_email = ENV.fetch("ONBOARDING_CHECK_IN_FROM_EMAIL", "Deltatime <deltatime@deltavdevs.com>")
+    reply_to = "deltatime@deltavdevs.com"
 
     mail(
       to: recipient_email,

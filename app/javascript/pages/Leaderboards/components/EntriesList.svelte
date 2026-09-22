@@ -19,7 +19,6 @@
     searchQuery,
     leaderboard,
     github_uid_blank,
-    can_view_telescreen,
     period_type,
   }: {
     entries?: LeaderboardEntriesPayload;
@@ -28,7 +27,6 @@
     searchQuery: string;
     leaderboard: LeaderboardMeta;
     github_uid_blank: boolean;
-    can_view_telescreen: boolean;
     period_type: string;
   } = $props();
 
@@ -62,11 +60,7 @@
       bufferSize={2_000}
     >
       {#snippet children(entry: LeaderboardEntry)}
-        <Row
-          {entry}
-          rank={entryRank.get(entry.user_id) ?? 0}
-          {can_view_telescreen}
-        />
+        <Row {entry} rank={entryRank.get(entry.user_id) ?? 0} />
       {/snippet}
     </WindowVirtualizer>
 
