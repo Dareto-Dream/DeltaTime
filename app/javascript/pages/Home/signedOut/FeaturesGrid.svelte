@@ -42,7 +42,8 @@
     },
     {
       title: "Privacy-first",
-      description: "We never see your code, so your projects stay private.",
+      description:
+        "We never see the contents of what you're working on, so your projects stay private.",
       icon: LockClosed,
     },
   ];
@@ -56,7 +57,7 @@
       Everything you need, nothing you don't.
     </h2>
     <p class="text-secondary text-lg text-pretty">
-      Granular telemetry for your development environment that helps you stay
+      Granular telemetry for how you spend your time that helps you stay
       productive.
     </p>
   </div>

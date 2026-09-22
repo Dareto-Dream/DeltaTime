@@ -7,6 +7,7 @@
   import LinkScreen from "./LinkScreen.svelte";
   import VsCodeSteps from "./VsCodeSteps.svelte";
   import TerminalCommand from "./TerminalCommand.svelte";
+  import MinecraftSteps from "./MinecraftSteps.svelte";
   import Finish from "./Finish.svelte";
   import { popIn } from "./transitions";
 
@@ -18,6 +19,7 @@
     | "vscode-download"
     | "terminal-choice"
     | "terminal-command"
+    | "minecraft-steps"
     | "finish";
 
   const STEPS = new Set<Step>([
@@ -28,6 +30,7 @@
     "vscode-download",
     "terminal-choice",
     "terminal-command",
+    "minecraft-steps",
     "finish",
   ]);
 
@@ -93,7 +96,7 @@
           emoji="/images/emojis/ms-grinning.svg"
           title="Welcome to Deltatime!"
           subtitle="Deltatime is a free tool from Hack Club that tracks the time you spend working on projects."
-          question="To get started, do you have a code editor (like VSCode) installed?"
+          question="To get started, what are you tracking your time in?"
         >
           <TwoChoiceCard
             label="Yes, I have an editor installed"
@@ -104,6 +107,11 @@
             label="No, I don't have an editor installed"
             sublabel={'or: "what\'s a code editor?"'}
             onclick={() => goToStep("install-programs")}
+          />
+          <TwoChoiceCard
+            label="I want to track Minecraft"
+            sublabel="(we'll help you install the Deltatime mod)"
+            onclick={() => goToStep("minecraft-steps")}
           />
         </TwoChoiceLayout>
       {:else if step === "install-programs"}
@@ -171,6 +179,11 @@
         <TerminalCommand
           apiKey={current_user_api_key}
           setupOs={setup_os}
+          onDone={() => goToStep("finish")}
+        />
+      {:else if step === "minecraft-steps"}
+        <MinecraftSteps
+          apiKey={current_user_api_key}
           onDone={() => goToStep("finish")}
         />
       {:else if step === "finish"}

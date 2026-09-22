@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-  <title>Deltatime - Track your coding time</title>
+  <title>Deltatime - Track your time</title>
 </svelte:head>
 
 <div class="landing-page min-h-screen w-full bg-darker text-surface-content">
@@ -108,12 +108,12 @@
       <h1
         class="text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-pretty"
       >
-        The open-source coding time tracker
+        The open-source time tracker
       </h1>
       <p
         class="text-lg md:text-xl text-secondary max-w-[70ch] mx-auto leading-relaxed mb-8"
       >
-        Deltatime is a free, open-source replacement for WakaTime. Your coding
+        Deltatime is a free, open-source replacement for WakaTime. Your work
         habits, project breakdowns and language stats belong to you - not a
         proprietary database!
       </p>

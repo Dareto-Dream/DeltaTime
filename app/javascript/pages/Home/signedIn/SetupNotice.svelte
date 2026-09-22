@@ -11,7 +11,7 @@
       class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
     >
       <p class="m-0 text-base font-medium text-surface-content">
-        Finish setup once and we&apos;ll start tracking your coding time
+        Finish setup once and we&apos;ll start tracking your time
         automatically.
       </p>
       <Button

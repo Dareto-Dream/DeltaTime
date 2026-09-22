@@ -58,7 +58,7 @@
     <h1
       class="font-bold mt-1 sm:mt-2 mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl"
     >
-      Keep Track of <span class="text-primary">Your</span> Coding Time
+      Keep Track of <span class="text-primary">Your</span> Time
     </h1>
   </div>
 

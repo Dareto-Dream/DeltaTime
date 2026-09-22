@@ -61,7 +61,7 @@
   >
     <img src="/images/emojis/ms-tada.svg" alt="" class="mx-auto mb-3 size-12" />
     <h1 class="mb-2 text-lg font-semibold">You're all set!</h1>
-    <p class="mb-8 text-sm">Deltatime is configured and tracking your code.</p>
+    <p class="mb-8 text-sm">Deltatime is configured and tracking your time.</p>
 
     <div
       class="mb-8 rounded-xl border border-yellow/40 bg-yellow/10 p-6 text-left text-surface-content"
@@ -73,9 +73,9 @@
         with the fair play policy.
       </p>
       <p class="mb-3 text-sm">
-        Fraud means trying to make it look like you're coding when you are not,
-        including using scripts, bots, manipulated heartbeats, spoofed editor
-        activity or API abuse.
+        Fraud means trying to make it look like you're working when you are
+        not, including using scripts, bots, manipulated heartbeats, spoofed
+        editor or game activity, or API abuse.
       </p>
       <p class="text-sm">
         We have a zero-tolerance policy for fraud. Attempting to cheat the

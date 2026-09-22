@@ -268,7 +268,7 @@
               height={containerHeight}
               class="lc-layout-svg"
               role="figure"
-              aria-label="Stacked project coding time by week"
+              aria-label="Stacked project time by week"
               style="touch-action: pan-y"
             >
               <g transform={`translate(${PADDING.left}, ${PADDING.top})`}>

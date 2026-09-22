@@ -11,8 +11,8 @@
       a: "Point your existing WakaTime plugin at Deltatime's API URL and enter your Deltatime API key! You can even import your WakaTime data into Deltatime.",
     },
     {
-      q: "Is my code private?",
-      a: "Deltatime only receives metadata (e.g. file names, project names, timestamps, language). We never see your actual source code.",
+      q: "Is my data private?",
+      a: "Deltatime only receives metadata (e.g. file names, project names, timestamps, language). We never see the actual content of what you're working on.",
     },
     {
       q: "Can I self-host this?",

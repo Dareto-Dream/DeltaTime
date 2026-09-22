@@ -46,7 +46,7 @@
     averageSeconds === 0
       ? todaySeconds > 0
         ? "First comparable session"
-        : "No coding yet today"
+        : "No time tracked yet today"
       : changePercent === 0
         ? "Equal to your usual daily total"
         : changePercent > 0
@@ -60,7 +60,7 @@
 >
   <div>
     <h3 class="text-lg font-semibold text-surface-content">
-      {periodAverage ? "Average Coding Time Per Day" : "Coding Time Today"}
+      {periodAverage ? "Average Time Per Day" : "Time Today"}
     </h3>
     <p class="text-sm text-surface-content/55">
       {periodAverage
@@ -91,7 +91,7 @@
         viewBox="0 0 180 105"
         class="h-32 w-full max-w-64"
         role="figure"
-        aria-label={`${percent}% of your usual coding time today`}
+        aria-label={`${percent}% of your usual time today`}
       >
         <path
           d="M 20 90 A 70 70 0 0 1 160 90"

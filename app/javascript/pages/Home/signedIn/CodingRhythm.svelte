@@ -131,9 +131,9 @@
 
 <section class="rounded-2xl border border-surface-200 bg-dark p-4 sm:p-6">
   <div class="mb-4">
-    <h3 class="text-lg font-semibold text-surface-content">Coding Rhythm</h3>
+    <h3 class="text-lg font-semibold text-surface-content">Work Rhythm</h3>
     <p class="text-sm text-surface-content/55">
-      When you code, calculated in {data.timezone_label}
+      When you work, calculated in {data.timezone_label}
     </p>
   </div>
 
@@ -142,7 +142,7 @@
       viewBox="0 0 600 184"
       class="min-w-[600px] w-full"
       role="figure"
-      aria-label={`Coding duration by weekday and hour in ${data.timezone_label}`}
+      aria-label={`Work duration by weekday and hour in ${data.timezone_label}`}
     >
       {#each Array.from({ length: 8 }, (_, index) => index * 3) as hour}
         <text
