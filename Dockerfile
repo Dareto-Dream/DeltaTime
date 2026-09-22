@@ -61,8 +61,7 @@ FROM frontend-base AS javascript-dependencies
 
 COPY package.json bun.lock bunfig.toml ./
 COPY patches patches
-RUN --mount=type=cache,target=/root/.bun/install/cache,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/root/.bun/install/cache \
-    bun i --frozen-lockfile --linker=isolated && \
+RUN bun i --frozen-lockfile --linker=isolated && \
     mkdir -p node_modules/.vite-client node_modules/.vite-ssr node_modules/.vite-temp
 
 RUN cp node_modules/@fontsource-variable/spline-sans/files/spline-sans-latin-wght-normal.woff2 /tmp/spline-sans-latin-wght-normal.woff2 && \
@@ -98,9 +97,7 @@ RUN ln -s libvips-cpp.so /usr/local/lib/libvips.so.42 && \
 FROM build-base AS ruby-dependencies
 
 COPY Gemfile Gemfile.lock ./
-RUN --mount=type=cache,target=/root/.bundle/cache,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/root/.bundle/cache \
-    --mount=type=cache,target=/usr/local/bundle/ruby/4.0.0/cache,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/usr/local/bundle/ruby/4.0.0/cache \
-    BUNDLER_VERSION="$(awk 'END { print $1 }' Gemfile.lock)" && \
+RUN BUNDLER_VERSION="$(awk 'END { print $1 }' Gemfile.lock)" && \
     (gem list --installed bundler --version "$BUNDLER_VERSION" || \
       gem install bundler --version "$BUNDLER_VERSION" --no-document) && \
     bundle "_${BUNDLER_VERSION}_" install && \
@@ -141,8 +138,7 @@ RUN export SECRET_KEY_BASE_DUMMY=1 JS_FROM_ROUTES_FORCE=true && \
 # so production does not compile the same Ruby files again at boot.
 FROM route-helpers AS rails-assets
 
-RUN --mount=type=cache,target=/root/.cache/bootsnap,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/root/.cache/bootsnap \
-    export SECRET_KEY_BASE_DUMMY=1 BOOTSNAP_CACHE_DIR=/root/.cache/bootsnap \
+RUN export SECRET_KEY_BASE_DUMMY=1 BOOTSNAP_CACHE_DIR=/root/.cache/bootsnap \
       VITE_RUBY_SKIP_ASSETS_PRECOMPILE_EXTENSION=true && \
     AWS_EC2_METADATA_DISABLED=true \
       S3_BUCKET=dummy S3_ACCESS_KEY_ID=dummy S3_SECRET_ACCESS_KEY=dummy S3_ENDPOINT=http://127.0.0.1 \
@@ -167,10 +163,7 @@ COPY vite.config.ts ./
 COPY --from=route-helpers /rails/app/javascript/api app/javascript/api
 COPY --from=javascript-dependencies /rails/node_modules /rails/node_modules
 
-RUN --mount=type=cache,target=/rails/node_modules/.vite-client,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/rails/node_modules/.vite-client \
-    --mount=type=cache,target=/rails/node_modules/.vite-ssr,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/rails/node_modules/.vite-ssr \
-    --mount=type=cache,target=/root/.bun/install/cache,id=s/f27de4c1-7b0b-49d0-adcf-68317e472c0a-/root/.bun/install/cache \
-    mkdir -p /rails/node_modules/.vite-temp && \
+RUN mkdir -p /rails/node_modules/.vite-temp && \
     (VITE_CACHE_DIR=node_modules/.vite-client bun x --bun vite build & \
       client_pid=$!; \
       VITE_CACHE_DIR=node_modules/.vite-ssr bun x --bun vite build --ssr & \
