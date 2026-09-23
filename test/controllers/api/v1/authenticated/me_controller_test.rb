@@ -109,6 +109,33 @@ class Api::V1::Authenticated::MeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index exposes an admin level only to a verified confidential application with the admin scope" do
+    user = create(:user, :admin)
+    application = create_oauth_application(user, scopes: "profile admin")
+    application.update!(verified: true)
+    access_token = create(:oauth_access_token,
+      application: application,
+      resource_owner_id: user.id,
+      scopes: "profile admin",
+      expires_in: 16.years
+    )
+
+    get "/api/v1/authenticated/me", headers: bearer_header(access_token)
+
+    assert_response :success
+    assert_equal "admin", response.parsed_body["admin_level"]
+  end
+
+  test "index does not expose an admin level without the admin scope" do
+    user = create(:user, :admin)
+    access_token = create_oauth_access_token(user, scopes: "profile")
+
+    get "/api/v1/authenticated/me", headers: bearer_header(access_token)
+
+    assert_response :success
+    assert_not response.parsed_body.key?("admin_level")
+  end
+
   test "index rejects pending deletion users" do
     user = create(:user)
     DeletionRequest.create_for_user!(user)

@@ -16,6 +16,12 @@ RSpec.describe 'Api::V1::Authenticated', type: :request do
             emails: { type: :array, items: { type: :string, example: 'orpheus@hackclub.com' } },
             slack_id: { type: :string, nullable: true, example: 'U0266FRGP' },
             github_username: { type: :string, nullable: true, example: 'orpheus' },
+            admin_level: {
+              type: :string,
+              nullable: true,
+              example: 'admin',
+              description: 'Present only for verified confidential clients authorised with the admin scope.'
+            },
             trust_factor: {
               type: :object,
               properties: {

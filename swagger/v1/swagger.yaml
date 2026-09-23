@@ -1027,6 +1027,11 @@ paths:
                     type: string
                     nullable: true
                     example: orpheus
+                  admin_level:
+                    type: string
+                    nullable: true
+                    example: admin
+                    description: Present only for verified confidential clients authorised with the admin scope.
                   trust_factor:
                     type: object
                     properties:

@@ -14,7 +14,7 @@ module Api
             current_user.public_trust_level
           end
 
-          render json: {
+          profile = {
             id: current_user.id,
             emails: current_user.email_addresses&.map(&:email)|| [],
             github_username: current_user.github_username,
@@ -23,6 +23,18 @@ module Api
               trust_value: User.trust_levels[exposed_level]
             }
           }
+          profile[:admin_level] = current_user.admin_level if trusted_admin_application?
+
+          render json: profile
+        end
+
+        private
+
+        def trusted_admin_application?
+          token = doorkeeper_token
+          token&.scopes&.include?("admin") &&
+            token.application&.verified? &&
+            token.application&.confidential?
         end
       end
     end
