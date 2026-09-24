@@ -41,6 +41,11 @@ module UserApiAuthentication
     normalized_token = normalize_api_token(raw_token)
     return unless normalized_token.present?
 
+    # A Ward token with the `deltatime` scope reads stats like a DeltaTime "read" token.
+    if WardToken.ward_token?(normalized_token)
+      return Array(required_scopes).map(&:to_s) == [ "read" ] ? WardToken.user_for(normalized_token) : nil
+    end
+
     token = Doorkeeper::AccessToken.by_token(normalized_token)
     User.find_by(id: token.resource_owner_id) if token&.acceptable?(required_scopes)
   end

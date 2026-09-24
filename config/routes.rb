@@ -248,6 +248,9 @@ Rails.application.routes.draw do
 
       get "currently_hacking", to: "currently_hacking#index"
 
+      # Ward tokens with the `deltatime` scope (see WardToken)
+      get "ward/me", to: "ward#me"
+
       get "banned_users/counts", to: "stats#banned_users_counts"
 
       namespace :my do
