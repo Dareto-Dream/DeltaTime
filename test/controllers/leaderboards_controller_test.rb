@@ -14,16 +14,15 @@ class LeaderboardsControllerTest < ActionDispatch::IntegrationTest
     create_boards_for_today(period_type: :last_7_days)
 
     sign_in_as(us_user)
-    get leaderboards_path(period_type: "last_7_days", scope: "country")
+    get leaderboards_path(period_type: "last_7_days", scope: "global")
 
     assert_response :success
     assert_inertia_component "Leaderboards/Index"
-    assert_inertia_props period_type: "last_7_days", scope: "country"
-    assert_equal "US", inertia.props.dig("country", "code")
-    assert inertia.props.dig("country", "available")
+    assert_inertia_props period_type: "last_7_days", scope: "global"
+    assert_nil inertia.props["country"], "the country tab is gone"
   end
 
-  test "index falls back to global scope when country is missing" do
+  test "old country links and unknown scopes land on the DeltaTime tab" do
     viewer = create_user(username: "viewer_no_country")
     create_boards_for_today(period_type: :daily)
 
@@ -32,8 +31,7 @@ class LeaderboardsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_inertia_component "Leaderboards/Index"
-    assert_inertia_props scope: "global"
-    assert_not inertia.props.dig("country", "available")
+    assert_inertia_props scope: "deltatime"
   end
 
   test "index clamps invalid period_type to daily" do

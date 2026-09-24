@@ -19,6 +19,8 @@
   } = $props();
 
   const theme = $derived(streakTheme(entry.streak_count));
+  // Hackatime rows are read-only copies; their profiles live on Hackatime.
+  const external = $derived(entry.source === "hackatime");
 </script>
 
 <div
@@ -28,7 +30,15 @@
     ? 'cursor-pointer'
     : ''} {entry.is_current_user ? 'bg-dark border-l-4 border-l-primary' : ''}"
 >
-  {#if entry.user.profile_path}
+  {#if entry.user.profile_path && external}
+    <a
+      href={entry.user.profile_path}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${entry.user.display_name}'s Hackatime profile`}
+      class="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+    ></a>
+  {:else if entry.user.profile_path}
     <Link
       href={entry.user.profile_path}
       aria-label={`View ${entry.user.display_name}'s profile`}
@@ -56,7 +66,16 @@
           />
         {/if}
         <span class="inline-flex items-center gap-1 min-w-0">
-          {#if entry.user.profile_path}
+          {#if entry.user.profile_path && external}
+            <a
+              href={entry.user.profile_path}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="relative z-20 text-blue hover:underline truncate"
+            >
+              {entry.user.display_name}
+            </a>
+          {:else if entry.user.profile_path}
             <Link
               href={entry.user.profile_path}
               class="relative z-20 text-blue hover:underline truncate"
@@ -67,6 +86,12 @@
             <span class="truncate">{entry.user.display_name}</span>
           {/if}
         </span>
+        {#if external}
+          <span
+            class="shrink-0 rounded-full border border-surface-200 px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted"
+            title="From Hackatime's public leaderboard">Hackatime</span
+          >
+        {/if}
         {#if entry.user.country_code}
           <CountryFlag
             countryCode={entry.user.country_code}

@@ -1,20 +1,14 @@
 <script lang="ts">
-  import { Deferred, Link } from "@inertiajs/svelte";
+  import { Deferred } from "@inertiajs/svelte";
   import { Icon, MagnifyingGlass } from "svelte-hero-icons";
   import Tabs from "./components/Tabs.svelte";
   import EntriesList from "./components/EntriesList.svelte";
-  import type {
-    LeaderboardMeta,
-    LeaderboardCountry,
-    LeaderboardEntriesPayload,
-  } from "../../types";
+  import type { LeaderboardMeta, LeaderboardEntriesPayload } from "../../types";
   import { timeAgo } from "./utils";
-  import { settingsProfile } from "../../api";
 
   let {
     period_type,
     scope,
-    country,
     leaderboard,
     is_logged_in,
     github_uid_blank,
@@ -22,14 +16,12 @@
   }: {
     period_type: string;
     scope: string;
-    country: LeaderboardCountry;
     leaderboard: LeaderboardMeta | null;
     is_logged_in: boolean;
     github_uid_blank: boolean;
     entries?: LeaderboardEntriesPayload;
   } = $props();
 
-  const settingsPath = settingsProfile.my.path();
   let searchQuery = $state("");
 
   const filteredEntries = $derived.by(() => {
@@ -51,7 +43,7 @@
   });
 
   const entryRank = $derived.by(() => {
-    const map = new Map<number, number>();
+    const map = new Map<number | string, number>();
     entries?.entries?.forEach((e, i) => map.set(e.user_id, i));
     return map;
   });
@@ -84,17 +76,20 @@
     </h1>
 
     <div class="flex flex-row items-center justify-between gap-3">
-      <Tabs {period_type} {scope} {country} />
+      <Tabs {period_type} {scope} />
     </div>
 
-    {#if is_logged_in && !country.available}
+    {#if scope === "global"}
       <p class="text-xs text-muted">
-        Set your country in
-        <Link
-          href={settingsPath}
-          class="text-accent hover:text-cyan transition-colors">settings</Link
+        Global mixes DeltaTime with
+        <a
+          href="https://hackatime.hackclub.com/leaderboards"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent hover:text-cyan transition-colors"
+          >Hackatime's public leaderboard</a
         >
-        to unlock regional leaderboards.
+        (read-only, refreshed every 10 minutes).
       </p>
     {/if}
 
@@ -168,9 +163,7 @@
           Leaderboard is being generated...
         </h3>
         <p class="text-muted">
-          Check back in a moment for {scope === "country" && country.name
-            ? `${country.name} `
-            : ""}{periodLabel} results!
+          Check back in a moment for {periodLabel} results!
         </p>
       </div>
     {/if}

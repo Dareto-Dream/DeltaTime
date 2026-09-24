@@ -3,19 +3,17 @@ class LeaderboardsController < InertiaController
 
   def index
     period_type = validated_period_type
-    country = load_country_context
-    leaderboard_scope = validated_leaderboard_scope(country)
+    leaderboard_scope = validated_leaderboard_scope
 
     leaderboard = LeaderboardService.get(period: period_type, date: Date.current)
 
     render inertia: "Leaderboards/Index", props: {
       period_type: period_type.to_s,
       scope: leaderboard_scope.to_s,
-      country: country,
       leaderboard: leaderboard_metadata(leaderboard),
       is_logged_in: current_user.present?,
       github_uid_blank: current_user.present? && current_user.github_uid.blank?,
-      entries: InertiaRails.defer { entries_payload(leaderboard, leaderboard_scope, country) }
+      entries: InertiaRails.defer { entries_payload(leaderboard, leaderboard_scope, period_type) }
     }
   end
 
@@ -26,30 +24,10 @@ class LeaderboardsController < InertiaController
     %w[daily last_7_days].include?(p) ? p.to_sym : :daily
   end
 
-  def validated_leaderboard_scope(country)
-    requested = params[:scope].to_s
-    requested = "global" unless %w[global country].include?(requested)
-    requested = "global" if requested == "country" && !country[:available]
-    requested.to_sym
-  end
-
-  def load_country_context
-    code = current_user&.country_code.presence || country_code_from_request_ip
-    c = ISO3166::Country.new(code)
-    {
-      code: c&.alpha2,
-      name: c&.common_name,
-      available: c&.alpha2.present? && c&.common_name.present?
-    }
-  end
-
-  def country_code_from_request_ip
-    ip = request.remote_ip
-    return nil if ip.blank?
-
-    Rails.cache.fetch([ "leaderboards", "ip_country", ip ], expires_in: 1.day) do
-      User.country_code_from_ip(ip)
-    end
+  # "deltatime": DeltaTime people only. "global": DeltaTime mixed with
+  # Hackatime's public leaderboard (read-only). Old ?scope=country links land on DeltaTime.
+  def validated_leaderboard_scope
+    params[:scope].to_s == "global" ? :global : :deltatime
   end
 
   def leaderboard_metadata(leaderboard)
@@ -63,14 +41,20 @@ class LeaderboardsController < InertiaController
     }
   end
 
-  def entries_payload(leaderboard, scope, country)
-    return { entries: [], total: 0 } unless leaderboard&.persisted?
+  def entries_payload(leaderboard, scope, period_type)
+    entries = leaderboard&.persisted? ? deltatime_entries(leaderboard) : []
+    return { entries: entries, total: entries.size } unless scope == :global
 
-    country_code = (scope == :country && country[:available]) ? country[:code] : nil
+    # Global: everyone on DeltaTime plus Hackatime's public board, by time.
+    mixed = (entries + HackatimeLeaderboard.entries(period_type)).sort_by { |e| -e[:total_seconds].to_i }
+    { entries: mixed, total: mixed.size }
+  end
+
+  def deltatime_entries(leaderboard)
     payload = LeaderboardPageCache.fetch(
       leaderboard: leaderboard,
-      scope: scope,
-      country_code: country_code
+      scope: :global,
+      country_code: nil
     )
 
     active_projects = Cache::ActiveProjectsJob.perform_now
@@ -85,6 +69,7 @@ class LeaderboardsController < InertiaController
       proj = active_projects&.dig(e[:user_id])
       {
         user_id: e[:user_id],
+        source: "deltatime",
         total_seconds: e[:total_seconds],
         streak_count: e[:streak_count],
         is_current_user: e[:user_id] == current_user&.id,
@@ -99,9 +84,6 @@ class LeaderboardsController < InertiaController
       }
     end
 
-    {
-      entries: entries,
-      total: visible_entries.size
-    }
+    entries
   end
 end

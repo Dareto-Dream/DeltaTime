@@ -95,7 +95,9 @@ type LeaderboardEntryUser = {
 };
 
 export type LeaderboardEntry = {
-  user_id: number;
+  // Hackatime rows use "hackatime:<id>" so they never collide with DeltaTime ids.
+  user_id: number | string;
+  source?: "deltatime" | "hackatime";
   total_seconds: number;
   streak_count: number;
   is_current_user: boolean;
