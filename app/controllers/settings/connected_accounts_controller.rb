@@ -3,6 +3,12 @@ class Settings::ConnectedAccountsController < Settings::BaseController
 
   def page_props
     {
+      ward: {
+        enabled: User.ward_configured?,
+        connected: @user.ward_sub.present?,
+        name: @user.ward_name
+      },
+      has_password: @user.password_digest.present?,
       google: {
         connected: @user.google_uid.present?,
         name: @user.google_name

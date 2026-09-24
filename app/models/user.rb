@@ -334,7 +334,7 @@ class User < ApplicationRecord
   def display_name
     return display_name_override if display_name_override.present?
 
-    name = github_username || google_name || username
+    name = github_username || google_name || ward_name || username
     return name if name.present?
     email = email_addresses&.first&.email
     return "error displaying name" unless email.present?

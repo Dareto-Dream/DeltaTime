@@ -113,6 +113,10 @@ Rails.application.routes.draw do
   get "/signin", to: "static_pages#signin", as: :signin, export: true
 
   # Auth routes
+  get "/auth/ward", to: "sessions#ward_new", as: :ward_auth, export: true
+  get "/auth/ward/callback", to: "sessions#ward_create", as: :ward_callback
+  delete "/auth/ward/unlink", to: "sessions#ward_unlink", as: :ward_unlink, export: true
+  delete "/auth/password", to: "sessions#remove_password", as: :remove_password_auth, export: true
   get "/auth/google", to: "sessions#google_new", as: :google_auth, export: true
   get "/auth/google/callback", to: "sessions#google_create"
   delete "/auth/google/unlink", to: "sessions#google_unlink", as: :google_unlink, export: true

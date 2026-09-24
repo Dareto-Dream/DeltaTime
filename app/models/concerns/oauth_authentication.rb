@@ -15,6 +15,70 @@ module OauthAuthentication
       }.to_query}")
     end
 
+    # ---- Ward (ward.deltavdevs.com): the DeltaVDevs account ----
+    def ward_url = ENV.fetch("WARD_URL", "https://ward.deltavdevs.com").chomp("/")
+    def ward_configured? = ENV["WARD_CLIENT_ID"].present? && ENV["WARD_CLIENT_SECRET"].present?
+
+    def ward_authorize_url(redirect_uri, state:, code_challenge:)
+      URI.parse("#{ward_url}/oauth/authorize?#{{
+        client_id: ENV["WARD_CLIENT_ID"],
+        redirect_uri: redirect_uri,
+        response_type: "code",
+        scope: "openid profile email",
+        state: state,
+        code_challenge: code_challenge,
+        code_challenge_method: "S256"
+      }.to_query}")
+    end
+
+    # Signs in with (or, given current_user, links) a Ward account.
+    # Returns [user, nil] or [nil, error] where error is one of
+    # :failed, :taken, :other, :email_exists.
+    #
+    # Never merges into an existing account by email: DeltaTime's own email
+    # sign-up never verified addresses, so a match proves nothing. People with
+    # an older account sign in the old way and link Ward from settings.
+    def from_ward_token(code, redirect_uri, code_verifier, current_user = nil, ip_address: nil)
+      response = HTTP.headers(accept: "application/json").post("#{ward_url}/oauth/token", form: {
+        grant_type: "authorization_code", code: code, redirect_uri: redirect_uri, code_verifier: code_verifier,
+        client_id: ENV["WARD_CLIENT_ID"], client_secret: ENV["WARD_CLIENT_SECRET"]
+      })
+      return [ nil, :failed ] unless response.status.success?
+      access_token = JSON.parse(response.body.to_s)["access_token"]
+      return [ nil, :failed ] if access_token.blank?
+
+      info = JSON.parse(HTTP.auth("Bearer #{access_token}").get("#{ward_url}/oauth/userinfo").body.to_s)
+      sub = info["sub"].to_s
+      return [ nil, :failed ] unless sub.match?(/\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/)
+      email = info["email_verified"] == true ? info["email"].to_s.strip.downcase.presence : nil
+      attrs = { ward_name: (info["name"].presence || info["preferred_username"].presence), ward_avatar_url: info["picture"].presence }
+
+      owner = User.find_by(ward_sub: sub)
+      if current_user
+        return [ nil, :taken ] if owner && owner.id != current_user.id
+        return [ nil, :other ] if current_user.ward_sub.present? && current_user.ward_sub != sub
+        current_user.update!(attrs.merge(ward_sub: sub))
+        return [ current_user, nil ]
+      end
+
+      if owner
+        owner.update!(attrs)
+        return [ owner, nil ]
+      end
+
+      return [ nil, :email_exists ] if email && EmailAddress.exists?(email: email)
+
+      user = nil
+      ActiveRecord::Base.transaction do
+        user = User.create!(attrs.merge(ward_sub: sub, country_code: country_code_from_ip(ip_address)))
+        EmailAddress.create!(email: email, user: user) if email
+      end
+      [ user, nil ]
+    rescue => e
+      report_error(e, message: "Error signing in with Ward: #{e.message}")
+      [ nil, :failed ]
+    end
+
     def github_authorize_url(redirect_uri, state: nil)
       URI.parse("https://github.com/login/oauth/authorize?#{{
         client_id: ENV["GITHUB_CLIENT_ID"],
@@ -46,6 +110,8 @@ module OauthAuthentication
       target_user = current_user
       target_user ||= User.find_by(google_uid: google_uid)
       target_user ||= (EmailAddress.find_by(email: google_email)&.user if google_email.present?)
+      # Once Ward is on, Google only gets existing people back in; new accounts come from Ward.
+      return :ward_required if target_user.nil? && ward_configured?
 
       if target_user
         User.where(google_uid: google_uid).where.not(id: target_user.id).where.not(google_access_token: nil).find_each do |user|
@@ -98,6 +164,7 @@ module OauthAuthentication
       target_user = current_user
       target_user ||= User.find_by(github_uid: github_uid)
       target_user ||= (EmailAddress.find_by(email: github_email)&.user if github_email.present?)
+      return :ward_required if target_user.nil? && ward_configured?
 
       if target_user
         User.where(github_uid: github_uid).where.not(id: target_user.id).where.not(github_access_token: nil).find_each do |user|

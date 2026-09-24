@@ -1,4 +1,80 @@
 class SessionsController < ApplicationController
+  WARD_REQUIRED = "New DeltaTime accounts are created with Ward. Use Continue with Ward."
+
+  # ---- Ward: the DeltaVDevs account ----
+  def ward_new
+    return redirect_to(signin_path, alert: "Ward sign-in isn't set up yet.") unless User.ward_configured?
+
+    session[:return_data] = build_return_data(params[:continue]) if params[:continue].present?
+    verifier = SecureRandom.urlsafe_base64(48)
+    state = SecureRandom.hex(24)
+    session[:ward_oauth] = { "state" => state, "verifier" => verifier }
+    challenge = Base64.urlsafe_encode64(Digest::SHA256.digest(verifier), padding: false)
+    redirect_to User.ward_authorize_url(ward_callback_url, state: state, code_challenge: challenge).to_s,
+      allow_other_host: User.ward_url
+  end
+
+  def ward_create
+    pending = session.delete(:ward_oauth) || {}
+    back = current_user ? my_settings_connected_accounts_path : signin_path
+
+    if params[:error].present?
+      return redirect_to(back, alert: params[:error] == "access_denied" ? "Sign in cancelled" : "Ward sign-in failed. Try again.")
+    end
+
+    # State, then RFC 9207: the response has to name Ward as its issuer.
+    state_ok = pending["state"].present? && params[:state].present? &&
+      ActiveSupport::SecurityUtils.secure_compare(params[:state].to_s, pending["state"].to_s)
+    unless state_ok && params[:iss].to_s == User.ward_url && params[:code].present?
+      report_message("Ward OAuth state or issuer mismatch")
+      return redirect_to(back, alert: "Ward sign-in could not be verified. Try again.")
+    end
+
+    user, error = User.from_ward_token(params[:code], ward_callback_url, pending["verifier"], current_user, ip_address: client_ip)
+    case error
+    when :taken then return redirect_to(back, alert: "That Ward account is already linked to a different DeltaTime account.")
+    when :other then return redirect_to(back, alert: "This DeltaTime account is already linked to a different Ward account.")
+    when :email_exists then return redirect_to(back, alert: "You already have a DeltaTime account with this email. Sign in the old way below, then link Ward in Settings → Connected accounts.")
+    when :failed then return redirect_to(back, alert: "Ward sign-in failed. Try again.")
+    end
+
+    if current_user
+      redirect_to my_settings_connected_accounts_path, notice: "Ward is linked. Sign in with Ward from now on, and remove your old sign-ins below."
+    else
+      preserved_return_data = session[:return_data]
+      reset_session
+      session[:user_id] = user.id
+      session[:return_data] = preserved_return_data if preserved_return_data
+      notice = "Signed in with Ward. Welcome!"
+      if user.previously_new_record?
+        redirect_to setup_path, notice: notice
+      elsif session[:return_data]&.dig("url").present?
+        redirect_to session[:return_data].delete("url"), notice: notice
+      else
+        redirect_to root_path, notice: notice
+      end
+    end
+  end
+
+  def ward_unlink
+    return unless require_signed_in!("Please sign in first")
+
+    unless current_user.google_uid.present? || current_user.github_uid.present? || current_user.password_digest.present?
+      return redirect_to(my_settings_connected_accounts_path, alert: "Ward is your only way to sign in, so it can't be unlinked.")
+    end
+    current_user.update!(ward_sub: nil, ward_name: nil, ward_avatar_url: nil)
+    redirect_to my_settings_connected_accounts_path, notice: "Ward unlinked."
+  end
+
+  # Last step of moving to Ward: drop the old email + password sign-in.
+  def remove_password
+    return unless require_signed_in!("Please sign in first")
+    return redirect_to(my_settings_connected_accounts_path, alert: "Link Ward first, so you can still sign in.") if current_user.ward_sub.blank?
+
+    current_user.update!(password_digest: nil)
+    redirect_to my_settings_connected_accounts_path, notice: "Password removed. Sign in with Ward from now on."
+  end
+
   def google_new
     session[:return_data] = build_return_data(params[:continue]) if params[:continue].present?
     redirect_uri = url_for(action: :google_create, only_path: false)
@@ -22,6 +98,7 @@ class SessionsController < ApplicationController
 
     redirect_uri = url_for(action: :google_create, only_path: false)
     @user = User.from_google_token(params[:code], redirect_uri, current_user, ip_address: client_ip)
+    return redirect_to(signin_path, alert: WARD_REQUIRED) if @user == :ward_required
 
     if @user&.persisted?
       if current_user
@@ -79,6 +156,7 @@ class SessionsController < ApplicationController
     end
 
     @user = User.from_github_token(params[:code], redirect_uri, current_user, ip_address: client_ip)
+    return redirect_to(signin_path, alert: WARD_REQUIRED) if @user == :ward_required
 
     if @user&.persisted?
       if current_user
@@ -120,6 +198,8 @@ class SessionsController < ApplicationController
     if email.blank? || !email.match?(URI::MailTo::EMAIL_REGEXP)
       return redirect_to signin_path(continue: continue_param), alert: "Please enter a valid email address"
     end
+
+    return redirect_to(signin_path(continue: continue_param), alert: WARD_REQUIRED) if User.ward_configured?
 
     if EmailAddress.exists?(email: email)
       return redirect_to signin_path(continue: continue_param), alert: "An account with that email already exists. Try signing in instead."

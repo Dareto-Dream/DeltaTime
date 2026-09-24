@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_21_040000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -643,6 +643,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_21_040000) do
     t.integer "trust_level", default: 0, null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.string "ward_avatar_url"
+    t.string "ward_name"
+    t.string "ward_sub"
     t.boolean "weekly_summary_email_enabled", default: true, null: false
     t.index ["display_name_override"], name: "index_users_on_display_name_override_trgm", opclass: :gin_trgm_ops, using: :gin
     t.index ["github_uid", "github_access_token"], name: "index_users_on_github_uid_and_access_token"
@@ -656,6 +659,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_21_040000) do
     t.index ["timezone"], name: "index_users_on_timezone"
     t.index ["username"], name: "index_users_on_username"
     t.index ["username"], name: "index_users_on_username_trgm", opclass: :gin_trgm_ops, using: :gin
+    t.index ["ward_sub"], name: "index_users_on_ward_sub", unique: true
   end
 
   create_table "versions", force: :cascade do |t|
