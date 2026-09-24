@@ -40,9 +40,12 @@ module OauthAuthentication
       google_uid = user_info["sub"]
       return nil if google_uid.blank?
 
+      # Only an address Google has verified may match (or be attached to) an account.
+      google_email = user_info["email"].presence if user_info["email_verified"] == true
+
       target_user = current_user
       target_user ||= User.find_by(google_uid: google_uid)
-      target_user ||= (EmailAddress.find_by(email: user_info["email"])&.user if user_info["email"].present?)
+      target_user ||= (EmailAddress.find_by(email: google_email)&.user if google_email.present?)
 
       if target_user
         User.where(google_uid: google_uid).where.not(id: target_user.id).where.not(google_access_token: nil).find_each do |user|
@@ -63,7 +66,7 @@ module OauthAuthentication
             google_name: user_info["name"], google_avatar_url: user_info["picture"],
             country_code: country_code_from_ip(ip_address)
           )
-          EmailAddress.create!(email: user_info["email"], user: target_user) if user_info["email"].present?
+          EmailAddress.create!(email: google_email, user: target_user) if google_email.present?
         end
       end
       target_user
@@ -141,7 +144,8 @@ module OauthAuthentication
       emails = JSON.parse(HTTP.auth("Bearer #{access_token}").get("https://api.github.com/user/emails").body.to_s)
       return nil unless emails.is_a?(Array)
 
-      primary = emails.find { |e| e["primary"] } || emails.first
+      # Unverified GitHub addresses can be anyone's; never match on them.
+      primary = emails.find { |e| e["primary"] && e["verified"] } || emails.find { |e| e["verified"] }
       primary && primary["email"]
     rescue
       nil
