@@ -11,14 +11,12 @@
     scope,
     leaderboard,
     is_logged_in,
-    github_uid_blank,
     entries,
   }: {
     period_type: string;
     scope: string;
     leaderboard: LeaderboardMeta | null;
     is_logged_in: boolean;
-    github_uid_blank: boolean;
     entries?: LeaderboardEntriesPayload;
   } = $props();
 
@@ -152,7 +150,6 @@
             {entryRank}
             {searchQuery}
             {leaderboard}
-            {github_uid_blank}
             {period_type}
           />
         {/snippet}

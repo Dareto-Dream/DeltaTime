@@ -12,7 +12,6 @@ class LeaderboardsController < InertiaController
       scope: leaderboard_scope.to_s,
       leaderboard: leaderboard_metadata(leaderboard),
       is_logged_in: current_user.present?,
-      github_uid_blank: current_user.present? && current_user.github_uid.blank?,
       entries: InertiaRails.defer { entries_payload(leaderboard, leaderboard_scope, period_type) }
     }
   end

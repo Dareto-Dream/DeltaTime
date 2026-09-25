@@ -33,6 +33,19 @@ class LeaderboardUpdateJobTest < ActiveJob::TestCase
     assert_operator board.generation_duration_seconds, :>=, 1
   end
 
+  test "people qualify without a linked GitHub, but red trust still keeps them off" do
+    no_github = create_user(username: "lb_job_no_github", github_uid: nil)
+    red = create_user(username: "lb_job_red", github_uid: nil)
+    red.update!(trust_level: :red)
+    create_heartbeat_pair(user: no_github, started_at: 1.hour.ago, editor: "vscode")
+    create_heartbeat_pair(user: red, started_at: 1.hour.ago, editor: "vscode")
+
+    LeaderboardUpdateJob.perform_now(:daily, Date.current, force_update: true)
+
+    board = Leaderboard.find_by!(start_date: Date.current, period_type: :daily, timezone_utc_offset: nil)
+    assert_equal [ no_github.id ], board.entries.pluck(:user_id)
+  end
+
   private
 
   def create_user(username:, github_uid:)

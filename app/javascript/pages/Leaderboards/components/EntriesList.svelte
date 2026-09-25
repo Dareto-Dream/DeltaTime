@@ -1,12 +1,10 @@
 <script lang="ts">
   import { WindowVirtualizer } from "virtua/svelte";
-  import Button from "../../../components/Button.svelte";
   import Row from "./Row.svelte";
   import type {
     LeaderboardEntriesPayload,
     LeaderboardMeta,
   } from "../../../types";
-  import { sessions } from "../../../api";
 
   type LeaderboardEntry = NonNullable<
     LeaderboardEntriesPayload["entries"]
@@ -18,7 +16,6 @@
     entryRank,
     searchQuery,
     leaderboard,
-    github_uid_blank,
     period_type,
   }: {
     entries?: LeaderboardEntriesPayload;
@@ -26,25 +23,9 @@
     entryRank: Map<number, number>;
     searchQuery: string;
     leaderboard: LeaderboardMeta;
-    github_uid_blank: boolean;
     period_type: string;
   } = $props();
-
-  const githubAuthPath = sessions.githubNew.path();
 </script>
-
-{#if github_uid_blank}
-  <div
-    class="rounded-t-xl border border-yellow/30 bg-yellow/10 p-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-2"
-  >
-    <p class="text-base font-medium text-surface-content">
-      Connect your GitHub to qualify for the leaderboard.
-    </p>
-    <Button href={githubAuthPath} native class="w-full sm:w-fit shrink-0">
-      Connect GitHub
-    </Button>
-  </div>
-{/if}
 
 {#if entries && entries.total > 0}
   {#if filteredEntries.length === 0}
