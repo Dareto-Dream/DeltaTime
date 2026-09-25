@@ -10,8 +10,8 @@
     <div class="flex items-center gap-3 min-w-0">
       <GithubFill size={24} class="text-surface-content shrink-0" />
       <span class="text-surface-content"
-        >Link your GitHub account to unlock project linking and show what
-        you're working on!</span
+        >Link your GitHub account to connect your projects to their
+        repositories.</span
       >
     </div>
     <a

@@ -76,13 +76,11 @@
     <p
       class="rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-secondary"
     >
-      <span class="font-semibold text-surface-content">Heads up:</span> join the
-      server using
+      Join the server with
       <span class="font-mono font-medium text-surface-content"
         >turkiye.deltavdevs.com</span
-      >. The mod tracks time under the address you connect with, so joining
-      through any other address won't count toward your Turkiye hours or show
-      up in Synthcity.
+      >. Time is recorded under the address you connect with, and Synthcity
+      only counts time under turkiye.deltavdevs.com.
     </p>
   </div>
 
