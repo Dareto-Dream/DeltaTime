@@ -7,6 +7,8 @@
     href: string;
     inertia?: boolean;
     external?: boolean;
+    // Reopens the DeltaVDevs cookie banner (consent.js listens for data-dv-consent).
+    consent?: boolean;
   };
   type FooterSection = { title: string; links: FooterLink[] };
 
@@ -34,6 +36,7 @@
       links: [
         { label: "Privacy Policy", href: staticPages.privacy.path() },
         { label: "Terms of Service", href: staticPages.terms.path() },
+        { label: "Cookie settings", href: "#", consent: true },
       ],
     },
   ];
@@ -73,6 +76,7 @@
                 <a
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
+                  data-dv-consent={link.consent ? "" : undefined}
                   class={linkCls}>{link.label}</a
                 >
               {/if}

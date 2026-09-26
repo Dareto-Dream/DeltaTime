@@ -55,7 +55,7 @@ class StaticPagesController < InertiaController
   def privacy
     @page_title = "Privacy Policy | Deltatime"
     @meta_description = @og_description = @twitter_description = "How Deltatime collects, uses, and protects your data."
-    render inertia: "Privacy", props: { last_updated: "September 21, 2026" }
+    render inertia: "Privacy", props: { last_updated: "September 26, 2026" }
   end
 
   def terms

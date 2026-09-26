@@ -137,6 +137,12 @@
               described above.
             </li>
             <li>
+              <strong>DeltaVDevs Analytics</strong> (our own service at
+              analytics.deltavdevs.com, also hosted on Railway) - to count
+              visits and see which pages get used. See "Cookies and analytics"
+              below.
+            </li>
+            <li>
               <strong>Error tracking</strong> (Sentry) - to catch and fix bugs.
               This can include limited technical context about a request, not
               the contents of your coding activity.
@@ -149,6 +155,41 @@
           <p class="mt-4">
             We may also disclose information if required by law, or to
             protect the security or integrity of the service.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-semibold mb-4">Cookies and analytics</h2>
+          <p class="mb-4">
+            Essential cookies keep you signed in and remember your cookie
+            choice (dv_consent, 12 months). They don't need your permission.
+          </p>
+          <p class="mb-4">
+            A small script from analytics.deltavdevs.com records the page you
+            open, the page that linked you here, campaign tags in the link
+            (utm_source, utm_medium, utm_campaign), your device type and
+            browser, and which links to other websites you follow. Other query
+            parameters are dropped. We also count traffic from our host's
+            request logs. Neither stores your IP address: we keep a hash of it
+            that changes every day, and each day's key is deleted after two
+            days.
+          </p>
+          <p class="mb-4">
+            One cookie is optional: dv_vid, a random visitor ID kept for 13
+            months, plus a random ID for the current browser tab. They're only
+            set if you choose "Allow analytics" in the cookie banner. You can
+            change that at any time with
+            <a href="#" data-dv-consent class="text-primary underline">Cookie settings</a
+            >, which is also in the footer. If your browser sends Global
+            Privacy Control, we treat it as a no.
+          </p>
+          <p>
+            Counting without a visitor ID relies on our legitimate interest in
+            understanding how Deltatime is used; the visitor ID relies on your
+            consent. After 13 months we delete everything in our analytics
+            that could identify a person (visitor and session IDs, IP hashes
+            and browser user agents) and keep only counts, pages, sources and
+            timings. Records of your cookie choice follow the same rule.
           </p>
         </section>
 
@@ -183,7 +224,19 @@
             </li>
             <li>Rotate or revoke your API key at any time.</li>
             <li>Request an export or deletion of your data at any time.</li>
+            <li>
+              Allow or refuse the analytics cookie, and change your mind later,
+              with
+              <a href="#" data-dv-consent class="text-primary underline">Cookie settings</a
+              >.
+            </li>
           </ul>
+          <p class="mt-4">
+            If you live in California, the CCPA gives you the right to know
+            what we collect, to have it deleted or corrected, and not to be
+            treated differently for using those rights. We don't sell or share
+            personal information, and we honor Global Privacy Control.
+          </p>
         </section>
 
         <section>

@@ -140,7 +140,9 @@
     <link rel="apple-touch-icon" href="<%= asset_path('favicon.png') %>">
 
     <% if include_external_scripts %>
-      <script defer data-domain="deltatime.deltavdevs.com" src="https://plausible.io/js/script.file-downloads.hash.js"></script>
+      <%# DeltaVDevs cookie banner, then analytics (no analytics cookie without consent). Replaces Plausible. %>
+      <script defer src="https://analytics.deltavdevs.com/consent.js" data-policy="/privacy"></script>
+      <script defer src="https://analytics.deltavdevs.com/t.js"></script>
     <% end %>
 
     <% if Sentry.get_trace_propagation_meta %>
